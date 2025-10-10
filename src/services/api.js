@@ -1,21 +1,48 @@
-async function testConnection() {
-  try {
-    const response = await fetch(`${VITE_BACKEND_URL}/test`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+// src/services/api.js
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+export const api = {
+  async testConnection() {
+    try {
+      const response = await fetch(`${API_BASE_URL}/health`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return { success: true, data };
+    } catch (error) {
+      console.error("API connection test failed:", error);
+      return { success: false, error: error.message };
     }
+  },
 
-    const data = await response.json();
-    return { success: true, data };
-  } catch (error) {
-    console.error("API connection test failed:", error);
-    return { success: false, error: error.message };
-  }
-}
+  async register({ username, email, password }) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!(response.status === 201))
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+
+      return { success: true, data };
+    } catch (error) {
+      console.error("Registration failed:", error);
+      return { success: false, error: error.message };
+    }
+  },
+};
