@@ -1,26 +1,23 @@
 // src/components/Register.jsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
     setError('');
 
     const result = await api.register({ username, email, password });
 
     if (result.success) {
-      setMessage('Registration successful!');
-      setUsername('');
-      setEmail('');
-      setPassword('');
+      // navigate("/dashboard");
     } else {
       setError(result.error);
     }
@@ -59,7 +56,6 @@ const Register = () => {
         </div>
         <button type="submit">Register</button>
       </form>
-      {message && <p>{message}</p>}
       {error && <p>Error: {error}</p>}
     </div>
   );
