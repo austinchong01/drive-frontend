@@ -84,6 +84,29 @@ export const api = {
     }
   },
 
+  async verifyJWT() {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${API_BASE_URL}/auth/verify`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!(response.status === 200))
+        throw new Error(data.message);
+
+      return { success: true };
+    } catch (error) {
+      console.log(error.message);
+      return { success: false, error: error.message };
+    }
+  },
+
   async getUserProfile() {
     try {
       const token = localStorage.getItem("token");
@@ -105,9 +128,8 @@ export const api = {
 
       return { success: true, data };
     } catch (error) {
-      console.error("Failed to get user profile:", error);
+      console.log("Failed to get user profile:", error.message);
       return { success: false, error: error.message };
     }
   },
-
 };

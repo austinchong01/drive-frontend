@@ -17,7 +17,7 @@ const Register = () => {
     const result = await api.register({ username, email, password });
 
     if (result.success) {
-      // navigate("/dashboard");
+      navigate("/dashboard");
     } else {
       setError(result.error);
     }
