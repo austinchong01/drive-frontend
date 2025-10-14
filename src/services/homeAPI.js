@@ -78,7 +78,7 @@ export const api = {
     try {
       const endpoint = folderId
         ? `${API_BASE_URL}/folders/${folderId}`
-        : `${API_BASE_URL}/folders/null`; // for root folder
+        : `${API_BASE_URL}/folders/null`;
 
       const token = localStorage.getItem("token");
       const response = await fetch(endpoint, {

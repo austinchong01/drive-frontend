@@ -43,7 +43,7 @@ const Content = () => {
       style={{
         flex: 1,
         padding: "20px",
-        overflow: "auto",
+        border: "1px solid black"
       }}
     >
       <h2>Folders</h2>
@@ -52,7 +52,7 @@ const Content = () => {
           display: "flex",
           flexWrap: "wrap",
           gap: "15px",
-          marginBottom: "30px",
+          marginBottom: "50px",
         }}
       >
         {subfolders.map((folder) => (
