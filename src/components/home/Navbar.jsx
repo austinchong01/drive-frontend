@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", padding: "20px", border: "1px solid black" }}>
       <img src="/images/mock_google_drive.svg" alt="Logo" style={{ width: "50px" }} />
       <h1>{username || "Loading..."}</h1>
       <button onClick={handleLogout}>Logout</button>

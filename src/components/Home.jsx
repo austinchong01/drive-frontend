@@ -1,5 +1,5 @@
 // src/components/Home.jsx
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import Navbar from "./home/Navbar";
@@ -18,14 +18,23 @@ const Home = () => {
       if (!result.success) navigate("/login");
     };
     verifyUser();
-  }, []);
+  }, [navigate]);
 
   return (
     <ErrorProvider>
       <ErrorToast />
-      <div>
+      <div style={{ 
+        display: "flex", 
+        flexDirection: "column", 
+        height: "100vh",
+        width: "100vw"
+      }}>
         <Navbar />
-        <div style={{display: "flex"}}>
+        <div style={{ 
+          display: "flex", 
+          flex: 1,
+          overflow: "hidden"
+        }}>
           <Sidebar />
           <Content />
         </div>
