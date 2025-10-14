@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import Navbar from "./home/Navbar";
+import Sidebar from "./home/Sidebar";
 import { ErrorProvider } from "../contexts/ErrorContext";
 import ErrorToast from "./ErrorToast";
 
@@ -23,6 +24,7 @@ const Home = () => {
       <ErrorToast />
       <div>
         <Navbar />
+        <Sidebar />
       </div>
     </ErrorProvider>
   );

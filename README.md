@@ -7,7 +7,6 @@
     - Home
         - Navbar
             - Logo
-            - Search Bar
             - Profile
                 - username
                     - change username?
@@ -19,5 +18,6 @@
             - Home
             - Storage
         - Content
+            - Search Bar
             - Folders
             - Files
