@@ -12,6 +12,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/folders/:folderId" element={<Home />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </Router>

@@ -24,7 +24,7 @@ export const api = {
     }
   },
 
-  async register({ username, email, password }) {
+  async register(username, email, password) {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
@@ -50,7 +50,7 @@ export const api = {
     }
   },
 
-  async login({ email, password }) {
+  async login(email, password) {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",

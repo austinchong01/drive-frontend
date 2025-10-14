@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    const result = await api.login({ email, password });
+    const result = await api.login(email, password);
 
     if (result.success) {
       navigate("/home");

@@ -1,12 +1,14 @@
 // src/components/home/Sidebar.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../../services/homeAPI";
 import { useError } from "../../contexts/ErrorContext";
+import NewFolderModal from "./NewFolderModal";
+import NewFileModal from "./NewFileModal";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-  const [storage, setStorage] = useState("");
+  const [storage, setStorage] = useState(null);
+  const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
+  const [isFileModalOpen, setIsFileModalOpen] = useState(false);
   const { showError } = useError();
 
   useEffect(() => {
@@ -20,14 +22,25 @@ const Sidebar = () => {
       }
     };
     fetchUserProfile();
-  }, []);
+  }, [showError]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-        <button>New File</button>
-        <button>New Folder</button>
-        <h1>{storage || "Loading..."}</h1>
-    </div>
+    <>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <button onClick={() => setIsFileModalOpen(true)}>New File</button>
+        <button onClick={() => setIsFolderModalOpen(true)}>New Folder</button>
+        <h1>{storage !== null ? storage : "Loading..."}</h1>
+      </div>
+
+      <NewFileModal 
+        isOpen={isFileModalOpen} 
+        onClose={() => setIsFileModalOpen(false)} 
+      />
+      <NewFolderModal 
+        isOpen={isFolderModalOpen} 
+        onClose={() => setIsFolderModalOpen(false)} 
+      />
+    </>
   );
 };
 

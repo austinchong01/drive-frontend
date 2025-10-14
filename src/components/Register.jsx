@@ -25,7 +25,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
 
-    const result = await api.register({ username, email, password });
+    const result = await api.register(username, email, password);
 
     if (result.success) {
       navigate("/home");
