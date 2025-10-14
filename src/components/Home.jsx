@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import Navbar from "./home/Navbar";
 import Sidebar from "./home/Sidebar";
-import Content from "./home/Content"
+import Content from "./home/Content";
 import { ErrorProvider } from "../contexts/ErrorContext";
 import ErrorToast from "./ErrorToast";
 
@@ -25,8 +25,10 @@ const Home = () => {
       <ErrorToast />
       <div>
         <Navbar />
-        <Sidebar />
-        <Content />
+        <div style={{display: "flex"}}>
+          <Sidebar />
+          <Content />
+        </div>
       </div>
     </ErrorProvider>
   );

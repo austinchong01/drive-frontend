@@ -8,7 +8,7 @@ const Content = () => {
 
   return (
     <>
-      <div style={{ display: "flex"}}>
+      <div>
         <h1>CONTENT</h1>
       </div>
     </>
