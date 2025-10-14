@@ -16,7 +16,7 @@ const Navbar = () => {
       if (result.success) {
         setUsername(result.data.username);
       } else {
-        showError(`Failed to load profile: ${result.error}`);
+        showError(`Username Error: ${result.error}`);
       }
     };
     fetchUserProfile();
