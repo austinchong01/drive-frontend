@@ -4,7 +4,20 @@
 - components
     - Login
     - Register
-    - Dashboard
-        - Profile
-        - Folders
-        - Files
+    - Home
+        - Header
+            - Logo
+            - Search Bar
+            - Profile
+                - username
+                    - change username?
+                - Log Out
+        - Side Bar
+            - New (Dropdown)
+                - New File
+                - New Folder
+            - Home
+            - Storage
+        - Content
+            - Folders
+            - Files

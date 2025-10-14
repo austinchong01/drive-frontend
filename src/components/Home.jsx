@@ -6,6 +6,7 @@ import { api } from "../services/api";
 const Home = () => {
   const navigate = useNavigate();
 
+  // redirect to login if no valid token
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();

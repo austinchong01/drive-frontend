@@ -1,5 +1,5 @@
 // src/components/Register.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 
@@ -10,6 +10,17 @@ const Register = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // redirect to home if valid token
+  useEffect(() => {
+    const verifyUser = async () => {
+      const result = await api.verifyJWT();
+      if (result.success) {
+        navigate("/home");
+      }
+    };
+    verifyUser();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -17,10 +28,14 @@ const Register = () => {
     const result = await api.register({ username, email, password });
 
     if (result.success) {
-      navigate("/dashboard");
+      navigate("/home");
     } else {
       setError(result.error);
     }
+  };
+
+  const handleLoginRedirect = () => {
+    navigate("/login");
   };
 
   return (
@@ -55,6 +70,7 @@ const Register = () => {
           />
         </div>
         <button type="submit">Register</button>
+        <button type="button" onClick={handleLoginRedirect}>Back to Login</button>
       </form>
       {error && <p>Error: {error}</p>}
     </div>
