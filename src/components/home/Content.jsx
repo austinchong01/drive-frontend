@@ -1,12 +1,12 @@
 // src/components/home/Content.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../../services/homeAPI";
+import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import Folder from "./Folder";
 import File from "./File";
 
-const Content = () => {
+const Content = ({ refreshTrigger, onSidebarChange }) => {
   const { showError } = useError();
   const { folderId } = useParams();
   const [subfolders, setSubfolders] = useState([]);
@@ -28,7 +28,7 @@ const Content = () => {
     };
 
     fetchContents();
-  }, [folderId, showError]);
+  }, [refreshTrigger]);
 
   if (loading) {
     return (
@@ -56,14 +56,14 @@ const Content = () => {
         }}
       >
         {subfolders.map((folder) => (
-          <Folder key={folder.id} folder={folder} />
+          <Folder key={folder.id} folder={folder} onDelete={onSidebarChange}/>
         ))}
       </div>
 
       <h2>Files</h2>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
         {files.map((file) => (
-          <File key={file.id} file={file} />
+          <File key={file.id} file={file} onDelete={onSidebarChange}/>
         ))}
       </div>
     </div>

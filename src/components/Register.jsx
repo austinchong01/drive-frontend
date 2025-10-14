@@ -1,7 +1,7 @@
 // src/components/Register.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../services/api';
+import { api } from '../services/user';
 
 const Register = () => {
   const [username, setUsername] = useState('');

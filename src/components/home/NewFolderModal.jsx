@@ -1,10 +1,10 @@
 // src/components/home/NewFolderModal.jsx
 import { useState } from "react";
-import { api } from "../../services/homeAPI";
+import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import { useParams } from "react-router-dom";
 
-const NewFolderModal = ({ isOpen, onClose }) => {
+const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
   const [folderName, setFolderName] = useState("");
   const { showError } = useError();
   const { folderId } = useParams();
@@ -16,7 +16,7 @@ const NewFolderModal = ({ isOpen, onClose }) => {
 
     if (result.success) {
       setFolderName("");
-      onClose();
+      onSuccess();
     } else {
       showError(`Folder Creation Error: ${result.error}`);
     }
@@ -52,6 +52,7 @@ const NewFolderModal = ({ isOpen, onClose }) => {
               value={folderName}
               onChange={(e) => setFolderName(e.target.value)}
               required
+              autoFocus
             />
           </div>
           <button type="submit">Create</button>

@@ -1,5 +1,5 @@
 // src/components/home/NewFileModal.jsx
-import { api } from "../../services/homeAPI";
+import { api } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";
 import { useParams } from "react-router-dom";
 
@@ -53,6 +53,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
             <input
               type="text"
               name="name"
+              autoFocus
               required
             />
           </div>

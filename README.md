@@ -22,6 +22,7 @@
             - Folders
             - Files
 
+
 Functionalities
 - Routing
     - route any url to home if valid token
@@ -34,4 +35,7 @@ Functionalities
     - Modal
     - FolderId from URL params
         - "/home" = null (root folder)
-- 
+
+Other
+- Drag and Drop
+- Breadcrumbs

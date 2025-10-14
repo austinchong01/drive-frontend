@@ -1,7 +1,7 @@
 // src/components/Login.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../services/api";
+import { api } from "../services/user";
 
 const Login = () => {
   const [email, setEmail] = useState("");

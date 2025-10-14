@@ -1,11 +1,11 @@
 // src/components/home/Sidebar.jsx
 import { useState, useEffect } from "react";
-import { api } from "../../services/homeAPI";
+import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "./NewFolderModal";
 import NewFileModal from "./NewFileModal";
 
-const Sidebar = () => {
+const Sidebar = ({ onContentChange, refreshTrigger }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
@@ -23,12 +23,13 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchUserProfile();
-  }, []);
+  }, [refreshTrigger]);
 
-  // refresh storage
-  const handleFileUploadSuccess = () => {
+  const handleSuccess = () => {
     setIsFileModalOpen(false);
+    setIsFolderModalOpen(false);
     fetchUserProfile();
+    onContentChange(); // trigger content refresh
   };
 
   return (
@@ -42,11 +43,12 @@ const Sidebar = () => {
       <NewFileModal 
         isOpen={isFileModalOpen} 
         onClose={() => setIsFileModalOpen(false)}
-        onSuccess={handleFileUploadSuccess}
+        onSuccess={handleSuccess}
       />
       <NewFolderModal 
         isOpen={isFolderModalOpen} 
-        onClose={() => setIsFolderModalOpen(false)} 
+        onClose={() => setIsFolderModalOpen(false)}
+        onSuccess={handleSuccess}
       />
     </>
   );
