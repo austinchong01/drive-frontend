@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
+import Navbar from "./home/Navbar";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <button onClick={handleLogout}>Logout</button>
+      <Navbar/>
     </div>
   );
 };

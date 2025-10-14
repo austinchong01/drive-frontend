@@ -5,14 +5,14 @@
     - Login
     - Register
     - Home
-        - Header
+        - Navbar
             - Logo
             - Search Bar
             - Profile
                 - username
                     - change username?
                 - Log Out
-        - Side Bar
+        - Sidebar
             - New (Dropdown)
                 - New File
                 - New Folder
