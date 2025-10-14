@@ -1,16 +1,23 @@
+// src/components/home/Navbar.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { useError } from "../../contexts/ErrorContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const { showError } = useError();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       const result = await api.getUserProfile();
-      if (result.success)
+      
+      if (result.success) {
         setUsername(result.data.username);
+      } else {
+        showError(`Failed to load profile: ${result.error}`);
+      }
     };
     fetchUserProfile();
   }, []);
