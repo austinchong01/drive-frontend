@@ -102,7 +102,7 @@ export const api = {
 
       return { success: true };
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
       return { success: false, error: error.message };
     }
   },
@@ -110,7 +110,7 @@ export const api = {
   async getUserProfile() {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/profile `, {
+      const response = await fetch(`${API_BASE_URL}/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -119,16 +119,13 @@ export const api = {
       });
 
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message || `HTTP error! status: ${response.status}`
-        );
-      }
-
+  
+      if (!(response.status === 200))
+        throw new Error(data.message);
+  
       return { success: true, data };
     } catch (error) {
-      console.log("Failed to get user profile:", error.message);
+      console.error("Failed to get user profile:", error.message);
       return { success: false, error: error.message };
     }
   },
