@@ -3,7 +3,7 @@ import { api } from "../../services/homeAPI";
 import { useError } from "../../contexts/ErrorContext";
 import { useParams } from "react-router-dom";
 
-const NewFileModal = ({ isOpen, onClose }) => {
+const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
   const { showError } = useError();
   const { folderId } = useParams();
 
@@ -15,7 +15,7 @@ const NewFileModal = ({ isOpen, onClose }) => {
 
     if (result.success) {
       e.target.reset();
-      onClose();
+      onSuccess();
     } else {
       showError(`File Upload Error: ${result.error}`);
     }

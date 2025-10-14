@@ -11,18 +11,25 @@ const Sidebar = () => {
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
   const { showError } = useError();
 
+  const fetchUserProfile = async () => {
+    const result = await api.getUserProfile();
+    
+    if (result.success) {
+      setStorage(result.data.storage);
+    } else {
+      showError(`Storage Error: ${result.error}`);
+    }
+  };
+
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      const result = await api.getUserProfile();
-      
-      if (result.success) {
-        setStorage(result.data.storage);
-      } else {
-        showError(`Storage Error: ${result.error}`);
-      }
-    };
     fetchUserProfile();
-  }, [showError]);
+  }, []);
+
+  // refresh storage
+  const handleFileUploadSuccess = () => {
+    setIsFileModalOpen(false);
+    fetchUserProfile();
+  };
 
   return (
     <>
@@ -34,7 +41,8 @@ const Sidebar = () => {
 
       <NewFileModal 
         isOpen={isFileModalOpen} 
-        onClose={() => setIsFileModalOpen(false)} 
+        onClose={() => setIsFileModalOpen(false)}
+        onSuccess={handleFileUploadSuccess}
       />
       <NewFolderModal 
         isOpen={isFolderModalOpen} 

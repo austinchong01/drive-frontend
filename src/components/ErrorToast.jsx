@@ -28,7 +28,7 @@ const ErrorToast = () => {
       padding: '15px 20px',
       borderRadius: '8px',
       boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
-      zIndex: 1000,
+      zIndex: 1001,
       maxWidth: '400px',
       display: 'flex',
       alignItems: 'center',
