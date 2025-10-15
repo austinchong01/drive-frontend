@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
-const FolderList = ({ folders, setFolders }) => {
+const FolderList = ({ folders, setFolders, onItemDeleted }) => {
   const { openFolderRenameModal } = useModal();
 
   const handleFolderRename = (folderId, newName) => {
@@ -16,6 +16,7 @@ const FolderList = ({ folders, setFolders }) => {
 
   const handleFolderDelete = (folderId) => {
     setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
+    onItemDeleted();
   };
 
   return (

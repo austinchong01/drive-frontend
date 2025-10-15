@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
 
-const FileList = ({ files, setFiles }) => {
+const FileList = ({ files, setFiles, onItemDeleted }) => {
   const { openFileRenameModal } = useModal();
 
   const handleFileRename = (fileId, newName) => {
@@ -16,6 +16,7 @@ const FileList = ({ files, setFiles }) => {
 
   const handleFileDelete = (fileId) => {
     setFiles((prev) => prev.filter((file) => file.id !== fileId));
+    onItemDeleted();
   };
 
   return (

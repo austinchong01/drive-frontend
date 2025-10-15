@@ -11,7 +11,12 @@ import ErrorToast from "./ErrorToast";
 
 const Home = () => {
   const navigate = useNavigate();
-  const contentRef = useRef(null); // ref for new folder/file
+  const contentRef = useRef(null);
+  const sidebarRef = useRef(null);
+
+  const handleItemDeleted = () => {
+    sidebarRef.current?.refreshStorage();
+  };
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -53,7 +58,7 @@ const Home = () => {
               onAddFolder={handleFolderCreated}
               onAddFile={handleFileCreated}
             />
-            <Content ref={contentRef} />
+            <Content ref={contentRef} onItemDeleted={handleItemDeleted} />
           </div>
         </div>
       </ModalProvider>

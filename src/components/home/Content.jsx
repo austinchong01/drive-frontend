@@ -6,7 +6,7 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const Content = forwardRef((props, ref) => {
+const Content = forwardRef(({ onItemDeleted }, ref) => {
   const { showError } = useError();
   const { folderId } = useParams();
   const [subfolders, setSubfolders] = useState([]);
@@ -19,7 +19,7 @@ const Content = forwardRef((props, ref) => {
     },
     addFile: (newFile) => {
       setFiles((prev) => [...prev, newFile]);
-    }
+    },
   }));
 
   // load all files and folders in FOLDER
@@ -50,8 +50,16 @@ const Content = forwardRef((props, ref) => {
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <FolderList folders={subfolders} setFolders={setSubfolders} />
-      <FileList files={files} setFiles={setFiles} />
+      <FolderList
+        folders={subfolders}
+        setFolders={setSubfolders}
+        onItemDeleted={onItemDeleted}
+      />
+      <FileList
+        files={files}
+        setFiles={setFiles}
+        onItemDeleted={onItemDeleted}
+      />
     </div>
   );
 });
