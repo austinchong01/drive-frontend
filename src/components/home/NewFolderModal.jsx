@@ -62,7 +62,11 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
             </label>
           </div>
           <button type="submit">Create</button>
-          <button type="button" onClick={onClose}>
+          <button
+            type="button"
+            onClick={() => {
+              setFolderName("");
+              onClose();}}>
             Cancel
           </button>
         </form>

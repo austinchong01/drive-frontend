@@ -1,17 +1,26 @@
 // src/components/home/Content.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const Content = ({ newFolder, newFile }) => {
+const Content = forwardRef((props, ref) => {
   const { showError } = useError();
   const { folderId } = useParams();
   const [subfolders, setSubfolders] = useState([]);
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useImperativeHandle(ref, () => ({
+    addFolder: (newFolder) => {
+      setSubfolders((prev) => [...prev, newFolder]);
+    },
+    addFile: (newFile) => {
+      setFiles((prev) => [...prev, newFile]);
+    }
+  }));
 
   // load all files and folders in FOLDER
   useEffect(() => {
@@ -31,20 +40,6 @@ const Content = ({ newFolder, newFile }) => {
     fetchContents();
   }, [folderId]);
 
-  // add new folder
-  useEffect(() => {
-    if (newFolder) {
-      setSubfolders((prev) => [...prev, newFolder]);
-    }
-  }, [newFolder]);
-
-  // add new file
-  useEffect(() => {
-    if (newFile) {
-      setFiles((prev) => [...prev, newFile]);
-    }
-  }, [newFile]);
-
   if (loading) {
     return (
       <div style={{ flex: 1, padding: "20px" }}>
@@ -59,6 +54,6 @@ const Content = ({ newFolder, newFile }) => {
       <FileList files={files} setFiles={setFiles} />
     </div>
   );
-};
+});
 
 export default Content;

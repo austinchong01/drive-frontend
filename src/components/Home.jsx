@@ -1,5 +1,5 @@
 // src/components/Home.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/user";
 import Navbar from "./home/Navbar";
@@ -11,8 +11,7 @@ import ErrorToast from "./ErrorToast";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [newFolder, setNewFolder] = useState(null);
-  const [newFile, setNewFile] = useState(null);
+  const contentRef = useRef(null); // ref for new folder/file
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -22,6 +21,14 @@ const Home = () => {
     };
     verifyUser();
   }, []);
+
+  const handleFolderCreated = (newFolder) => {
+    contentRef.current?.addFolder(newFolder);
+  };
+
+  const handleFileCreated = (newFile) => {
+    contentRef.current?.addFile(newFile);
+  };
 
   return (
     <ErrorProvider>
@@ -43,13 +50,10 @@ const Home = () => {
             }}
           >
             <Sidebar
-              onAddFolder={setNewFolder}
-              onAddFile={setNewFile}
+              onAddFolder={handleFolderCreated}
+              onAddFile={handleFileCreated}
             />
-            <Content
-              newFolder={newFolder}
-              newFile={newFile}
-            />
+            <Content ref={contentRef} />
           </div>
         </div>
       </ModalProvider>
