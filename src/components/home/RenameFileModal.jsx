@@ -1,6 +1,6 @@
 // src/components/home/RenameFileModal.jsx
-
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { api } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";
 
@@ -22,12 +22,13 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
       onSuccess(file.id, result.data.displayName);
     } else {
       showError(`File Rename Error: ${result.error}`);
+      onClose();
     }
   };
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       style={{
         position: "fixed",
@@ -68,7 +69,8 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
           </button>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

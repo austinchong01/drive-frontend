@@ -1,6 +1,6 @@
 // src/components/home/RenameFolderModal.jsx
-
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 
@@ -21,12 +21,13 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
       onSuccess(folder.id, result.data.name);
     } else {
       showError(`Folder Rename Error: ${result.error}`);
+      onClose();
     }
   };
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div style={{
       position: "fixed",
       top: 0,
@@ -61,7 +62,8 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
           <button type="button" onClick={onClose}>Cancel</button>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
