@@ -1,7 +1,7 @@
 // src/components/home/File.jsx
 
-import { api } from "../../services/file";
-import { useError } from "../../contexts/ErrorContext";
+import { api } from "../../../services/file";
+import { useError } from "../../../contexts/ErrorContext";
 
 const File = ({ file, onDelete, onRenameClick }) => {
   const { showError } = useError();

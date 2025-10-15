@@ -1,8 +1,8 @@
 // src/components/home/RenameFileModal.jsx
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { api } from "../../services/file";
-import { useError } from "../../contexts/ErrorContext";
+import { api } from "../services/file";
+import { useError } from "./ErrorContext";
 
 const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
   const [fileName, setFileName] = useState("");

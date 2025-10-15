@@ -6,6 +6,7 @@ import Navbar from "./home/Navbar";
 import Sidebar from "./home/Sidebar";
 import Content from "./home/Content";
 import { ErrorProvider } from "../contexts/ErrorContext";
+import { ModalProvider } from "../contexts/ModalContext";
 import ErrorToast from "./ErrorToast";
 
 const Home = () => {
@@ -32,32 +33,34 @@ const Home = () => {
 
   return (
     <ErrorProvider>
-      <ErrorToast />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          width: "100vw",
-        }}
-      >
-        <Navbar />
+      <ModalProvider>
+        <ErrorToast />
         <div
           style={{
             display: "flex",
-            flex: 1,
+            flexDirection: "column",
+            height: "100vh",
+            width: "100vw",
           }}
         >
-          <Sidebar
-            onContentChange={triggerContentRefresh}
-            refreshTrigger={sidebarRefreshTrigger}
-          />
-          <Content
-            onSidebarChange={triggerSidebarRefresh}
-            refreshTrigger={contentRefreshTrigger}
-          />
+          <Navbar />
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+            }}
+          >
+            <Sidebar
+              onContentChange={triggerContentRefresh}
+              refreshTrigger={sidebarRefreshTrigger}
+            />
+            <Content
+              onSidebarChange={triggerSidebarRefresh}
+              refreshTrigger={contentRefreshTrigger}
+            />
+          </div>
         </div>
-      </div>
+      </ModalProvider>
     </ErrorProvider>
   );
 };

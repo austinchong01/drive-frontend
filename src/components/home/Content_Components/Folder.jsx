@@ -1,7 +1,7 @@
 // src/components/home/Folder.jsx
 
-import { api } from "../../services/folder";
-import { useError } from "../../contexts/ErrorContext";
+import { api } from "../../../services/folder";
+import { useError } from "../../../contexts/ErrorContext";
 
 const Folder = ({ folder, onDelete, onRenameClick }) => {
   const { showError } = useError();
