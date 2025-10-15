@@ -1,24 +1,23 @@
-// src/components/home/NewFolderModal.jsx
+// src/components/home/RenameFolderModal.jsx
+
 import { useState } from "react";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
-import { useParams } from "react-router-dom";
 
-const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
-  const [folderName, setFolderName] = useState("");
+const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
+  const [folderName, setFolderName] = useState(folder.name);
   const { showError } = useError();
-  const { folderId } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await api.createFolder(folderName, folderId);
+    const result = await api.renameFolder(folder.id, folderName);
 
     if (result.success) {
       setFolderName("");
       onSuccess();
     } else {
-      showError(`Folder Creation Error: ${result.error}`);
+      showError(`Folder Rename Error: ${result.error}`);
     }
   };
 
@@ -43,10 +42,10 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
         borderRadius: "8px",
         minWidth: "300px"
       }}>
-        <h2>Create New Folder</h2>
+        <h2>Rename Folder</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Folder Name:
+            <label>Folder Name:</label>
             <input
               type="text"
               value={folderName}
@@ -54,9 +53,8 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
               required
               autoFocus
             />
-            </label>
           </div>
-          <button type="submit">Create</button>
+          <button type="submit">Rename</button>
           <button type="button" onClick={onClose}>Cancel</button>
         </form>
       </div>
@@ -64,4 +62,4 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
   );
 };
 
-export default NewFolderModal;
+export default RenameFolderModal;
