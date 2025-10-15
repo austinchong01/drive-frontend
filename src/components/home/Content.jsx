@@ -1,26 +1,17 @@
 // src/components/home/Content.jsx
-import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
+import { useState, useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const Content = forwardRef(({ onItemDeleted }, ref) => {
+const Content = ({ onItemDeleted, onFolderCreated, onFileCreated }) => {
   const { showError } = useError();
   const { folderId } = useParams();
   const [subfolders, setSubfolders] = useState([]);
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useImperativeHandle(ref, () => ({
-    addFolder: (newFolder) => {
-      setSubfolders((prev) => [...prev, newFolder]);
-    },
-    addFile: (newFile) => {
-      setFiles((prev) => [...prev, newFile]);
-    },
-  }));
 
   // load all files and folders in FOLDER
   useEffect(() => {
@@ -40,6 +31,16 @@ const Content = forwardRef(({ onItemDeleted }, ref) => {
     fetchContents();
   }, [folderId]);
 
+  const handleFolderCreated = (newFolder) => {
+    setSubfolders((prev) => [...prev, newFolder]);
+    onFolderCreated();
+  };
+
+  const handleFileCreated = (newFile) => {
+    setFiles((prev) => [...prev, newFile]);
+    onFileCreated();
+  };
+
   if (loading) {
     return (
       <div style={{ flex: 1, padding: "20px" }}>
@@ -54,14 +55,16 @@ const Content = forwardRef(({ onItemDeleted }, ref) => {
         folders={subfolders}
         setFolders={setSubfolders}
         onItemDeleted={onItemDeleted}
+        onFolderCreated={handleFolderCreated}
       />
       <FileList
         files={files}
         setFiles={setFiles}
         onItemDeleted={onItemDeleted}
+        onFileCreated={handleFileCreated}
       />
     </div>
   );
-});
+};
 
-export default Content;
+export default memo(Content);

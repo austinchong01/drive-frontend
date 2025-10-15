@@ -4,9 +4,8 @@ import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "./NewFolderModal";
 import NewFileModal from "./NewFileModal";
-import { forwardRef, useImperativeHandle } from "react";
 
-const Sidebar = forwardRef(({ onAddFolder, onAddFile }, ref) => {
+const Sidebar = ({ storageUpdateTrigger, onFolderCreated, onFileCreated }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
@@ -22,23 +21,20 @@ const Sidebar = forwardRef(({ onAddFolder, onAddFile }, ref) => {
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    refreshStorage: fetchUserProfile,
-  }));
-
+  // Initial fetch
   useEffect(() => {
     fetchUserProfile();
-  }, []);
+  }, [storageUpdateTrigger]);
 
   const handleFileSuccess = (newFile) => {
     setIsFileModalOpen(false);
-    onAddFile(newFile);
+    onFileCreated(newFile);
     fetchUserProfile();
   };
 
   const handleFolderSuccess = (newFolder) => {
     setIsFolderModalOpen(false);
-    onAddFolder(newFolder);
+    onFolderCreated(newFolder);
   };
 
   return (
@@ -61,6 +57,6 @@ const Sidebar = forwardRef(({ onAddFolder, onAddFile }, ref) => {
       />
     </>
   );
-});
+};
 
 export default Sidebar;

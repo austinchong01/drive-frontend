@@ -1,5 +1,5 @@
 // src/components/Home.jsx
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/user";
 import Navbar from "./home/Navbar";
@@ -11,12 +11,18 @@ import ErrorToast from "./ErrorToast";
 
 const Home = () => {
   const navigate = useNavigate();
-  const contentRef = useRef(null);
-  const sidebarRef = useRef(null);
+  const [storageUpdateTrigger, setStorageUpdateTrigger] = useState(0);
 
-  const handleItemDeleted = () => {
-    sidebarRef.current?.refreshStorage();
-  };
+  const handleStorageChange = useCallback(() => {
+    setStorageUpdateTrigger((prev) => prev + 1);
+  }, []);
+
+  const handleFolderCreated = useCallback(() => {
+  }, []);
+
+  const handleFileCreated = useCallback(() => {
+    handleStorageChange();
+  }, [handleStorageChange]);
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -25,15 +31,7 @@ const Home = () => {
       if (!result.success) navigate("/login");
     };
     verifyUser();
-  }, []);
-
-  const handleFolderCreated = (newFolder) => {
-    contentRef.current?.addFolder(newFolder);
-  };
-
-  const handleFileCreated = (newFile) => {
-    contentRef.current?.addFile(newFile);
-  };
+  }, [navigate]);
 
   return (
     <ErrorProvider>
@@ -55,10 +53,15 @@ const Home = () => {
             }}
           >
             <Sidebar
-              onAddFolder={handleFolderCreated}
-              onAddFile={handleFileCreated}
+              storageUpdateTrigger={storageUpdateTrigger}
+              onFolderCreated={handleFolderCreated}
+              onFileCreated={handleFileCreated}
             />
-            <Content ref={contentRef} onItemDeleted={handleItemDeleted} />
+            <Content
+              onItemDeleted={handleStorageChange}
+              onFolderCreated={handleFolderCreated}
+              onFileCreated={handleFileCreated}
+            />
           </div>
         </div>
       </ModalProvider>
