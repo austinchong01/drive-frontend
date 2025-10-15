@@ -1,10 +1,9 @@
-// src/components/home/FileList.jsx
-import { useState } from "react";
+// src/components/home/Content_Components/FileList.jsx
+import { memo } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
 
-const FileList = ({ initialFiles, onSidebarChange }) => {
-  const [files, setFiles] = useState(initialFiles);
+const FileList = ({ files, setFiles }) => {
   const { openFileRenameModal } = useModal();
 
   const handleFileRename = (fileId, newName) => {
@@ -36,4 +35,4 @@ const FileList = ({ initialFiles, onSidebarChange }) => {
   );
 };
 
-export default FileList;
+export default memo(FileList);

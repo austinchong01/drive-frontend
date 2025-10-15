@@ -1,14 +1,13 @@
-// src/components/home/FolderList.jsx
-import { useState } from "react";
+// src/components/home/Content_Components/FolderList.jsx
+import { memo } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
-const FolderList = ({ initialFolders, onSidebarChange }) => {
-  const [subfolders, setSubfolders] = useState(initialFolders);
+const FolderList = ({ folders, setFolders }) => {
   const { openFolderRenameModal } = useModal();
 
   const handleFolderRename = (folderId, newName) => {
-    setSubfolders((prev) =>
+    setFolders((prev) =>
       prev.map((folder) =>
         folder.id === folderId ? { ...folder, name: newName } : folder
       )
@@ -16,7 +15,7 @@ const FolderList = ({ initialFolders, onSidebarChange }) => {
   };
 
   const handleFolderDelete = (folderId) => {
-    setSubfolders((prev) => prev.filter((folder) => folder.id !== folderId));
+    setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
   };
 
   return (
@@ -30,7 +29,7 @@ const FolderList = ({ initialFolders, onSidebarChange }) => {
           marginBottom: "50px",
         }}
       >
-        {subfolders.map((folder) => (
+        {folders.map((folder) => (
           <Folder
             key={folder.id}
             folder={folder}
@@ -45,4 +44,4 @@ const FolderList = ({ initialFolders, onSidebarChange }) => {
   );
 };
 
-export default FolderList;
+export default memo(FolderList);

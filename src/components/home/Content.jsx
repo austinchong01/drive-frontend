@@ -6,7 +6,7 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const Content = ({ refreshTrigger, onSidebarChange }) => {
+const Content = ({ newFolder, newFile }) => {
   const { showError } = useError();
   const { folderId } = useParams();
   const [subfolders, setSubfolders] = useState([]);
@@ -29,7 +29,21 @@ const Content = ({ refreshTrigger, onSidebarChange }) => {
     };
 
     fetchContents();
-  }, [refreshTrigger, folderId]);
+  }, [folderId]);
+
+  // add new folder
+  useEffect(() => {
+    if (newFolder) {
+      setSubfolders((prev) => [...prev, newFolder]);
+    }
+  }, [newFolder]);
+
+  // add new file
+  useEffect(() => {
+    if (newFile) {
+      setFiles((prev) => [...prev, newFile]);
+    }
+  }, [newFile]);
 
   if (loading) {
     return (
@@ -41,11 +55,8 @@ const Content = ({ refreshTrigger, onSidebarChange }) => {
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <FolderList
-        initialFolders={subfolders}
-        onSidebarChange={onSidebarChange}
-      />
-      <FileList initialFiles={files} onSidebarChange={onSidebarChange} />
+      <FolderList folders={subfolders} setFolders={setSubfolders} />
+      <FileList files={files} setFiles={setFiles} />
     </div>
   );
 };

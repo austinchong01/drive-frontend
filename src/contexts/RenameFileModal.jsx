@@ -22,7 +22,7 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
       onSuccess(file.id, result.data.displayName);
     } else {
       showError(`File Rename Error: ${result.error}`);
-      onClose();
+      // onClose();
     }
   };
 

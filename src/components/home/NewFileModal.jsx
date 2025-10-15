@@ -15,7 +15,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
 
     if (result.success) {
       e.target.reset();
-      onSuccess();
+      onSuccess(result.data.file); // Pass the new file data to parent
     } else {
       showError(`File Upload Error: ${result.error}`);
     }
@@ -50,20 +50,11 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
         <form onSubmit={handleSubmit}>
           <div>
             <label>File Name:</label>
-            <input
-              type="text"
-              name="name"
-              autoFocus
-              required
-            />
+            <input type="text" name="name" autoFocus required />
           </div>
           <div>
             <label>Select File:</label>
-            <input
-              type="file"
-              name="image"
-              required
-            />
+            <input type="file" name="image" required />
           </div>
           <button type="submit">Upload</button>
           <button type="button" onClick={onClose}>

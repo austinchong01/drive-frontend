@@ -11,8 +11,8 @@ import ErrorToast from "./ErrorToast";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [contentRefreshTrigger, setContentRefreshTrigger] = useState(0);
-  const [sidebarRefreshTrigger, setSidebarRefreshTrigger] = useState(0);
+  const [newFolder, setNewFolder] = useState(null);
+  const [newFile, setNewFile] = useState(null);
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -22,14 +22,6 @@ const Home = () => {
     };
     verifyUser();
   }, []);
-
-  const triggerContentRefresh = () => {
-    setContentRefreshTrigger((prev) => prev + 1);
-  };
-
-  const triggerSidebarRefresh = () => {
-    setSidebarRefreshTrigger((prev) => prev + 1);
-  };
 
   return (
     <ErrorProvider>
@@ -51,12 +43,12 @@ const Home = () => {
             }}
           >
             <Sidebar
-              onContentChange={triggerContentRefresh}
-              refreshTrigger={sidebarRefreshTrigger}
+              onAddFolder={setNewFolder}
+              onAddFile={setNewFile}
             />
             <Content
-              onSidebarChange={triggerSidebarRefresh}
-              refreshTrigger={contentRefreshTrigger}
+              newFolder={newFolder}
+              newFile={newFile}
             />
           </div>
         </div>

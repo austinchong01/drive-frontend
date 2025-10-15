@@ -5,7 +5,7 @@ import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "./NewFolderModal";
 import NewFileModal from "./NewFileModal";
 
-const Sidebar = ({ onContentChange, refreshTrigger }) => {
+const Sidebar = ({ onAddFolder, onAddFile, refreshTrigger }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
@@ -13,7 +13,7 @@ const Sidebar = ({ onContentChange, refreshTrigger }) => {
 
   const fetchUserProfile = async () => {
     const result = await api.getUserProfile();
-    
+
     if (result.success) {
       setStorage(result.data.storage);
     } else {
@@ -25,11 +25,15 @@ const Sidebar = ({ onContentChange, refreshTrigger }) => {
     fetchUserProfile();
   }, [refreshTrigger]);
 
-  const handleSuccess = () => {
+  const handleFileSuccess = (newFile) => {
     setIsFileModalOpen(false);
+    onAddFile(newFile);
+    fetchUserProfile()
+  };
+
+  const handleFolderSuccess = (newFolder) => {
     setIsFolderModalOpen(false);
-    fetchUserProfile();
-    onContentChange(); // trigger content refresh
+    onAddFolder(newFolder);
   };
 
   return (
@@ -40,15 +44,15 @@ const Sidebar = ({ onContentChange, refreshTrigger }) => {
         <h1>{storage !== null ? storage : "Loading..."}</h1>
       </div>
 
-      <NewFileModal 
-        isOpen={isFileModalOpen} 
+      <NewFileModal
+        isOpen={isFileModalOpen}
         onClose={() => setIsFileModalOpen(false)}
-        onSuccess={handleSuccess}
+        onSuccess={handleFileSuccess}
       />
-      <NewFolderModal 
-        isOpen={isFolderModalOpen} 
+      <NewFolderModal
+        isOpen={isFolderModalOpen}
         onClose={() => setIsFolderModalOpen(false)}
-        onSuccess={handleSuccess}
+        onSuccess={handleFolderSuccess}
       />
     </>
   );

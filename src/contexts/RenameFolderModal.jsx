@@ -21,7 +21,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
       onSuccess(folder.id, result.data.name);
     } else {
       showError(`Folder Rename Error: ${result.error}`);
-      onClose();
+      // onClose();
     }
   };
 
