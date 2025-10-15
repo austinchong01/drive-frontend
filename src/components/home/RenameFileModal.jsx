@@ -5,8 +5,13 @@ import { api } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";
 
 const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
-  const [fileName, setFileName] = useState(file.displayName);
+  const [fileName, setFileName] = useState("");
   const { showError } = useError();
+
+  // Load the file's displayName whenever the file changes
+  useEffect(() => {
+    setFileName(file.displayName);
+  }, [file]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +19,7 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
     const result = await api.updateFileName(file.id, fileName);
 
     if (result.success) {
-      setFileName(result.data.displayName);
-      onSuccess(result.data.displayName);
+      onSuccess(file.id, result.data.displayName);
     } else {
       showError(`File Rename Error: ${result.error}`);
     }

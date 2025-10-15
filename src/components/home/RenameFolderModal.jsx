@@ -1,12 +1,16 @@
 // src/components/home/RenameFolderModal.jsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 
 const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
-  const [folderName, setFolderName] = useState(folder.name);
+  const [folderName, setFolderName] = useState("");
   const { showError } = useError();
+
+  useEffect(() => {
+    setFolderName(folder.name);
+  }, [folder]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +18,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
     const result = await api.renameFolder(folder.id, folderName);
 
     if (result.success) {
-      setFolderName("");
-      onSuccess(result.data.name);
+      onSuccess(folder.id, result.data.name);
     } else {
       showError(`Folder Rename Error: ${result.error}`);
     }
