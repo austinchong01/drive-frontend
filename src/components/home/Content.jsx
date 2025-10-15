@@ -28,7 +28,32 @@ const Content = ({ refreshTrigger, onSidebarChange }) => {
     };
 
     fetchContents();
-  }, [refreshTrigger]);
+  }, [refreshTrigger, folderId]);
+
+  const handleFolderRename = (folderId, newName) => {
+    setSubfolders(prev => 
+      prev.map(folder => 
+        folder.id === folderId ? { ...folder, name: newName } : folder));
+  };
+
+  const handleFolderDelete = (folderId) => {
+    setSubfolders(prev => prev.filter(folder => folder.id !== folderId));
+    onSidebarChange();
+  };
+
+  const handleFileRename = (fileId, newName) => {
+    setFiles(prev => 
+      prev.map(file => 
+        file.id === fileId ? { ...file, displayName: newName } : file
+      )
+    );
+  };
+
+  const handleFileDelete = (fileId) => {
+    setFiles(prev => prev.filter(file => file.id !== fileId));
+    onSidebarChange();
+  };
+
 
   if (loading) {
     return (
@@ -39,31 +64,20 @@ const Content = ({ refreshTrigger, onSidebarChange }) => {
   }
 
   return (
-    <div
-      style={{
-        flex: 1,
-        padding: "20px",
-        border: "1px solid black"
-      }}
-    >
+    <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
       <h2>Folders</h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "15px",
-          marginBottom: "50px",
-        }}
-      >
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "15px", marginBottom: "50px" }}>
         {subfolders.map((folder) => (
-          <Folder key={folder.id} folder={folder} onDelete={onSidebarChange}/>
+          <Folder key={folder.id} folder={folder} onDelete={handleFolderDelete}
+          onRename={handleFolderRename} />
         ))}
       </div>
 
       <h2>Files</h2>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
         {files.map((file) => (
-          <File key={file.id} file={file} onDelete={onSidebarChange}/>
+          <File key={file.id} file={file} onDelete={handleFileDelete}
+          onRename={handleFileRename} />
         ))}
       </div>
     </div>

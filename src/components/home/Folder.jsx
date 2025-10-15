@@ -5,7 +5,7 @@ import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import RenameFolderModal from "./RenameFolderModal";
 
-const Folder = ({ folder, onDelete }) => {
+const Folder = ({ folder, onDelete, onRename }) => {
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const { showError } = useError();
 
@@ -13,15 +13,15 @@ const Folder = ({ folder, onDelete }) => {
     const result = await api.deleteFolder(folder.id);
 
     if (result.success) {
-      onDelete(); // Trigger refresh
+      onDelete(folder.id);
     } else {
       showError(`Delete Folder Error: ${result.error}`);
     }
   };
 
-  const handleRenameSuccess = () => {
+  const handleRenameSuccess = (newName) => {
+    onRename(folder.id, newName);
     setIsRenameModalOpen(false);
-    onDelete(); // Trigger refresh to update the folder name
   };
 
   return (
