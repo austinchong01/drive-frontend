@@ -1,17 +1,12 @@
-// src/components/home/RenameFileModal.jsx
-import { useState, useEffect } from "react";
+// src/components/modals/RenameFileModal.jsx
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../services/file";
-import { useError } from "./ErrorContext";
+import { useError } from "../contexts/ErrorContext";
 
-const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
-  const [fileName, setFileName] = useState("");
+const RenameFileModal = ({ onClose, onSuccess, file }) => {
+  const [fileName, setFileName] = useState(file.displayName);
   const { showError } = useError();
-
-  // Load the file's displayName whenever the file changes
-  useEffect(() => {
-    setFileName(file.displayName);
-  }, [file]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,13 +15,12 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
 
     if (result.success) {
       onSuccess(file.id, result.data.displayName);
+      onClose();
     } else {
       showError(`File Rename Error: ${result.error}`);
-      // onClose();
+      onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
-
-  if (!isOpen) return null;
 
   return createPortal(
     <div
@@ -42,6 +36,7 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
         justifyContent: "center",
         zIndex: 1000,
       }}
+      onClick={onClose}
     >
       <div
         style={{
@@ -50,6 +45,7 @@ const RenameFileModal = ({ isOpen, onClose, onSuccess, file }) => {
           borderRadius: "8px",
           minWidth: "300px",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         <h2>Rename File</h2>
         <form onSubmit={handleSubmit}>

@@ -49,7 +49,6 @@ export const ModalProvider = ({ children }) => {
 
       {fileModalState && (
         <RenameFileModal
-          isOpen={true}
           onClose={closeFileRenameModal}
           onSuccess={(fileId, newName) => {
             fileModalState.onSuccess(fileId, newName);
@@ -61,7 +60,6 @@ export const ModalProvider = ({ children }) => {
 
       {folderModalState && (
         <RenameFolderModal
-          isOpen={true}
           onClose={closeFolderRenameModal}
           onSuccess={(folderId, newName) => {
             folderModalState.onSuccess(folderId, newName);

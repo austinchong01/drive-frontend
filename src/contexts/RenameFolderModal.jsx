@@ -1,17 +1,12 @@
-
-// src/components/home/RenameFolderModal.jsx
-import { useState, useEffect } from "react";
+// src/components/modals/RenameFolderModal.jsx
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../services/folder";
-import { useError } from "./ErrorContext";
+import { useError } from "../contexts/ErrorContext";
 
-const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
-  const [folderName, setFolderName] = useState("");
+const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
+  const [folderName, setFolderName] = useState(folder.name);
   const { showError } = useError();
-
-  useEffect(() => {
-    setFolderName(folder.name);
-  }, [folder]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,13 +15,12 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
 
     if (result.success) {
       onSuccess(folder.id, result.data.name);
+      onClose();
     } else {
       showError(`Folder Rename Error: ${result.error}`);
-      // onClose();
+      onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
-
-  if (!isOpen) return null;
 
   return createPortal(
     <div
@@ -42,6 +36,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
         justifyContent: "center",
         zIndex: 1000,
       }}
+      onClick={onClose}
     >
       <div
         style={{
@@ -50,6 +45,7 @@ const RenameFolderModal = ({ isOpen, onClose, onSuccess, folder }) => {
           borderRadius: "8px",
           minWidth: "300px",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         <h2>Rename Folder</h2>
         <form onSubmit={handleSubmit}>
