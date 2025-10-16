@@ -8,13 +8,14 @@ import FileList from "./Content_Components/FileList";
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showError } = useError();
-  const { folderId } = useParams();
+  let { folderId } = useParams();
   const [initialFiles, setInitialFiles] = useState([]);
   const [initialFolders, setInitialFolders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // load all files and folders in FOLDER
   useEffect(() => {
+    if (folderId === undefined) folderId = "";
     const fetchContents = async () => {
       setLoading(true);
       const result = await api.getFolderContents(folderId);
@@ -33,7 +34,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       const result = await api.getCrumbs(folderId);
 
       if (result.success) {
-        console.log(result.data.breadcrumbs);
       } else {
         showError(`Failed to load crumbs: ${result.error}`);
       }

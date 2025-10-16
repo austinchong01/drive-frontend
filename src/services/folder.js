@@ -8,6 +8,8 @@ export const api = {
       const endpoint = folderId
         ? `${API_BASE_URL}/folders/${folderId}/upload`
         : `${API_BASE_URL}/folders/upload`; // root upload
+      
+        console.log(endpoint)
 
       const token = localStorage.getItem("token");
       const response = await fetch(endpoint, {
@@ -56,8 +58,7 @@ export const api = {
     try {
       const endpoint = folderId
         ? `${API_BASE_URL}/folders/${folderId}/crumbs`
-        : `${API_BASE_URL}/folders/crumbs`;
-      console.log(endpoint)
+        : `${API_BASE_URL}/folders/null/crumbs`;
 
       const token = localStorage.getItem("token");
       const response = await fetch(endpoint,
