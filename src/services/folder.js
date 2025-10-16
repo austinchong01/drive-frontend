@@ -52,6 +52,33 @@ export const api = {
     }
   },
 
+  async getCrumbs(folderId) {
+    try {
+      const endpoint = folderId
+        ? `${API_BASE_URL}/folders/${folderId}/crumbs`
+        : `${API_BASE_URL}/folders/crumbs`;
+      console.log(endpoint)
+
+      const token = localStorage.getItem("token");
+      const response = await fetch(endpoint,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      if (response.status !== 200) throw new Error(data.message);
+
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  },
+
   async renameFolder(folderId, name) {
     try {
       const token = localStorage.getItem("token");

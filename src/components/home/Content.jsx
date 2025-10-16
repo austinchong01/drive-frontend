@@ -28,7 +28,19 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       setLoading(false);
     };
 
+    const fetchCrumbs = async () => {
+      setLoading(true);
+      const result = await api.getCrumbs(folderId);
+
+      if (result.success) {
+        console.log(result.data.breadcrumbs);
+      } else {
+        showError(`Failed to load crumbs: ${result.error}`);
+      }
+    };
+
     fetchContents();
+    fetchCrumbs();
   }, [folderId]);
 
   if (loading) {
