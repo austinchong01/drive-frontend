@@ -1,6 +1,6 @@
 // src/components/ErrorToast.jsx
 import { useEffect } from 'react';
-import { useError } from '../contexts/ErrorContext';
+import { useError } from './ErrorContext';
 
 const ErrorToast = () => {
   const { error, clearError } = useError();

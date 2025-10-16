@@ -1,7 +1,7 @@
 // src/components/home/NewFolderModal.jsx
 import { useState } from "react";
-import { api } from "../../services/folder";
-import { useError } from "../../contexts/ErrorContext";
+import { api } from "../services/folder";
+import { useError } from "./ErrorContext";
 import { useParams } from "react-router-dom";
 
 const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
@@ -66,7 +66,9 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
             type="button"
             onClick={() => {
               setFolderName("");
-              onClose();}}>
+              onClose();
+            }}
+          >
             Cancel
           </button>
         </form>

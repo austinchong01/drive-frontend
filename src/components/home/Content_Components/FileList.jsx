@@ -8,13 +8,15 @@ const FileList = ({ initialFiles, createdFile, onFileDelete }) => {
   const [files, setFiles] = useState(initialFiles);
 
   useEffect(() => {
-    if (createdFile) setFiles((prev) => [...prev, createdFile]);
+    if (createdFile) setFiles((prev) => [createdFile, ...prev]);
   }, [createdFile]);
 
   const handleFileRename = (fileId, newName) => {
     setFiles((prev) =>
       prev.map((file) =>
-        file.id === fileId ? { ...file, displayName: newName } : file));
+        file.id === fileId ? { ...file, displayName: newName } : file
+      )
+    );
   };
 
   const handleFileDelete = (fileId) => {

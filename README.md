@@ -31,11 +31,26 @@ Functionalities
 - Error Handling
     - Error Context
     - Toast
-- New Folder/File
-    - Modal
-    - FolderId from URL params
+- Files
+    - create/download/rename/delete
+    - parent folderId from URL params
         - "/home" = null (root folder)
+- Folders
+    - create/rename/delete
+    - parent folderId from URL params
+        - "/home" = null (root folder)
+    - go into folder
+        - URL change, parentId
+        - breadcrumbs
 
-Other
+
+Optimization (minimize APIs and re-rendering)
+- Callback approach (siblings and children -> parent)
+    - on creation/deletion of file/folder, pass argument into sibling/parent component
+        - trigger storage update
+- rename file/folder only renders corresponding FileList/FolderList
+    - ModalContext (two rename modals for all files and folders)
+    
+
+Nice to Haves
 - Drag and Drop
-- Breadcrumbs

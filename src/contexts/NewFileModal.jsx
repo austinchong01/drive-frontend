@@ -1,6 +1,6 @@
 // src/components/home/NewFileModal.jsx
-import { api } from "../../services/file";
-import { useError } from "../../contexts/ErrorContext";
+import { api } from "../services/file";
+import { useError } from "./ErrorContext";
 import { useParams } from "react-router-dom";
 
 const NewFileModal = ({ isOpen, onClose, onSuccess }) => {

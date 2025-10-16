@@ -8,7 +8,7 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
   const [folders, setFolders] = useState(initialFolders);
 
   useEffect(() => {
-    if (createdFolder) setFolders((prev) => [...prev, createdFolder]);
+    if (createdFolder) setFolders((prev) => [createdFolder, ...prev]);
   }, [createdFolder]);
 
   const handleFolderRename = (folderId, newName) => {
