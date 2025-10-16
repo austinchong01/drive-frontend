@@ -5,7 +5,6 @@ import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 
 const Navbar = () => {
-  console.log("Navbar rendered")
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const { showError } = useError();

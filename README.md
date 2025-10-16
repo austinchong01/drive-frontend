@@ -50,6 +50,15 @@ Optimization (minimize APIs and re-rendering)
         - trigger storage update
 - rename file/folder only renders corresponding FileList/FolderList
     - ModalContext (two rename modals for all files and folders)
+- Memoization
+- 
+
+
+User Interface
+- Loading messages/screens/design
+- Error messages
+- Status 500 page
+- Modal Design
 
 
 Nice to Haves
