@@ -1,6 +1,6 @@
 // src/components/Register.jsx
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/user';
 
 const Register = () => {
@@ -19,7 +19,7 @@ const Register = () => {
       }
     };
     verifyUser();
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,10 +32,6 @@ const Register = () => {
     } else {
       setError(result.error);
     }
-  };
-
-  const handleLoginRedirect = () => {
-    navigate("/login");
   };
 
   return (
@@ -70,7 +66,7 @@ const Register = () => {
           />
         </div>
         <button type="submit">Register</button>
-        <button type="button" onClick={handleLoginRedirect}>Back to Login</button>
+        <Link to="/login">Back to Login</Link>
       </form>
       {error && <p>Error: {error}</p>}
     </div>

@@ -5,6 +5,7 @@ import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
+import Crumbs from "./Content_Components/Crumbs"
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showError } = useError();
@@ -29,19 +30,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       setLoading(false);
     };
 
-    const fetchCrumbs = async () => {
-      setLoading(true);
-      const result = await api.getCrumbs(folderId);
-
-      if (result.success) {
-        console.log(result.data.breadcrumbs);
-      } else {
-        showError(`Failed to load crumbs: ${result.error}`);
-      }
-    };
-
     fetchContents();
-    fetchCrumbs();
   }, [folderId]);
 
   if (loading) {
@@ -54,6 +43,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+      <Crumbs folderId={folderId}/>
       <FolderList
         initialFolders={initialFolders}
         createdFolder={createdFolder}

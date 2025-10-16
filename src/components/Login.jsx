@@ -1,6 +1,6 @@
 // src/components/Login.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { api } from "../services/user";
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
       }
     };
     verifyUser();
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,10 +31,6 @@ const Login = () => {
     } else {
       setError(result.error);
     }
-  };
-
-  const handleRegisterRedirect = () => {
-    navigate("/register");
   };
 
   return (
@@ -60,7 +56,7 @@ const Login = () => {
           />
         </div>
         <button type="submit">Login</button>
-        <button type="button" onClick={handleRegisterRedirect}>Register</button>
+        <Link to="/register">Register</Link>
       </form>
       {error && <p>Error: {error}</p>}
     </div>

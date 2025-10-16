@@ -1,16 +1,10 @@
-// src/components/home/Folder.jsx
-
-import { useNavigate } from "react-router-dom";
+// src/components/home/Content_Components/Folder.jsx
+import { Link } from "react-router-dom";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
 
 const Folder = ({ folder, onDelete, onRenameClick }) => {
-  const navigate = useNavigate();
   const { showError } = useError();
-
-  const handleFolderClick = () => {
-    navigate(`/folders/${folder.id}`);
-  };
 
   const handleDeleteFolder = async () => {
     const result = await api.deleteFolder(folder.id);
@@ -23,15 +17,12 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
   };
 
   return (
-    <div onClick={handleFolderClick}
-      style={{ border: "1px solid blue", padding: "10px", cursor: "pointer" }}>
-      <h3>{folder.name}</h3>
-      <button onClick={(e) => { e.stopPropagation(); onRenameClick(); }}>
-        RENAME
-      </button>
-      <button onClick={(e) => { e.stopPropagation(); handleDeleteFolder(); }}>
-        DELETE
-      </button>
+    <div style={{ border: "1px solid blue", padding: "10px" }}>
+      <h3>
+        <Link to={`/folders/${folder.id}`}>{folder.name}</Link>
+      </h3>
+      <button onClick={onRenameClick}>RENAME</button>
+      <button onClick={handleDeleteFolder}>DELETE</button>
     </div>
   );
 };

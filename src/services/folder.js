@@ -6,14 +6,17 @@ export const api = {
   async createFolder(name, folderId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/folders/${folderId}/upload`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name }),
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/folders/${folderId}/upload`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name }),
+        }
+      );
 
       const data = await response.json();
       if (response.status !== 201) throw new Error(data.message);
@@ -27,8 +30,7 @@ export const api = {
   async getFolderContents(folderId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/folders/${folderId}`,
-      {
+      const response = await fetch(`${API_BASE_URL}/folders/${folderId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +39,7 @@ export const api = {
       });
 
       const data = await response.json();
-      if (response.status !== 200) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message);
 
       return { success: true, data };
     } catch (error) {
@@ -48,7 +50,8 @@ export const api = {
   async getCrumbs(folderId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/folders/${folderId}/crumbs`,
+      const response = await fetch(
+        `${API_BASE_URL}/folders/${folderId}/crumbs`,
         {
           method: "GET",
           headers: {
@@ -59,7 +62,7 @@ export const api = {
       );
 
       const data = await response.json();
-      if (response.status !== 200) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message);
 
       return { success: true, data };
     } catch (error) {
@@ -83,7 +86,31 @@ export const api = {
       );
 
       const data = await response.json();
-      if (response.status !== 200) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message);
+
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  },
+
+  async updateFoldLoc(folderId, newParentId) {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${API_BASE_URL}/folders/${folderId}/newFolderLocation`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ newParentId }),
+        }
+      );
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message);
 
       return { success: true, data };
     } catch (error) {

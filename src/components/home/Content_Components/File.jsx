@@ -1,4 +1,4 @@
-// src/components/home/File.jsx
+// src/components/home/Content_Components/File.jsx
 
 import { api } from "../../../services/file";
 import { useError } from "../../../contexts/ErrorContext";

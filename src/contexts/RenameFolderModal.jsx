@@ -18,7 +18,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
       onClose();
     } else {
       showError(`Folder Rename Error: ${result.error}`);
-      onClose(); // Close modal after error (or remove this line to keep it open)
+      // onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
 

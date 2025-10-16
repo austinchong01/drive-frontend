@@ -11,14 +11,14 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await api.updateFileName(file.id, fileName);
+    const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
       onSuccess(file.id, result.data.displayName);
       onClose();
     } else {
       showError(`File Rename Error: ${result.error}`);
-      onClose(); // Close modal after error (or remove this line to keep it open)
+      // onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
 

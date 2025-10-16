@@ -12,7 +12,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
 
     const formData = new FormData(e.target);
     if (folderId === undefined) folderId = "";
-    const result = await api.uploadFile(formData, folderId);
+    const result = await api.createFile(formData, folderId);
 
     if (result.success) {
       e.target.reset();

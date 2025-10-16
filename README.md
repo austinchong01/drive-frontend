@@ -50,7 +50,8 @@ Optimization (minimize APIs and re-rendering)
         - trigger storage update
 - rename file/folder only renders corresponding FileList/FolderList
     - ModalContext (two rename modals for all files and folders)
-    
+
 
 Nice to Haves
 - Drag and Drop
+- Delete/Uploading loading messages

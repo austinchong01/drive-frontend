@@ -35,6 +35,7 @@ export const api = {
       });
 
       const data = await response.json();
+      console.log(data)
 
       if (!(response.status === 201))
         throw new Error(
@@ -62,7 +63,7 @@ export const api = {
 
       const data = await response.json();
 
-      if (!(response.status === 200))
+      if (!response.ok)
         throw new Error(
           data.message || `HTTP error! status: ${response.status}`
         );
@@ -89,7 +90,7 @@ export const api = {
 
       const data = await response.json();
 
-      if (!(response.status === 200)) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message);
 
       return { success: true };
     } catch (error) {
@@ -111,7 +112,7 @@ export const api = {
 
       const data = await response.json();
 
-      if (!(response.status === 200)) throw new Error(data.message);
+      if (!response.ok) throw new Error(data.message);
 
       return { success: true, data };
     } catch (error) {

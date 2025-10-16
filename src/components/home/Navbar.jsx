@@ -1,6 +1,6 @@
 // src/components/home/Navbar.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 
@@ -20,11 +20,7 @@ const Navbar = () => {
       }
     };
     fetchUserProfile();
-  }, []);
-
-  const handleLogoClick = () => {
-    navigate("/home");
-  };
+  }, [showError]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -33,12 +29,13 @@ const Navbar = () => {
 
   return (
     <div style={{ display: "flex", padding: "20px", border: "1px solid black" }}>
-      <img 
-        src="/images/mock_google_drive.svg" 
-        alt="Logo" 
-        onClick={handleLogoClick}
-        style={{ width: "50px", cursor: "pointer" }} 
-      />
+      <Link to="/home">
+        <img 
+          src="/images/mock_google_drive.svg" 
+          alt="Logo" 
+          style={{ width: "50px" }} 
+        />
+      </Link>
       <h1>{username || "Loading..."}</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
