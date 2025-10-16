@@ -30,19 +30,10 @@ const Crumbs = ({ folderId }) => {
     return <div>Loading breadcrumbs...</div>;
   }
 
-  // Get previous folder ID for back button (parent of current folder)
-  const previousFolderId = breadcrumbs.length > 1 
-    ? breadcrumbs[breadcrumbs.length - 2].id 
-    : null;
-
-  // Filter out the first element (root) from display
   const displayBreadcrumbs = breadcrumbs.slice(1);
 
   return (
     <div>
-      {previousFolderId && (
-        <Link to={`/folders/${previousFolderId}`}>← Back</Link>
-      )}
       {displayBreadcrumbs.map((crumb, index) => {
         const isLast = index === displayBreadcrumbs.length - 1;
 
