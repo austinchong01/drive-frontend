@@ -8,6 +8,7 @@ import FileList from "./Content_Components/FileList";
 import Crumbs from "./Content_Components/Crumbs";
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
+  // console.log("rendered Content")
   const { showError } = useError();
   let { folderId } = useParams();
   const [initialFiles, setInitialFiles] = useState([]);

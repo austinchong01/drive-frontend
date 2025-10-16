@@ -5,51 +5,52 @@ import { useError } from "../../../contexts/ErrorContext";
 import { Link } from "react-router-dom";
 
 const Crumbs = ({ folderId }) => {
+  // console.log("rendered Crumbs")
   const { showError } = useError();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
+
+  const normFolderId = folderId === undefined ? "" : folderId;
 
   useEffect(() => {
-    if (folderId === undefined) folderId = "";
     const fetchCrumbs = async () => {
-      setLoading(true);
-      const result = await api.getCrumbs(folderId);
+      // setLoading(true);
+      const result = await api.getCrumbs(normFolderId);
 
       if (result.success) {
         setBreadcrumbs(result.data.breadcrumbs);
       } else {
         showError(`Failed to load crumbs: ${result.error}`);
       }
-      setLoading(false);
+      // setLoading(false);
     };
 
     fetchCrumbs();
-  }, [folderId]);
+  }, [normFolderId]);
 
-  if (loading) {
-    return <div>Loading breadcrumbs...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading breadcrumbs...</div>;
+  // }
 
-  const displayBreadcrumbs = breadcrumbs.slice(1);
+  if (!normFolderId)
+    return <div>/ root</div>;
 
-  return (
-    <div>
-      {displayBreadcrumbs.map((crumb, index) => {
-        const isLast = index === displayBreadcrumbs.length - 1;
+  const crumbElements = breadcrumbs.map((crumb, index) => {
+    return (
+      <span key={crumb.id}>
+        <span> / </span>
+        {crumb.id === normFolderId ? (
+          <span>{crumb.name}</span>
+        ) : (
+          <Link to={index === 0 ? "/home" : `/folders/${crumb.id}`}>
+            {crumb.name}
+          </Link>
+        )}
+      </span>
+    );
+  });
 
-        return (
-          <span key={crumb.id}>
-            <span> / </span>
-            {isLast ? (
-              <span>{crumb.name}</span>
-            ) : (
-              <Link to={`/folders/${crumb.id}`}>{crumb.name}</Link>
-            )}
-          </span>
-        );
-      })}
-    </div>
-  );
+  return <div>{crumbElements}</div>;
 };
 
 export default Crumbs;

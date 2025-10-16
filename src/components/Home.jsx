@@ -10,6 +10,7 @@ import Sidebar from "./home/Sidebar";
 import Content from "./home/Content";
 
 const Home = () => {
+  // console.log("rendered Home")
   const navigate = useNavigate();
   const { folderId } = useParams();
   const [createdFolder, setCreatedFolder] = useState(null);
