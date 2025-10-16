@@ -1,22 +1,25 @@
 // src/components/home/Content_Components/FileList.jsx
-import { memo } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
 
-const FileList = ({ files, setFiles, onItemDeleted }) => {
+const FileList = ({ initialFiles, createdFile, onFileDelete }) => {
   const { openFileRenameModal } = useModal();
+  const [files, setFiles] = useState(initialFiles);
+
+  useEffect(() => {
+    if (createdFile) setFiles((prev) => [...prev, createdFile]);
+  }, [createdFile]);
 
   const handleFileRename = (fileId, newName) => {
     setFiles((prev) =>
       prev.map((file) =>
-        file.id === fileId ? { ...file, displayName: newName } : file
-      )
-    );
+        file.id === fileId ? { ...file, displayName: newName } : file));
   };
 
   const handleFileDelete = (fileId) => {
     setFiles((prev) => prev.filter((file) => file.id !== fileId));
-    onItemDeleted();
+    onFileDelete(fileId);
   };
 
   return (
@@ -36,4 +39,4 @@ const FileList = ({ files, setFiles, onItemDeleted }) => {
   );
 };
 
-export default memo(FileList);
+export default FileList;

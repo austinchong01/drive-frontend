@@ -5,7 +5,7 @@ import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "./NewFolderModal";
 import NewFileModal from "./NewFileModal";
 
-const Sidebar = ({ storageUpdateTrigger, onFolderCreated, onFileCreated }) => {
+const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
@@ -21,10 +21,9 @@ const Sidebar = ({ storageUpdateTrigger, onFolderCreated, onFileCreated }) => {
     }
   };
 
-  // Initial fetch
   useEffect(() => {
     fetchUserProfile();
-  }, [storageUpdateTrigger]);
+  }, [storageTrigger]);
 
   const handleFileSuccess = (newFile) => {
     setIsFileModalOpen(false);

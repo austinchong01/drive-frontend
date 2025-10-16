@@ -11,18 +11,9 @@ import ErrorToast from "./ErrorToast";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [storageUpdateTrigger, setStorageUpdateTrigger] = useState(0);
-
-  const handleStorageChange = useCallback(() => {
-    setStorageUpdateTrigger((prev) => prev + 1);
-  }, []);
-
-  const handleFolderCreated = useCallback(() => {
-  }, []);
-
-  const handleFileCreated = useCallback(() => {
-    handleStorageChange();
-  }, [handleStorageChange]);
+  const [createdFolder, setCreatedFolder] = useState(null);
+  const [createdFile, setCreatedFile] = useState(null);
+  const [storageTrigger, setStorageTrigger] = useState(0);
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -32,6 +23,10 @@ const Home = () => {
     };
     verifyUser();
   }, [navigate]);
+
+  const handleDelete = useCallback(() => {
+    setStorageTrigger(prev => prev + 1);
+  }, []);
 
   return (
     <ErrorProvider>
@@ -53,14 +48,14 @@ const Home = () => {
             }}
           >
             <Sidebar
-              storageUpdateTrigger={storageUpdateTrigger}
-              onFolderCreated={handleFolderCreated}
-              onFileCreated={handleFileCreated}
+              onFolderCreated={setCreatedFolder}
+              onFileCreated={setCreatedFile}
+              storageTrigger={storageTrigger}
             />
             <Content
-              onItemDeleted={handleStorageChange}
-              onFolderCreated={handleFolderCreated}
-              onFileCreated={handleFileCreated}
+              createdFolder={createdFolder}
+              createdFile={createdFile}
+              itemDeleted={handleDelete}
             />
           </div>
         </div>

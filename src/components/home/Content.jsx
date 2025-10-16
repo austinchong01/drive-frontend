@@ -1,16 +1,16 @@
 // src/components/home/Content.jsx
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const Content = ({ onItemDeleted, onFolderCreated, onFileCreated }) => {
+const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showError } = useError();
   const { folderId } = useParams();
-  const [subfolders, setSubfolders] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [initialFiles, setInitialFiles] = useState([]);
+  const [initialFolders, setInitialFolders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // load all files and folders in FOLDER
@@ -20,8 +20,8 @@ const Content = ({ onItemDeleted, onFolderCreated, onFileCreated }) => {
       const result = await api.getFolderContents(folderId);
 
       if (result.success) {
-        setSubfolders(result.data.subfolders);
-        setFiles(result.data.files);
+        setInitialFolders(result.data.subfolders);
+        setInitialFiles(result.data.files);
       } else {
         showError(`Failed to load contents: ${result.error}`);
       }
@@ -30,16 +30,6 @@ const Content = ({ onItemDeleted, onFolderCreated, onFileCreated }) => {
 
     fetchContents();
   }, [folderId]);
-
-  const handleFolderCreated = (newFolder) => {
-    setSubfolders((prev) => [...prev, newFolder]);
-    onFolderCreated();
-  };
-
-  const handleFileCreated = (newFile) => {
-    setFiles((prev) => [...prev, newFile]);
-    onFileCreated();
-  };
 
   if (loading) {
     return (
@@ -52,19 +42,17 @@ const Content = ({ onItemDeleted, onFolderCreated, onFileCreated }) => {
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
       <FolderList
-        folders={subfolders}
-        setFolders={setSubfolders}
-        onItemDeleted={onItemDeleted}
-        onFolderCreated={handleFolderCreated}
+        initialFolders={initialFolders}
+        createdFolder={createdFolder}
+        onFolderDelete={itemDeleted}
       />
       <FileList
-        files={files}
-        setFiles={setFiles}
-        onItemDeleted={onItemDeleted}
-        onFileCreated={handleFileCreated}
+        initialFiles={initialFiles}
+        createdFile={createdFile}
+        onFileDelete={itemDeleted}
       />
     </div>
   );
 };
 
-export default memo(Content);
+export default Content;

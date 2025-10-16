@@ -1,22 +1,25 @@
 // src/components/home/Content_Components/FolderList.jsx
-import { memo } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
-const FolderList = ({ folders, setFolders, onItemDeleted }) => {
+const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
   const { openFolderRenameModal } = useModal();
+  const [folders, setFolders] = useState(initialFolders);
+
+  useEffect(() => {
+    if (createdFolder) setFolders((prev) => [...prev, createdFolder]);
+  }, [createdFolder]);
 
   const handleFolderRename = (folderId, newName) => {
     setFolders((prev) =>
       prev.map((folder) =>
-        folder.id === folderId ? { ...folder, name: newName } : folder
-      )
-    );
+        folder.id === folderId ? { ...folder, name: newName } : folder));
   };
 
   const handleFolderDelete = (folderId) => {
     setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
-    onItemDeleted();
+    onFolderDelete(folderId);
   };
 
   return (
@@ -28,8 +31,7 @@ const FolderList = ({ folders, setFolders, onItemDeleted }) => {
           flexWrap: "wrap",
           gap: "15px",
           marginBottom: "50px",
-        }}
-      >
+        }}>
         {folders.map((folder) => (
           <Folder
             key={folder.id}
@@ -45,4 +47,4 @@ const FolderList = ({ folders, setFolders, onItemDeleted }) => {
   );
 };
 
-export default memo(FolderList);
+export default FolderList;
