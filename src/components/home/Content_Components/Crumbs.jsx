@@ -24,7 +24,7 @@ const Crumbs = ({ folderId }) => {
     };
 
     fetchCrumbs();
-  }, [folderId, showError]);
+  }, [folderId]);
 
   if (loading) {
     return <div>Loading breadcrumbs...</div>;

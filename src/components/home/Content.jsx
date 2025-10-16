@@ -5,7 +5,7 @@ import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
-import Crumbs from "./Content_Components/Crumbs"
+import Crumbs from "./Content_Components/Crumbs";
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showError } = useError();
@@ -33,27 +33,25 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     fetchContents();
   }, [folderId]);
 
-  if (loading) {
-    return (
-      <div style={{ flex: 1, padding: "20px" }}>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <Crumbs folderId={folderId}/>
-      <FolderList
-        initialFolders={initialFolders}
-        createdFolder={createdFolder}
-        onFolderDelete={itemDeleted}
-      />
-      <FileList
-        initialFiles={initialFiles}
-        createdFile={createdFile}
-        onFileDelete={itemDeleted}
-      />
+      <Crumbs folderId={folderId} />
+      {loading ? (
+        <p>Loading contents...</p>
+      ) : (
+        <>
+          <FolderList
+            initialFolders={initialFolders}
+            createdFolder={createdFolder}
+            onFolderDelete={itemDeleted}
+          />
+          <FileList
+            initialFiles={initialFiles}
+            createdFile={createdFile}
+            onFileDelete={itemDeleted}
+          />
+        </>
+      )}
     </div>
   );
 };

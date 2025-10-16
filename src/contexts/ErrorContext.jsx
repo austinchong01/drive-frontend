@@ -1,5 +1,4 @@
-// src/contexts/ErrorContext.jsx
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 const ErrorContext = createContext();
 
@@ -14,13 +13,13 @@ export const useError = () => {
 export const ErrorProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
-  const showError = (message) => {
+  const showError = useCallback((message) => {
     setError(message);
-  };
+  }, []); // ← Memoize with useCallback
 
-  const clearError = () => {
+  const clearError = useCallback(() => {
     setError(null);
-  };
+  }, []); // ← Memoize this too
 
   return (
     <ErrorContext.Provider value={{ error, showError, clearError }}>

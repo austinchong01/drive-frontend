@@ -6,6 +6,7 @@ import NewFolderModal from "../../contexts/NewFolderModal";
 import NewFileModal from "../../contexts/NewFileModal";
 
 const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
+  console.log("Sidebar rendered")
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
