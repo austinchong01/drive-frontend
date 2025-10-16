@@ -42,6 +42,8 @@ Functionalities
     - go into folder
         - URL change, parentId
         - breadcrumbs
+- API
+    - Search Files/Folders
 
 
 Optimization (minimize APIs and re-rendering)
