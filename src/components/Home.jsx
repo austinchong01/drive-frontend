@@ -1,6 +1,6 @@
 // src/components/Home.jsx
 import { useEffect, useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ErrorProvider } from "../contexts/ErrorContext";
 import { ModalProvider } from "../contexts/ModalContext";
 import ErrorToast from "../contexts/ErrorToast";
@@ -11,6 +11,7 @@ import Content from "./home/Content";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { folderId } = useParams();
   const [createdFolder, setCreatedFolder] = useState(null);
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
@@ -23,6 +24,11 @@ const Home = () => {
     };
     verifyUser();
   }, [navigate]);
+
+  useEffect(() => {
+    setCreatedFolder(null);
+    setCreatedFile(null);
+  }, [folderId]);
 
   const handleDelete = useCallback(() => {
     setStorageTrigger((prev) => prev + 1);

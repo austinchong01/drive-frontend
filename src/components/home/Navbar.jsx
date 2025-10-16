@@ -22,6 +22,10 @@ const Navbar = () => {
     fetchUserProfile();
   }, []);
 
+  const handleLogoClick = () => {
+    navigate("/home");
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -29,7 +33,12 @@ const Navbar = () => {
 
   return (
     <div style={{ display: "flex", padding: "20px", border: "1px solid black" }}>
-      <img src="/images/mock_google_drive.svg" alt="Logo" style={{ width: "50px" }} />
+      <img 
+        src="/images/mock_google_drive.svg" 
+        alt="Logo" 
+        onClick={handleLogoClick}
+        style={{ width: "50px", cursor: "pointer" }} 
+      />
       <h1>{username || "Loading..."}</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>

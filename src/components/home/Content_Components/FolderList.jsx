@@ -21,6 +21,7 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
     setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
     onFolderDelete(folderId);
   };
+  // folders.map((folder) => {console.log(folder.id)});
 
   return (
     <>
