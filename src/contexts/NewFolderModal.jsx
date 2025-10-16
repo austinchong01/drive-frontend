@@ -7,11 +7,12 @@ import { useParams } from "react-router-dom";
 const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
   const [folderName, setFolderName] = useState("");
   const { showError } = useError();
-  const { folderId } = useParams();
+  let { folderId } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (folderId === undefined) folderId = "";
     const result = await api.createFolder(folderName, folderId);
 
     if (result.success) {

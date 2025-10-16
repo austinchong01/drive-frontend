@@ -34,6 +34,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       const result = await api.getCrumbs(folderId);
 
       if (result.success) {
+        console.log(result.data.breadcrumbs);
       } else {
         showError(`Failed to load crumbs: ${result.error}`);
       }

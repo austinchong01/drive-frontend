@@ -5,12 +5,13 @@ import { useParams } from "react-router-dom";
 
 const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
   const { showError } = useError();
-  const { folderId } = useParams();
+  let { folderId } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
+    if (folderId === undefined) folderId = "";
     const result = await api.uploadFile(formData, folderId);
 
     if (result.success) {

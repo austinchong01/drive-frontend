@@ -5,14 +5,8 @@ const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 export const api = {
   async createFolder(name, folderId) {
     try {
-      const endpoint = folderId
-        ? `${API_BASE_URL}/folders/${folderId}/upload`
-        : `${API_BASE_URL}/folders/upload`; // root upload
-      
-        console.log(endpoint)
-
       const token = localStorage.getItem("token");
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${API_BASE_URL}/folders/${folderId}/upload`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,12 +26,9 @@ export const api = {
 
   async getFolderContents(folderId) {
     try {
-      const endpoint = folderId
-        ? `${API_BASE_URL}/folders/${folderId}`
-        : `${API_BASE_URL}/folders/null`;
-
       const token = localStorage.getItem("token");
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${API_BASE_URL}/folders/${folderId}`,
+      {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -56,12 +47,8 @@ export const api = {
 
   async getCrumbs(folderId) {
     try {
-      const endpoint = folderId
-        ? `${API_BASE_URL}/folders/${folderId}/crumbs`
-        : `${API_BASE_URL}/folders/null/crumbs`;
-
       const token = localStorage.getItem("token");
-      const response = await fetch(endpoint,
+      const response = await fetch(`${API_BASE_URL}/folders/${folderId}/crumbs`,
         {
           method: "GET",
           headers: {
