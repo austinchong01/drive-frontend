@@ -1,6 +1,7 @@
 // src/components/home/Content.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { DndContext } from "@dnd-kit/core";
 import { api } from "../../services/folder";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
@@ -10,7 +11,6 @@ import Crumbs from "./Content_Components/Crumbs";
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showError } = useError();
   let { folderId } = useParams();
-  // console.log(folderId)
   const [initialFiles, setInitialFiles] = useState([]);
   const [initialFolders, setInitialFolders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,26 +34,50 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     fetchContents();
   }, [folderId]);
 
+  const handleDragStart = (event) => {
+    console.log("Drag started:", event.active);
+  };
+
+  const handleDragEnd = (event) => {
+    console.log("Drag ended:", event);
+    const { active, over } = event;
+    
+    if (over) {
+      console.log("Dragged:", active.data.current);
+      console.log("Dropped on:", over.data.current);
+    }
+  };
+
+  const handleDragCancel = () => {
+    console.log("Drag cancelled");
+  };
+
   return (
-    <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <Crumbs folderId={folderId} />
-      {loading ? (
-        <p>Loading contents...</p>
-      ) : (
-        <>
-          <FolderList
-            initialFolders={initialFolders}
-            createdFolder={createdFolder}
-            onFolderDelete={itemDeleted}
-          />
-          <FileList
-            initialFiles={initialFiles}
-            createdFile={createdFile}
-            onFileDelete={itemDeleted}
-          />
-        </>
-      )}
-    </div>
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+    >
+      <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+        <Crumbs folderId={folderId} />
+        {loading ? (
+          <p>Loading contents...</p>
+        ) : (
+          <>
+            <FolderList
+              initialFolders={initialFolders}
+              createdFolder={createdFolder}
+              onFolderDelete={itemDeleted}
+            />
+            <FileList
+              initialFiles={initialFiles}
+              createdFile={createdFile}
+              onFileDelete={itemDeleted}
+            />
+          </>
+        )}
+      </div>
+    </DndContext>
   );
 };
 

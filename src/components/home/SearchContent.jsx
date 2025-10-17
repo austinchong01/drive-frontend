@@ -1,5 +1,6 @@
 // src/components/home/SearchContent.jsx
 import { useState, useEffect } from "react";
+import { DndContext } from "@dnd-kit/core";
 import { api } from "../../services/api";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
@@ -28,26 +29,50 @@ const SearchContent = ({ query, createdFile, createdFolder, itemDeleted, searchT
     fetchSearchContents();
   }, [query, createdFile, createdFolder, searchTrigger, showError]);
 
+  const handleDragStart = (event) => {
+    console.log("Drag started:", event.active);
+  };
+
+  const handleDragEnd = (event) => {
+    console.log("Drag ended:", event);
+    const { active, over } = event;
+    
+    if (over) {
+      console.log("Dragged:", active.data.current);
+      console.log("Dropped on:", over.data.current);
+    }
+  };
+
+  const handleDragCancel = () => {
+    console.log("Drag cancelled");
+  };
+
   return (
-    <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <h2>Search Results for: "{query}"</h2>
-      {loading ? (
-        <p>Loading search results...</p>
-      ) : (
-        <>
-          <FolderList
-            initialFolders={foundFolders}
-            createdFolder={undefined}
-            onFolderDelete={itemDeleted}
-          />
-          <FileList
-            initialFiles={foundFiles}
-            createdFile={undefined}
-            onFileDelete={itemDeleted}
-          />
-        </>
-      )}
-    </div>
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+    >
+      <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+        <h2>Search Results for: "{query}"</h2>
+        {loading ? (
+          <p>Loading search results...</p>
+        ) : (
+          <>
+            <FolderList
+              initialFolders={foundFolders}
+              createdFolder={undefined}
+              onFolderDelete={itemDeleted}
+            />
+            <FileList
+              initialFiles={foundFiles}
+              createdFile={undefined}
+              onFileDelete={itemDeleted}
+            />
+          </>
+        )}
+      </div>
+    </DndContext>
   );
 };
 
