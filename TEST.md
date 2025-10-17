@@ -42,6 +42,7 @@ Testing
             - rename folder to same "name"
         - updateFoldLoc
             - folder with same name into new folder
+            - folder already in new folder
             - folder into descendant folder
         - deleteFolder
             - empty folder
@@ -57,7 +58,7 @@ Testing
             - rename file to same "displayName"
         - updateFileLoc
             - file with same name into new folder
-            - file into own folder
+            - file already in new folder
         - deleteFile
             - delete raw file
     - API

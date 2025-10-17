@@ -44,7 +44,7 @@ export const api = {
     }
   },
 
-  async updateFileLoc(fileId, newFolderId) {
+  async updateFileLoc(fileId, newParentId) {
     try {
       const endpoint = `${API_BASE_URL}/files/${fileId}/updateFileLocation`;
 
@@ -55,7 +55,7 @@ export const api = {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ newFolderId }),
+        body: JSON.stringify({ newParentId }),
       });
 
       const data = await response.json();

@@ -57,6 +57,8 @@ Optimization (minimize APIs and re-rendering)
 - Memoization
     - Error Messages
     - Home.jsx callbacks
+- Minimize Storage API call?
+- Minimize Search API calls?
 
 
 User Interface
@@ -64,6 +66,7 @@ User Interface
 - Error messages
 - Status 500 page
 - Modal Design
+    - modal autofill filename on upload
 - Dragged File/Folder picture
 
 
@@ -72,3 +75,8 @@ Nice to Haves
 - Sharing Files/Folders
 - Pagination (Limiting Files/Folders per page)
 - Change username
+- File replace on existing name
+- End to End Testing
+- Guest Account
+- Multiple Layouts (Tablet, Mobile)
+- Accessibility

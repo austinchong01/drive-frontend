@@ -74,7 +74,7 @@ export const api = {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${API_BASE_URL}/folders/${folderId}/newFolderName`,
+        `${API_BASE_URL}/folders/${folderId}/updateFolderName`,
         {
           method: "PATCH",
           headers: {
@@ -94,11 +94,11 @@ export const api = {
     }
   },
 
-  async updateFoldLoc(folderId, newParentId) {
+  async updateFolderLoc(folderId, newParentId) {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `${API_BASE_URL}/folders/${folderId}/newFolderLocation`,
+        `${API_BASE_URL}/folders/${folderId}/updateFolderLocation`,
         {
           method: "PATCH",
           headers: {
