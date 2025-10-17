@@ -5,7 +5,7 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const SearchContent = ({ query, refreshTrigger, itemDeleted }) => {
+const SearchContent = ({ query, refreshTrigger, itemDeleted, createdFolder, createdFile }) => {
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
@@ -27,7 +27,7 @@ const SearchContent = ({ query, refreshTrigger, itemDeleted }) => {
     };
 
     fetchContents();
-  }, [query, refreshTrigger, showError]);
+  }, [query, refreshTrigger, showError, createdFolder, createdFile]);
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>

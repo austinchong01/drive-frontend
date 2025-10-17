@@ -44,6 +44,8 @@ Functionalities
         - breadcrumbs
 - API
     - Search Files/Folders
+        - creating files/folders would be in "root" folder
+        - deleting folders with files/folders
 
 
 Optimization (minimize APIs and re-rendering)

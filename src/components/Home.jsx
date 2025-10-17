@@ -12,7 +12,7 @@ import SearchContent from "./home/SearchContent";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { folderId } = useParams();
+  let { folderId } = useParams();
   const [createdFolder, setCreatedFolder] = useState(null);
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     setCreatedFolder(null);
     setCreatedFile(null);
-    setSearchQuery("");
+    if (folderId) setSearchQuery("");
   }, [folderId]);
 
   const handleDelete = useCallback(() => {
@@ -47,10 +47,13 @@ const Home = () => {
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
       setSearchQuery(trimmedQuery);
+      navigate("/home");
     }
   }, []);
 
   const handleClearSearch = useCallback(() => {
+    setCreatedFolder(null);
+    setCreatedFile(null);
     setSearchQuery("");
   }, []);
 
@@ -83,6 +86,8 @@ const Home = () => {
                 refreshTrigger={searchRefreshTrigger}
                 query={searchQuery}
                 itemDeleted={handleSearchDelete}
+                createdFolder={createdFolder}
+                createdFile={createdFile}
               />
             ) : (
               <Content
