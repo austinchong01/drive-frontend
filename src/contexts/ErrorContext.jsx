@@ -13,13 +13,14 @@ export const useError = () => {
 export const ErrorProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
+  // memoization
   const showError = useCallback((message) => {
     setError(message);
-  }, []); // ← Memoize with useCallback
+  }, []);
 
   const clearError = useCallback(() => {
     setError(null);
-  }, []); // ← Memoize this too
+  }, []);
 
   return (
     <ErrorContext.Provider value={{ error, showError, clearError }}>

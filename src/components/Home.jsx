@@ -17,7 +17,7 @@ const Home = () => {
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchRefreshTrigger, setSearchRefreshTrigger] = useState(0);
+  const [searchTrigger, setSearchTrigger] = useState(0);
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -38,17 +38,17 @@ const Home = () => {
     setStorageTrigger((prev) => prev + 1);
   }, []);
 
-  const handleSearchDelete = useCallback(() => {
-    setStorageTrigger((prev) => prev + 1);
-    setSearchRefreshTrigger((prev) => prev + 1);
-  }, []);
-
   const handleSearch = useCallback((query) => {
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
       setSearchQuery(trimmedQuery);
       navigate("/home");
     }
+  }, []);
+
+  const handleSearchDelete = useCallback(() => {
+    setStorageTrigger((prev) => prev + 1);
+    setSearchTrigger((prev) => prev + 1);
   }, []);
 
   const handleClearSearch = useCallback(() => {
@@ -83,11 +83,11 @@ const Home = () => {
             />
             {searchQuery ? (
               <SearchContent
-                refreshTrigger={searchRefreshTrigger}
                 query={searchQuery}
-                itemDeleted={handleSearchDelete}
-                createdFolder={createdFolder}
                 createdFile={createdFile}
+                createdFolder={createdFolder}
+                itemDeleted={handleSearchDelete}
+                searchTrigger={searchTrigger}
               />
             ) : (
               <Content

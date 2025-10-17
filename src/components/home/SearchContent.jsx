@@ -5,15 +5,14 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const SearchContent = ({ query, refreshTrigger, itemDeleted, createdFolder, createdFile }) => {
+const SearchContent = ({ query, createdFile, createdFolder, itemDeleted, searchTrigger }) => {
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Re-fetch when query OR refreshTrigger changes
   useEffect(() => {
-    const fetchContents = async () => {
+    const fetchSearchContents = async () => {
       setLoading(true);
       const result = await api.search(query);
 
@@ -26,8 +25,8 @@ const SearchContent = ({ query, refreshTrigger, itemDeleted, createdFolder, crea
       setLoading(false);
     };
 
-    fetchContents();
-  }, [query, refreshTrigger, showError, createdFolder, createdFile]);
+    fetchSearchContents();
+  }, [query, createdFile, createdFolder, searchTrigger, showError]);
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>

@@ -5,10 +5,10 @@ import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 
 const Navbar = ({ onSearch, onClearSearch }) => {
-  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const { showError } = useError();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async () => {
