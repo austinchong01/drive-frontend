@@ -40,7 +40,9 @@ Testing
             - new folderId
         - renameFolder
             - rename folder to same "name"
-        - updateFoldLoc?
+        - updateFoldLoc
+            - folder with same name into new folder
+            - folder into descendant folder
         - deleteFolder
             - empty folder
             - two nested folders
@@ -53,7 +55,9 @@ Testing
             - same "displayName" in different folder
         - renameFile
             - rename file to same "displayName"
-        - updateFileLoc?
+        - updateFileLoc
+            - file with same name into new folder
+            - file into own folder
         - deleteFile
             - delete raw file
     - API
