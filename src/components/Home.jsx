@@ -12,7 +12,7 @@ import SearchContent from "./home/SearchContent";
 
 const Home = () => {
   const navigate = useNavigate();
-  let { folderId } = useParams();
+  const { folderId } = useParams();
   const [createdFolder, setCreatedFolder] = useState(null);
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
