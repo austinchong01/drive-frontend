@@ -17,7 +17,7 @@ const Home = () => {
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchRefreshKey, setSearchRefreshKey] = useState(0); // ← For search only
+  const [searchRefreshTrigger, setSearchRefreshTrigger] = useState(0);
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -40,7 +40,7 @@ const Home = () => {
 
   const handleSearchDelete = useCallback(() => {
     setStorageTrigger((prev) => prev + 1);
-    setSearchRefreshKey((prev) => prev + 1); // ← Trigger search re-mount
+    setSearchRefreshTrigger((prev) => prev + 1);
   }, []);
 
   const handleSearch = useCallback((query) => {
@@ -80,7 +80,7 @@ const Home = () => {
             />
             {searchQuery ? (
               <SearchContent
-                key={searchRefreshKey} // ← Only SearchContent gets the key
+                refreshTrigger={searchRefreshTrigger}
                 query={searchQuery}
                 itemDeleted={handleSearchDelete}
               />

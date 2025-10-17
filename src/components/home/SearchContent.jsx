@@ -5,16 +5,16 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const SearchContent = ({ query, itemDeleted }) => {
+const SearchContent = ({ query, refreshTrigger, itemDeleted }) => {
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  // load all files and folders from Search Query
+  // Re-fetch when query OR refreshTrigger changes
   useEffect(() => {
     const fetchContents = async () => {
-      // setLoading(true);
+      setLoading(true);
       const result = await api.search(query);
 
       if (result.success) {
@@ -23,25 +23,31 @@ const SearchContent = ({ query, itemDeleted }) => {
       } else {
         showError(`Failed to load search results: ${result.error}`);
       }
-      // setLoading(false);
+      setLoading(false);
     };
 
     fetchContents();
-  }, [query]);
+  }, [query, refreshTrigger, showError]);
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
       <h2>Search Results for: "{query}"</h2>
-      <FolderList
-        initialFolders={foundFolders}
-        createdFolder={undefined}
-        onFolderDelete={itemDeleted}
-      />
-      <FileList
-        initialFiles={foundFiles}
-        createdFile={undefined}
-        onFileDelete={itemDeleted}
-      />
+      {loading ? (
+        <p>Loading search results...</p>
+      ) : (
+        <>
+          <FolderList
+            initialFolders={foundFolders}
+            createdFolder={undefined}
+            onFolderDelete={itemDeleted}
+          />
+          <FileList
+            initialFiles={foundFiles}
+            createdFile={undefined}
+            onFileDelete={itemDeleted}
+          />
+        </>
+      )}
     </div>
   );
 };
