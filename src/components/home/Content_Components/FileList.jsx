@@ -4,6 +4,7 @@ import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
 
 const FileList = ({ initialFiles, createdFile, onFileDelete }) => {
+  console.log(initialFiles)
   const { openFileRenameModal } = useModal();
   const [files, setFiles] = useState(initialFiles);
 

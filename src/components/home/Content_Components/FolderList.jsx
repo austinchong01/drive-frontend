@@ -4,6 +4,7 @@ import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
 const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
+  console.log(initialFolders)
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
 

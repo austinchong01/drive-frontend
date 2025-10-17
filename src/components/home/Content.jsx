@@ -13,13 +13,13 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   let { folderId } = useParams();
   const [initialFiles, setInitialFiles] = useState([]);
   const [initialFolders, setInitialFolders] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // load all files and folders in FOLDER
   useEffect(() => {
     if (folderId === undefined) folderId = "";
     const fetchContents = async () => {
-      // setLoading(true);
+      setLoading(true);
       const result = await api.getFolderContents(folderId);
 
       if (result.success) {
@@ -28,7 +28,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       } else {
         showError(`Failed to load contents: ${result.error}`);
       }
-      // setLoading(false);
+      setLoading(false);
     };
 
     fetchContents();
@@ -37,7 +37,10 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
       <Crumbs folderId={folderId} />
-      {<>
+      {loading ? (
+        <p>Loading contents...</p>
+      ) : (
+        <>
           <FolderList
             initialFolders={initialFolders}
             createdFolder={createdFolder}
@@ -48,7 +51,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
             createdFile={createdFile}
             onFileDelete={itemDeleted}
           />
-        </>}
+        </>
+      )}
     </div>
   );
 };

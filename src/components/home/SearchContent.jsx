@@ -1,12 +1,11 @@
-// src/components/home/Content.jsx
+// src/components/home/SearchContent.jsx
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 
-const SearchContent = ({ itemDeleted, query}) => {
-  // console.log("rendered Search Content")
+const SearchContent = ({ query, itemDeleted }) => {
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
@@ -32,18 +31,17 @@ const SearchContent = ({ itemDeleted, query}) => {
 
   return (
     <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      {
-        <>
-          <FolderList
-            initialFolders={foundFiles}
-            onFolderDelete={itemDeleted}
-          />
-          <FileList
-            initialFiles={foundFolders}
-            onFileDelete={itemDeleted}
-          />
-        </>
-      }
+      <h2>Search Results for: "{query}"</h2>
+      <FolderList
+        initialFolders={foundFolders}
+        createdFolder={undefined}
+        onFolderDelete={itemDeleted}
+      />
+      <FileList
+        initialFiles={foundFiles}
+        createdFile={undefined}
+        onFileDelete={itemDeleted}
+      />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { api } from "../services/user";
 import Navbar from "./home/Navbar";
 import Sidebar from "./home/Sidebar";
 import Content from "./home/Content";
+import SearchContent from "./home/SearchContent";
 
 const Home = () => {
   // console.log("rendered Home")
@@ -16,6 +17,7 @@ const Home = () => {
   const [createdFolder, setCreatedFolder] = useState(null);
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -29,10 +31,18 @@ const Home = () => {
   useEffect(() => {
     setCreatedFolder(null);
     setCreatedFile(null);
+    setSearchQuery("");
   }, [folderId]);
 
   const handleDelete = useCallback(() => {
     setStorageTrigger((prev) => prev + 1);
+  }, []);
+
+  const handleSearch = useCallback((query) => {
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      setSearchQuery(trimmedQuery);
+    }
   }, []);
 
   return (
@@ -47,7 +57,7 @@ const Home = () => {
             width: "100vw",
           }}
         >
-          <Navbar />
+          <Navbar onSearch={handleSearch} />
           <div
             style={{
               display: "flex",
@@ -59,11 +69,18 @@ const Home = () => {
               onFileCreated={setCreatedFile}
               storageTrigger={storageTrigger}
             />
-            <Content
-              createdFolder={createdFolder}
-              createdFile={createdFile}
-              itemDeleted={handleDelete}
-            />
+            {searchQuery ? (
+              <SearchContent 
+                query={searchQuery} 
+                itemDeleted={handleDelete} 
+              />
+            ) : (
+              <Content
+                createdFolder={createdFolder}
+                createdFile={createdFile}
+                itemDeleted={handleDelete}
+              />
+            )}
           </div>
         </div>
       </ModalProvider>
