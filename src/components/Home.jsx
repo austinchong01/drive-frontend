@@ -11,13 +11,13 @@ import Content from "./home/Content";
 import SearchContent from "./home/SearchContent";
 
 const Home = () => {
-  // console.log("rendered Home")
   const navigate = useNavigate();
   const { folderId } = useParams();
   const [createdFolder, setCreatedFolder] = useState(null);
   const [createdFile, setCreatedFile] = useState(null);
   const [storageTrigger, setStorageTrigger] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchRefreshKey, setSearchRefreshKey] = useState(0); // ← For search only
 
   // redirect to login if no valid token
   useEffect(() => {
@@ -38,11 +38,20 @@ const Home = () => {
     setStorageTrigger((prev) => prev + 1);
   }, []);
 
+  const handleSearchDelete = useCallback(() => {
+    setStorageTrigger((prev) => prev + 1);
+    setSearchRefreshKey((prev) => prev + 1); // ← Trigger search re-mount
+  }, []);
+
   const handleSearch = useCallback((query) => {
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
       setSearchQuery(trimmedQuery);
     }
+  }, []);
+
+  const handleClearSearch = useCallback(() => {
+    setSearchQuery("");
   }, []);
 
   return (
@@ -57,7 +66,7 @@ const Home = () => {
             width: "100vw",
           }}
         >
-          <Navbar onSearch={handleSearch} />
+          <Navbar onSearch={handleSearch} onClearSearch={handleClearSearch} />
           <div
             style={{
               display: "flex",
@@ -70,9 +79,10 @@ const Home = () => {
               storageTrigger={storageTrigger}
             />
             {searchQuery ? (
-              <SearchContent 
-                query={searchQuery} 
-                itemDeleted={handleDelete} 
+              <SearchContent
+                key={searchRefreshKey} // ← Only SearchContent gets the key
+                query={searchQuery}
+                itemDeleted={handleSearchDelete}
               />
             ) : (
               <Content
@@ -87,5 +97,4 @@ const Home = () => {
     </ErrorProvider>
   );
 };
-
 export default Home;

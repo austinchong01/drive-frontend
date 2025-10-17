@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 
-const Navbar = ({ onSearch }) => {
+const Navbar = ({ onSearch, onClearSearch }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -36,7 +36,11 @@ const Navbar = ({ onSearch }) => {
 
   return (
     <div style={{ display: "flex", padding: "20px", border: "1px solid black", alignItems: "center", gap: "20px" }}>
-      <Link to="/home" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <Link 
+        to="/home" 
+        onClick={onClearSearch}
+        style={{ display: "flex", alignItems: "center", gap: "10px" }}
+      >
         <img 
           src="/images/mock_google_drive.svg" 
           alt="Logo" 

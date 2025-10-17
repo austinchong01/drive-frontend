@@ -4,9 +4,12 @@ import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
 const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
-  console.log(initialFolders)
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
+
+  useEffect(() => {
+    setFolders(initialFolders);
+  }, [initialFolders]);
 
   useEffect(() => {
     if (createdFolder) setFolders((prev) => [createdFolder, ...prev]);
@@ -15,7 +18,9 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
   const handleFolderRename = (folderId, newName) => {
     setFolders((prev) =>
       prev.map((folder) =>
-        folder.id === folderId ? { ...folder, name: newName } : folder));
+        folder.id === folderId ? { ...folder, name: newName } : folder
+      )
+    );
   };
 
   const handleFolderDelete = (folderId) => {
@@ -33,7 +38,8 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
           flexWrap: "wrap",
           gap: "15px",
           marginBottom: "50px",
-        }}>
+        }}
+      >
         {folders.map((folder) => (
           <Folder
             key={folder.id}
