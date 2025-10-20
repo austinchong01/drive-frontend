@@ -1,11 +1,12 @@
 // src/components/home/Content_Components/Folder.jsx
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
 
 const Folder = ({ folder, onDelete, onRenameClick }) => {
   const { showError } = useError();
+  const navigate = useNavigate();
 
   const {
     attributes,
@@ -34,7 +35,8 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
     setDropRef(node);
   };
 
-  const handleDeleteFolder = async () => {
+  const handleDeleteFolder = async (e) => {
+    e.stopPropagation();
     const result = await api.deleteFolder(folder.id);
 
     if (result.success) {
@@ -44,25 +46,32 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
     }
   };
 
-return (
-  <div
-    ref={combinedRef}
-    {...attributes}
-    {...listeners}
-    style={{ 
-      border: isOver ? "2px solid green" : "1px solid blue", 
-      padding: "10px",
-      // opacity: isDragging ? 0.5 : 1,
-      // backgroundColor: isOver ? "#e8f5e9" : "transparent",
-    }}
-  >
-    <h3>
-      <Link to={`/folders/${folder.id}`}>{folder.name}</Link>
-    </h3>
-    <button onClick={onRenameClick}>RENAME</button>
-    <button onClick={handleDeleteFolder}>DELETE</button>
-  </div>
-);
+  const handleRename = (e) => {
+    e.stopPropagation();
+    onRenameClick();
+  };
+
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    navigate(`/folders/${folder.id}`);
+  };
+
+  return (
+    <div
+      ref={combinedRef}
+      {...attributes}
+      {...listeners}
+      style={{ 
+        border: isOver ? "2px solid green" : "1px solid blue", 
+        padding: "10px",
+      }}
+    >
+      <h3>{folder.name}</h3>
+      <button onClick={handleOpen}>OPEN</button>
+      <button onClick={handleRename}>RENAME</button>
+      <button onClick={handleDeleteFolder}>DELETE</button>
+    </div>
+  );
 };
 
 export default Folder;
