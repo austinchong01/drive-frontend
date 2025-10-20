@@ -1,5 +1,6 @@
 // src/components/home/Content_Components/Crumbs.jsx
 import { useState, useEffect } from "react";
+import { useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
 import { Link } from "react-router-dom";
@@ -28,12 +29,19 @@ const Crumbs = ({ folderId }) => {
     fetchCrumbs();
   }, [normFolderId]);
 
+  // const { setNodeRef: setDropRef, isOver } = useDroppable({
+  //   id: `folder-drop-${crumb.id}`,
+  //   data: {
+  //     type: "folder",
+  //     item: folder,
+  //   },
+  // });
+
   // if (loading) {
   //   return <div>Loading breadcrumbs...</div>;
   // }
 
-  if (!normFolderId)
-    return <div>/ root</div>;
+  if (!normFolderId) return <div>/ root</div>;
 
   const crumbElements = breadcrumbs.map((crumb, index) => {
     return (
