@@ -48,6 +48,7 @@ export const api = {
   },
 
   async getCrumbs(folderId) {
+    if (folderId === undefined) folderId = "";
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(

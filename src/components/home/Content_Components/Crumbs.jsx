@@ -1,9 +1,8 @@
 // src/components/home/Content_Components/Crumbs.jsx
 import { useState, useEffect } from "react";
-import { useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
-import { Link } from "react-router-dom";
+import Crumb from "./Crumb";
 
 const Crumbs = ({ folderId }) => {
   // console.log("rendered Crumbs")
@@ -11,12 +10,10 @@ const Crumbs = ({ folderId }) => {
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   // const [loading, setLoading] = useState(true);
 
-  const normFolderId = folderId === undefined ? "" : folderId;
-
   useEffect(() => {
     const fetchCrumbs = async () => {
       // setLoading(true);
-      const result = await api.getCrumbs(normFolderId);
+      const result = await api.getCrumbs(folderId);
 
       if (result.success) {
         setBreadcrumbs(result.data.breadcrumbs);
@@ -27,38 +24,25 @@ const Crumbs = ({ folderId }) => {
     };
 
     fetchCrumbs();
-  }, [normFolderId]);
-
-  // const { setNodeRef: setDropRef, isOver } = useDroppable({
-  //   id: `folder-drop-${crumb.id}`,
-  //   data: {
-  //     type: "folder",
-  //     item: folder,
-  //   },
-  // });
+  }, [folderId]);
 
   // if (loading) {
   //   return <div>Loading breadcrumbs...</div>;
   // }
 
-  if (!normFolderId) return <div>/ root</div>;
-
-  const crumbElements = breadcrumbs.map((crumb, index) => {
-    return (
-      <span key={crumb.id}>
-        <span> / </span>
-        {crumb.id === normFolderId ? (
-          <span>{crumb.name}</span>
-        ) : (
-          <Link to={index === 0 ? "/home" : `/folders/${crumb.id}`}>
-            {crumb.name}
-          </Link>
-        )}
-      </span>
-    );
-  });
-
-  return <div>{crumbElements}</div>;
+  return (
+    <div>
+      {breadcrumbs.map((crumb, index) => {
+        if (index == breadcrumbs.length - 1) // if curr folder
+          return <span key={crumb.id}>{crumb.name}</span>;
+        return (
+          <span key={crumb.id}>
+            <Crumb folder={crumb} /> /
+          </span>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Crumbs;
