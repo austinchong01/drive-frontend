@@ -48,7 +48,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   }, []);
 
   const handleDragStart = (event) => {
-    console.log("reached DRAG START");
     setActiveItem(event.active.data.current);
   };
 
@@ -69,22 +68,17 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     if (targetType === "file") return;
 
     // Don't drop a folder into itself
-    if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
-
-    const targetFolderId = targetItem.id;
+    // if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
 
     let result;
-
     if (draggedType === "file") {
-      // Move file into folder
-      result = await fileApi.updateFileLoc(draggedItem.id, targetFolderId);
+      result = await fileApi.updateFileLoc(draggedItem.id, targetItem.id);
       if (result.success) {
         setInitialFiles((prev) => prev.filter((f) => f.id !== draggedItem.id));
         showError(`File moved successfully!`);
       }
     } else if (draggedType === "folder") {
-      // Move folder into another folder
-      result = await api.updateFolderLoc(draggedItem.id, targetFolderId);
+      result = await api.updateFolderLoc(draggedItem.id, targetItem.id);
       if (result.success) {
         setInitialFolders((prev) =>
           prev.filter((f) => f.id !== draggedItem.id)
@@ -104,7 +98,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     <DndContext
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      onDragCancel={handleDragCancel}
+      onDragCancel={(handleDragCancel)}
     >
       <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
         <Crumbs folderId={folderId} />
