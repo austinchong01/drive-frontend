@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
 
-const FileList = ({ initialFiles, createdFile, onFileDelete }) => {
+const FileList = ({
+  initialFiles,
+  createdFile,
+  onFileDelete,
+  openDropdownId,
+  onToggleDropdown,
+}) => {
   const { openFileRenameModal } = useModal();
   const [files, setFiles] = useState(initialFiles);
 
@@ -38,6 +44,8 @@ const FileList = ({ initialFiles, createdFile, onFileDelete }) => {
             file={file}
             onDelete={handleFileDelete}
             onRenameClick={() => openFileRenameModal(file, handleFileRename)}
+            openDropdownId={openDropdownId}
+            onToggleDropdown={onToggleDropdown}
           />
         ))}
       </div>

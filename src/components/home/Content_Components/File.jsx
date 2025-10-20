@@ -3,16 +3,17 @@ import { useDraggable } from "@dnd-kit/core";
 import { api } from "../../../services/file";
 import { useError } from "../../../contexts/ErrorContext";
 
-const File = ({ file, onDelete, onRenameClick }) => {
+const File = ({
+  file,
+  onDelete,
+  onRenameClick,
+  openDropdownId,
+  onToggleDropdown,
+}) => {
   const { showError } = useError();
 
   // Make this file draggable
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    isDragging,
-  } = useDraggable({
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `file-${file.id}`,
     data: {
       type: "file",
@@ -45,6 +46,13 @@ const File = ({ file, onDelete, onRenameClick }) => {
     onRenameClick();
   };
 
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
+    onToggleDropdown(file.id);
+  };
+
+  const isDropdownOpen = openDropdownId === file.id;
+
   return (
     <div
       ref={setNodeRef}
@@ -52,16 +60,21 @@ const File = ({ file, onDelete, onRenameClick }) => {
       {...listeners}
       style={{
         border: "1px solid green",
-        width: "300px",
-        opacity: isDragging ? 0.5 : 1,
       }}
     >
       <h3>{file.displayName}</h3>
       <p>Size: {file.size} bytes</p>
       <p>Updated: {new Date(file.updatedAt).toLocaleString()}</p>
-      <button onClick={handleDownloadFile}>DOWNLOAD</button>
-      <button onClick={handleRename}>RENAME</button>
-      <button onClick={handleDeleteFile}>DELETE</button>
+      <div onPointerDown={(e) => e.stopPropagation()}>
+        <button onClick={toggleDropdown}>...</button>
+        {isDropdownOpen && (
+          <div>
+            <button onClick={handleDownloadFile}>DOWNLOAD</button>
+            <button onClick={handleRename}>RENAME</button>
+            <button onClick={handleDeleteFile}>DELETE</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

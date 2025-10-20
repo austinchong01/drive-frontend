@@ -16,6 +16,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [initialFolders, setInitialFolders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeItem, setActiveItem] = useState(null);
+  const [openDropdownId, setOpenDropdownId] = useState(null);
 
   // load all files and folders in FOLDER
   useEffect(() => {
@@ -37,6 +38,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   }, [folderId]);
 
   const handleDragStart = (event) => {
+    console.log("reached DRAG START");
     setActiveItem(event.active.data.current);
   };
 
@@ -88,49 +90,51 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     setActiveItem(null);
   };
 
-return (
-  <DndContext
-    onDragStart={handleDragStart}
-    onDragEnd={handleDragEnd}
-    onDragCancel={handleDragCancel}
-  >
-    <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-      <Crumbs folderId={folderId} />
-      {loading ? (
-        <p>Loading contents...</p>
-      ) : (
-        <>
-          <FolderList
-            initialFolders={initialFolders}
-            createdFolder={createdFolder}
-            onFolderDelete={itemDeleted}
-          />
-          <FileList
-            initialFiles={initialFiles}
-            createdFile={createdFile}
-            onFileDelete={itemDeleted}
-          />
-        </>
-      )}
-    </div>
+  return (
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+    >
+      <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+        <Crumbs folderId={folderId} />
+        {loading ? (
+          <p>Loading contents...</p>
+        ) : (
+          <>
+            <FolderList
+              initialFolders={initialFolders}
+              createdFolder={createdFolder}
+              onFolderDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+            />
+            <FileList
+              initialFiles={initialFiles}
+              createdFile={createdFile}
+              onFileDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+            />
+          </>
+        )}
+      </div>
 
-    <DragOverlay>
-      {activeItem ? (
-        <div style={{ 
-          // opacity: 0.8,
-          // padding: "10px",
-          // backgroundColor: "white",
-          // border: "2px solid #1976d2",
-          borderRadius: "4px",
-          cursor: "grabbing"
-        }}>
-          {activeItem.type === "folder" ? "📁" : "📄"} 
-          {activeItem.item.name || activeItem.item.displayName}
-        </div>
-      ) : null}
-    </DragOverlay>
-  </DndContext>
-);
+      <DragOverlay>
+        {activeItem ? (
+          <div
+            style={{
+              borderRadius: "4px",
+              cursor: "grabbing",
+            }}
+          >
+            {activeItem.type === "folder" ? "📁" : "📄"}
+            {activeItem.item.name || activeItem.item.displayName}
+          </div>
+        ) : null}
+      </DragOverlay>
+    </DndContext>
+  );
 };
 
 export default Content;

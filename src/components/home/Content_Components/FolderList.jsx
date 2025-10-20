@@ -3,7 +3,13 @@ import { useState, useEffect } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import Folder from "./Folder";
 
-const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
+const FolderList = ({
+  initialFolders,
+  createdFolder,
+  onFolderDelete,
+  openDropdownId,
+  onToggleDropdown,
+}) => {
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
 
@@ -27,7 +33,6 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
     setFolders((prev) => prev.filter((folder) => folder.id !== folderId));
     onFolderDelete(folderId);
   };
-  // folders.map((folder) => {console.log(folder.id)});
 
   return (
     <>
@@ -48,6 +53,8 @@ const FolderList = ({ initialFolders, createdFolder, onFolderDelete }) => {
             onRenameClick={() =>
               openFolderRenameModal(folder, handleFolderRename)
             }
+            openDropdownId={openDropdownId}
+            onToggleDropdown={onToggleDropdown}
           />
         ))}
       </div>

@@ -4,7 +4,13 @@ import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
 
-const Folder = ({ folder, onDelete, onRenameClick }) => {
+const Folder = ({
+  folder,
+  onDelete,
+  onRenameClick,
+  openDropdownId,
+  onToggleDropdown,
+}) => {
   const { showError } = useError();
   const navigate = useNavigate();
 
@@ -21,7 +27,6 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
     },
   });
 
-  // Make this folder a drop target
   const { setNodeRef: setDropRef, isOver } = useDroppable({
     id: `folder-drop-${folder.id}`,
     data: {
@@ -46,30 +51,43 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
     }
   };
 
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    navigate(`/folders/${folder.id}`);
+  };
+
   const handleRename = (e) => {
     e.stopPropagation();
     onRenameClick();
   };
 
-  const handleOpen = (e) => {
+  const toggleDropdown = (e) => {
     e.stopPropagation();
-    navigate(`/folders/${folder.id}`);
+    onToggleDropdown(folder.id);
   };
+
+  const isDropdownOpen = openDropdownId === folder.id;
 
   return (
     <div
       ref={combinedRef}
       {...attributes}
       {...listeners}
-      style={{ 
-        border: isOver ? "2px solid green" : "1px solid blue", 
-        padding: "10px",
+      style={{
+        border: isOver ? "2px solid purple" : "1px solid blue",
       }}
     >
       <h3>{folder.name}</h3>
-      <button onClick={handleOpen}>OPEN</button>
-      <button onClick={handleRename}>RENAME</button>
-      <button onClick={handleDeleteFolder}>DELETE</button>
+      <div onPointerDown={(e) => e.stopPropagation()}>
+        <button onClick={toggleDropdown}>...</button>
+        {isDropdownOpen && (
+          <div>
+            <button onClick={handleOpen}>OPEN</button>
+            <button onClick={handleRename}>RENAME</button>
+            <button onClick={handleDeleteFolder}>DELETE</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
