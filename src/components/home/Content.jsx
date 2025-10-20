@@ -68,7 +68,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     if (targetType === "file") return;
 
     // Don't drop a folder into itself
-    // if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
+    if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
 
     let result;
     if (draggedType === "file") {
@@ -98,7 +98,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     <DndContext
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      onDragCancel={(handleDragCancel)}
+      onDragCancel={handleDragCancel}
     >
       <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
         <Crumbs folderId={folderId} />
