@@ -1,8 +1,9 @@
 // src/components/home/Content.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { DndContext } from "@dnd-kit/core";
+import { DndContext, DragOverlay } from "@dnd-kit/core";
 import { api } from "../../services/folder";
+import { api as fileApi } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
@@ -14,6 +15,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [initialFiles, setInitialFiles] = useState([]);
   const [initialFolders, setInitialFolders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeItem, setActiveItem] = useState(null);
 
   // load all files and folders in FOLDER
   useEffect(() => {
@@ -35,50 +37,100 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   }, [folderId]);
 
   const handleDragStart = (event) => {
-    console.log("Drag started:", event.active);
+    setActiveItem(event.active.data.current);
   };
 
-  const handleDragEnd = (event) => {
-    console.log("Drag ended:", event);
+  const handleDragEnd = async (event) => {
+    setActiveItem(null);
+
     const { active, over } = event;
-    
-    if (over) {
-      console.log("Dragged:", active.data.current);
-      console.log("Dropped on:", over.data.current);
+
+    // If not dropped over anything, do nothing
+    if (!over) return;
+
+    const draggedType = active.data.current.type;
+    const draggedItem = active.data.current.item;
+    const targetType = over.data.current.type;
+    const targetItem = over.data.current.item;
+
+    // Cannot drag into files
+    if (targetType === "file") return;
+
+    // Don't drop a folder into itself
+    if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
+
+    const targetFolderId = targetItem.id;
+
+    let result;
+
+    if (draggedType === "file") {
+      // Move file into folder
+      result = await fileApi.updateFileLoc(draggedItem.id, targetFolderId);
+      if (result.success) {
+        setInitialFiles((prev) => prev.filter((f) => f.id !== draggedItem.id));
+        showError(`File moved successfully!`);
+      }
+    } else if (draggedType === "folder") {
+      // Move folder into another folder
+      result = await api.updateFolderLoc(draggedItem.id, targetFolderId);
+      if (result.success) {
+        setInitialFolders((prev) =>
+          prev.filter((f) => f.id !== draggedItem.id)
+        );
+        showError(`Folder moved successfully!`);
+      }
     }
+
+    if (!result.success) showError(`Failed to move: ${result.error}`);
   };
 
   const handleDragCancel = () => {
-    console.log("Drag cancelled");
+    setActiveItem(null);
   };
 
-  return (
-    <DndContext
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-      onDragCancel={handleDragCancel}
-    >
-      <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
-        <Crumbs folderId={folderId} />
-        {loading ? (
-          <p>Loading contents...</p>
-        ) : (
-          <>
-            <FolderList
-              initialFolders={initialFolders}
-              createdFolder={createdFolder}
-              onFolderDelete={itemDeleted}
-            />
-            <FileList
-              initialFiles={initialFiles}
-              createdFile={createdFile}
-              onFileDelete={itemDeleted}
-            />
-          </>
-        )}
-      </div>
-    </DndContext>
-  );
+return (
+  <DndContext
+    onDragStart={handleDragStart}
+    onDragEnd={handleDragEnd}
+    onDragCancel={handleDragCancel}
+  >
+    <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+      <Crumbs folderId={folderId} />
+      {loading ? (
+        <p>Loading contents...</p>
+      ) : (
+        <>
+          <FolderList
+            initialFolders={initialFolders}
+            createdFolder={createdFolder}
+            onFolderDelete={itemDeleted}
+          />
+          <FileList
+            initialFiles={initialFiles}
+            createdFile={createdFile}
+            onFileDelete={itemDeleted}
+          />
+        </>
+      )}
+    </div>
+
+    <DragOverlay>
+      {activeItem ? (
+        <div style={{ 
+          // opacity: 0.8,
+          // padding: "10px",
+          // backgroundColor: "white",
+          // border: "2px solid #1976d2",
+          borderRadius: "4px",
+          cursor: "grabbing"
+        }}>
+          {activeItem.type === "folder" ? "📁" : "📄"} 
+          {activeItem.item.name || activeItem.item.displayName}
+        </div>
+      ) : null}
+    </DragOverlay>
+  </DndContext>
+);
 };
 
 export default Content;

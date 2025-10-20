@@ -7,7 +7,6 @@ import { useError } from "../../../contexts/ErrorContext";
 const Folder = ({ folder, onDelete, onRenameClick }) => {
   const { showError } = useError();
 
-  // Make this folder draggable
   const {
     attributes,
     listeners,
@@ -45,20 +44,25 @@ const Folder = ({ folder, onDelete, onRenameClick }) => {
     }
   };
 
-  return (
-    <div
-      ref={combinedRef}
-      {...attributes}
-      {...listeners}
-      style={{ border: "1px solid blue", padding: "10px" }}
-    >
-      <h3>
-        <Link to={`/folders/${folder.id}`}>{folder.name}</Link>
-      </h3>
-      <button onClick={onRenameClick}>RENAME</button>
-      <button onClick={handleDeleteFolder}>DELETE</button>
-    </div>
-  );
+return (
+  <div
+    ref={combinedRef}
+    {...attributes}
+    {...listeners}
+    style={{ 
+      border: isOver ? "2px solid green" : "1px solid blue", 
+      padding: "10px",
+      // opacity: isDragging ? 0.5 : 1,
+      // backgroundColor: isOver ? "#e8f5e9" : "transparent",
+    }}
+  >
+    <h3>
+      <Link to={`/folders/${folder.id}`}>{folder.name}</Link>
+    </h3>
+    <button onClick={onRenameClick}>RENAME</button>
+    <button onClick={handleDeleteFolder}>DELETE</button>
+  </div>
+);
 };
 
 export default Folder;

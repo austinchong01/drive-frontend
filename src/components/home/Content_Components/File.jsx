@@ -7,7 +7,12 @@ const File = ({ file, onDelete, onRenameClick }) => {
   const { showError } = useError();
 
   // Make this file draggable
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    isDragging,
+  } = useDraggable({
     id: `file-${file.id}`,
     data: {
       type: "file",
@@ -15,7 +20,8 @@ const File = ({ file, onDelete, onRenameClick }) => {
     },
   });
 
-  const handleDownloadFile = () => {
+  const handleDownloadFile = (e) => {
+    e.stopPropagation();
     const downloadUrl = file.cloudinaryUrl.replace(
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
@@ -23,7 +29,8 @@ const File = ({ file, onDelete, onRenameClick }) => {
     window.location.href = downloadUrl;
   };
 
-  const handleDeleteFile = async () => {
+  const handleDeleteFile = async (e) => {
+    e.stopPropagation();
     const result = await api.deleteFile(file.id);
 
     if (result.success) {
@@ -33,18 +40,27 @@ const File = ({ file, onDelete, onRenameClick }) => {
     }
   };
 
+  const handleRename = (e) => {
+    e.stopPropagation();
+    onRenameClick();
+  };
+
   return (
     <div
       ref={setNodeRef}
       {...attributes}
       {...listeners}
-      style={{ border: "1px solid green", width: "300px" }}
+      style={{
+        border: "1px solid green",
+        width: "300px",
+        opacity: isDragging ? 0.5 : 1,
+      }}
     >
       <h3>{file.displayName}</h3>
       <p>Size: {file.size} bytes</p>
       <p>Updated: {new Date(file.updatedAt).toLocaleString()}</p>
       <button onClick={handleDownloadFile}>DOWNLOAD</button>
-      <button onClick={onRenameClick}>RENAME</button>
+      <button onClick={handleRename}>RENAME</button>
       <button onClick={handleDeleteFile}>DELETE</button>
     </div>
   );
