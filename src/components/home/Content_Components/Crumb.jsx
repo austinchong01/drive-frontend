@@ -25,6 +25,7 @@ const Crumb = ({ folder }) => {
       ref={setNodeRef}
       style={{
         color: isOver ? "purple" : "blue",
+        cursor: "pointer",
       }}
       onClick={handleClick}
     >
