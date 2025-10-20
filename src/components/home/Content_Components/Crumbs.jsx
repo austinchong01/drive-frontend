@@ -5,14 +5,11 @@ import { useError } from "../../../contexts/ErrorContext";
 import Crumb from "./Crumb";
 
 const Crumbs = ({ folderId }) => {
-  // console.log("rendered Crumbs")
   const { showError } = useError();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCrumbs = async () => {
-      // setLoading(true);
       const result = await api.getCrumbs(folderId);
 
       if (result.success) {
@@ -20,15 +17,10 @@ const Crumbs = ({ folderId }) => {
       } else {
         showError(`Failed to load crumbs: ${result.error}`);
       }
-      // setLoading(false);
     };
 
     fetchCrumbs();
   }, [folderId]);
-
-  // if (loading) {
-  //   return <div>Loading breadcrumbs...</div>;
-  // }
 
   return (
     <div>

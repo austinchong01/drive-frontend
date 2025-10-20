@@ -9,6 +9,8 @@ const FileList = ({
   onFileDelete,
   openDropdownId,
   onToggleDropdown,
+  highlightId,
+  onToggleHighlight,
 }) => {
   const { openFileRenameModal } = useModal();
   const [files, setFiles] = useState(initialFiles);
@@ -46,6 +48,8 @@ const FileList = ({
             onRenameClick={() => openFileRenameModal(file, handleFileRename)}
             openDropdownId={openDropdownId}
             onToggleDropdown={onToggleDropdown}
+            highlightId={highlightId}
+            onToggleHighlight={onToggleHighlight}
           />
         ))}
       </div>

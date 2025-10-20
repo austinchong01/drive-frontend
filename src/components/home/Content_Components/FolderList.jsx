@@ -9,6 +9,8 @@ const FolderList = ({
   onFolderDelete,
   openDropdownId,
   onToggleDropdown,
+  highlightId,
+  onToggleHighlight,
 }) => {
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
@@ -55,6 +57,8 @@ const FolderList = ({
             }
             openDropdownId={openDropdownId}
             onToggleDropdown={onToggleDropdown}
+            highlightId={highlightId}
+            onToggleHighlight={onToggleHighlight}
           />
         ))}
       </div>

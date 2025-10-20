@@ -17,6 +17,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [loading, setLoading] = useState(true);
   const [activeItem, setActiveItem] = useState(null);
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [highlightId, setHighlightId] = useState(null);
 
   // load all files and folders in FOLDER
   useEffect(() => {
@@ -41,6 +42,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   useEffect(() => {
     const handleClickOutside = () => {
       setOpenDropdownId(null);
+      setHighlightId(null);
     };
 
     document.addEventListener("click", (handleClickOutside));
@@ -112,6 +114,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
               onFolderDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
             />
             <FileList
               initialFiles={initialFiles}
@@ -119,6 +123,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
               onFileDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
             />
           </>
         )}

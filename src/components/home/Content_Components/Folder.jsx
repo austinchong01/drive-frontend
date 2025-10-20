@@ -10,9 +10,13 @@ const Folder = ({
   onRenameClick,
   openDropdownId,
   onToggleDropdown,
+  highlightId,
+  onToggleHighlight,
 }) => {
   const { showError } = useError();
   const navigate = useNavigate();
+
+  const isHighlighted = highlightId === folder.id;
 
   const {
     attributes,
@@ -25,6 +29,10 @@ const Folder = ({
       type: "folder",
       item: folder,
     },
+    activationConstraint: {
+      distance: 1000,
+    },
+    disabled: !isHighlighted,
   });
 
   const { setNodeRef: setDropRef, isOver } = useDroppable({
@@ -51,11 +59,6 @@ const Folder = ({
     }
   };
 
-  const handleOpen = (e) => {
-    e.stopPropagation();
-    navigate(`/folders/${folder.id}`);
-  };
-
   const handleRename = (e) => {
     e.stopPropagation();
     onRenameClick();
@@ -66,15 +69,26 @@ const Folder = ({
     onToggleDropdown(folder.id);
   };
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (isHighlighted) {
+      navigate(`/folders/${folder.id}`);
+    } else {
+      onToggleHighlight(folder.id);
+    }
+  };
+
   const isDropdownOpen = openDropdownId === folder.id;
 
   return (
     <div
       ref={combinedRef}
-      {...attributes}
-      {...listeners}
+      {...(isHighlighted ? attributes : {})}
+      {...(isHighlighted ? listeners : {})}
+      onClick={handleClick}
       style={{
         border: isOver ? "2px solid purple" : "1px solid blue",
+        backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
       }}
     >
       <h3>{folder.name}</h3>
@@ -82,7 +96,6 @@ const Folder = ({
         <button onClick={toggleDropdown}>...</button>
         {isDropdownOpen && (
           <div>
-            <button onClick={handleOpen}>OPEN</button>
             <button onClick={handleRename}>RENAME</button>
             <button onClick={handleDeleteFolder}>DELETE</button>
           </div>

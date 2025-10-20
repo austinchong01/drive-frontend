@@ -9,8 +9,12 @@ const File = ({
   onRenameClick,
   openDropdownId,
   onToggleDropdown,
+  highlightId,
+  onToggleHighlight,
 }) => {
   const { showError } = useError();
+
+  const isHighlighted = highlightId === file.id;
 
   // Make this file draggable
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
@@ -19,6 +23,7 @@ const File = ({
       type: "file",
       item: file,
     },
+    disabled: !isHighlighted,
   });
 
   const handleDownloadFile = (e) => {
@@ -51,15 +56,22 @@ const File = ({
     onToggleDropdown(file.id);
   };
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onToggleHighlight(file.id);
+  };
+
   const isDropdownOpen = openDropdownId === file.id;
 
   return (
     <div
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
+      {...(isHighlighted ? attributes : {})}
+      {...(isHighlighted ? listeners : {})}
+      onClick={handleClick}
       style={{
         border: "1px solid green",
+        backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
       }}
     >
       <h3>{file.displayName}</h3>

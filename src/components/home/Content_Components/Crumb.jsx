@@ -1,7 +1,6 @@
 // src/components/home/Content_Components/Folder.jsx
 import { useNavigate } from "react-router-dom";
 import { useDroppable } from "@dnd-kit/core";
-import { useError } from "../../../contexts/ErrorContext";
 
 const Crumb = ({ folder }) => {
   const navigate = useNavigate();
