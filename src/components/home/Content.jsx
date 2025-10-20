@@ -37,6 +37,16 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     fetchContents();
   }, [folderId]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpenDropdownId(null);
+    };
+
+    document.addEventListener("click", (handleClickOutside));
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   const handleDragStart = (event) => {
     console.log("reached DRAG START");
     setActiveItem(event.active.data.current);
