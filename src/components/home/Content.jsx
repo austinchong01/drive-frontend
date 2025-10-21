@@ -31,7 +31,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   useEffect(() => {
     if (folderId === undefined) folderId = "";
     const fetchContents = async () => {
-      setLoading(true);
       const result = await api.getFolderContents(folderId);
 
       if (result.success) {

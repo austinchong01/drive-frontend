@@ -11,7 +11,6 @@ const Crumbs = ({ folderId }) => {
 
   useEffect(() => {
     const fetchCrumbs = async () => {
-      setLoading(true);
       const result = await api.getCrumbs(folderId);
 
       if (result.success) {

@@ -26,14 +26,13 @@ const SearchContent = ({
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [activeItem, setActiveItem] = useState(null);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [highlightId, setHighlightId] = useState(null);
 
   useEffect(() => {
     const fetchSearchContents = async () => {
-      setLoading(true);
       const result = await api.search(query);
 
       if (result.success) {
