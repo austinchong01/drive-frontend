@@ -1,8 +1,8 @@
 // src/components/home/NewFolderModal.jsx
 import { useState } from "react";
-import { api } from "../services/folder";
-import { useMessage } from "../contexts/MessageContext";
-import { useError } from "./ErrorContext";
+import { api } from "../../services/folder";
+import { useMessage } from "../MessageContext";
+import { useError } from "../ErrorContext";
 import { useParams } from "react-router-dom";
 
 const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
@@ -21,7 +21,7 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
     if (result.success) {
       setFolderName("");
       onSuccess(result.data.folder);
-      showMessage(`Created Folder ${result.data.folder.name}`)
+      showMessage(`Created Folder ${result.data.folder.name}`);
     } else {
       showError(`Folder Creation Error: ${result.error}`);
       clearMessage();

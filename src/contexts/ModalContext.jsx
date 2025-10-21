@@ -1,7 +1,13 @@
 // src/contexts/ModalContext.jsx
-import { createContext, useContext, useState, useCallback, useMemo } from "react";
-import RenameFileModal from "./RenameFileModal";
-import RenameFolderModal from "./RenameFolderModal";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import RenameFileModal from "./modals/RenameFileModal";
+import RenameFolderModal from "./modals/RenameFolderModal";
 
 const ModalContext = createContext();
 
@@ -40,7 +46,12 @@ export const ModalProvider = ({ children }) => {
       openFolderRenameModal,
       closeFolderRenameModal,
     }),
-    [openFileRenameModal, closeFileRenameModal, openFolderRenameModal, closeFolderRenameModal]
+    [
+      openFileRenameModal,
+      closeFileRenameModal,
+      openFolderRenameModal,
+      closeFolderRenameModal,
+    ]
   );
 
   return (

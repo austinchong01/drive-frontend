@@ -1,33 +1,35 @@
-// src/components/modals/RenameFolderModal.jsx
+// src/components/modals/RenameFileModal.jsx
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { api } from "../services/folder";
-import { useMessage } from "../contexts/MessageContext";
-import { useError } from "../contexts/ErrorContext";
+import { api } from "../../services/file";
+import { useMessage } from "../MessageContext";
+import { useError } from "../ErrorContext";
 
-const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
-  const [folderName, setFolderName] = useState(folder.name);
+const RenameFileModal = ({ onClose, onSuccess, file }) => {
+  const [fileName, setFileName] = useState(file.displayName);
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (folder.name === folderName) {
+    if (file.displayName === fileName) {
       onClose();
       return;
     }
 
-    showMessage(`Renaming ${folder.name}...`);
+    showMessage(`Renaming ${file.displayName}...`);
 
-    const result = await api.renameFolder(folder.id, folderName);
+    const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
-      onSuccess(folder.id, result.data.name);
+      onSuccess(file.id, result.data.displayName);
       onClose();
-      showMessage(`Folder ${folder.name} renamed to ${result.data.name}`);
+      showMessage(
+        `File ${file.displayName} renamed to ${result.data.displayName}`
+      );
     } else {
-      showError(`Folder Rename Error: ${result.error}`);
+      showError(`File Rename Error: ${result.error}`);
       clearMessage();
     }
   };
@@ -57,14 +59,14 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2>Rename Folder</h2>
+        <h2>Rename File</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Folder Name:</label>
+            <label>File Name:</label>
             <input
               type="text"
-              value={folderName}
-              onChange={(e) => setFolderName(e.target.value)}
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}
               onFocus={(e) => e.target.select()}
               required
               autoFocus
@@ -81,4 +83,4 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   );
 };
 
-export default RenameFolderModal;
+export default RenameFileModal;

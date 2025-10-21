@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
-import NewFolderModal from "../../contexts/NewFolderModal";
-import NewFileModal from "../../contexts/NewFileModal";
+import NewFolderModal from "../../contexts/modals/NewFolderModal";
+import NewFileModal from "../../contexts/modals/NewFileModal";
 
 const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   const [storage, setStorage] = useState(null);

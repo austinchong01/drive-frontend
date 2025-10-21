@@ -3,6 +3,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { api } from "../../../services/file";
 import { useMessage } from "../../../contexts/MessageContext";
 import { useError } from "../../../contexts/ErrorContext";
+import { useModal } from "../../../contexts/ModalContext";
 
 const File = ({
   file,
@@ -15,6 +16,7 @@ const File = ({
 }) => {
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
+  const { openPreviewModal } = useModal();
 
   const isHighlighted = highlightId === file.id;
 
@@ -67,7 +69,8 @@ const File = ({
 
   const handleDoubleClick = (e) => {
     e.stopPropagation();
-    window.open(file.cloudinaryUrl, "_blank");
+    openPreviewModal(file.cloudinaryUrl)
+    // window.open(file.cloudinaryUrl, "_blank");
   };
 
   const isDropdownOpen = openDropdownId === file.id;
