@@ -80,3 +80,4 @@ Nice to Haves
 - Guest Account
 - Multiple Layouts (Tablet, Mobile)
 - Accessibility
+- Search Query URL

@@ -1,7 +1,7 @@
 // src/components/home/Content.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { api } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";
@@ -45,9 +45,17 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       setHighlightId(null);
     };
 
-    document.addEventListener("click", (handleClickOutside));
+    document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   const handleDragStart = (event) => {
     setActiveItem(event.active.data.current);
@@ -101,6 +109,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
+      sensors={sensors}
     >
       <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
         <Crumbs folderId={folderId} />

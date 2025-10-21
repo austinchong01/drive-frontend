@@ -23,7 +23,6 @@ const File = ({
       type: "file",
       item: file,
     },
-    disabled: !isHighlighted,
   });
 
   const handleDownloadFile = (e) => {
@@ -58,7 +57,12 @@ const File = ({
 
   const handleClick = (e) => {
     e.stopPropagation();
-    onToggleHighlight(file.id);
+    if (isHighlighted) {
+      window.open(file.cloudinaryUrl, '_blank');
+      // need a better preview for certain file types
+    } else {
+      onToggleHighlight(file.id);
+    }
   };
 
   const isDropdownOpen = openDropdownId === file.id;
@@ -66,12 +70,13 @@ const File = ({
   return (
     <div
       ref={setNodeRef}
-      {...(isHighlighted ? attributes : {})}
-      {...(isHighlighted ? listeners : {})}
+      {...attributes}
+      {...listeners}
       onClick={handleClick}
       style={{
         border: "1px solid green",
         backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
+        opacity: isDragging ? 0.5 : 1, // Visual feedback
       }}
     >
       <h3>{file.displayName}</h3>

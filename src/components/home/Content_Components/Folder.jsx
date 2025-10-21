@@ -29,10 +29,6 @@ const Folder = ({
       type: "folder",
       item: folder,
     },
-    activationConstraint: {
-      distance: 1000,
-    },
-    disabled: !isHighlighted,
   });
 
   const { setNodeRef: setDropRef, isOver } = useDroppable({
@@ -83,12 +79,13 @@ const Folder = ({
   return (
     <div
       ref={combinedRef}
-      {...(isHighlighted ? attributes : {})}
-      {...(isHighlighted ? listeners : {})}
+      {...attributes}
+      {...listeners}
       onClick={handleClick}
       style={{
         border: isOver ? "2px solid purple" : "1px solid blue",
         backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
+        opacity: isDragging ? 0.5 : 1, // Visual feedback
       }}
     >
       <h3>{folder.name}</h3>
