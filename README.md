@@ -70,9 +70,10 @@ User Interface
 - Preview URL Fix
 - Picture according to file type
     - Dragged File/Folder picture
-- Status 500 page
+- Status 500 page?
 - Modal Design
     - modal autofill filename on upload
+    - RENAME, highlight initial name on click
 - Register/Login Layout
 - Dashboard Layout
 
