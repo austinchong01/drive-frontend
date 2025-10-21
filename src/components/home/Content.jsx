@@ -1,7 +1,13 @@
 // src/components/home/Content.jsx
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { DndContext, DragOverlay, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { api } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
 import { useError } from "../../contexts/ErrorContext";

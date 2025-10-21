@@ -51,18 +51,17 @@ const File = ({
   };
 
   const toggleDropdown = (e) => {
-    e.stopPropagation();
     onToggleDropdown(file.id);
   };
 
   const handleClick = (e) => {
     e.stopPropagation();
-    if (isHighlighted) {
-      window.open(file.cloudinaryUrl, '_blank');
-      // need a better preview for certain file types
-    } else {
-      onToggleHighlight(file.id);
-    }
+    onToggleHighlight(file.id);
+  };
+
+  const handleDoubleClick = (e) => {
+    e.stopPropagation();
+    window.open(file.cloudinaryUrl, "_blank");
   };
 
   const isDropdownOpen = openDropdownId === file.id;
@@ -73,6 +72,7 @@ const File = ({
       {...attributes}
       {...listeners}
       onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       style={{
         border: "1px solid green",
         backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",

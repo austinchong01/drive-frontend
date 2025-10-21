@@ -61,17 +61,17 @@ const Folder = ({
   };
 
   const toggleDropdown = (e) => {
-    e.stopPropagation();
     onToggleDropdown(folder.id);
   };
 
   const handleClick = (e) => {
     e.stopPropagation();
-    if (isHighlighted) {
-      navigate(`/folders/${folder.id}`);
-    } else {
-      onToggleHighlight(folder.id);
-    }
+    onToggleHighlight(folder.id);
+  };
+
+  const handleDoubleClick = (e) => {
+    e.stopPropagation();
+    navigate(`/folders/${folder.id}`);
   };
 
   const isDropdownOpen = openDropdownId === folder.id;
@@ -82,6 +82,7 @@ const Folder = ({
       {...attributes}
       {...listeners}
       onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       style={{
         border: isOver ? "2px solid purple" : "1px solid blue",
         backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",

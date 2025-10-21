@@ -1,6 +1,12 @@
 // src/components/home/SearchContent.jsx
 import { useState, useEffect } from "react";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { api } from "../../services/api";
 import { api as folderApi } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
@@ -21,6 +27,7 @@ const SearchContent = ({
   const [loading, setLoading] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [highlightId, setHighlightId] = useState(null);
 
   useEffect(() => {
     const fetchSearchContents = async () => {
@@ -43,11 +50,20 @@ const SearchContent = ({
   useEffect(() => {
     const handleClickOutside = () => {
       setOpenDropdownId(null);
+      setHighlightId(null);
     };
 
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   const handleDragStart = (event) => {
     setActiveItem(event.active.data.current);
@@ -91,6 +107,7 @@ const SearchContent = ({
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
+      sensors={sensors}
     >
       <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
         <h2>Search Results for: "{query}"</h2>
@@ -104,6 +121,8 @@ const SearchContent = ({
               onFolderDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
             />
             <FileList
               initialFiles={foundFiles}
@@ -111,6 +130,8 @@ const SearchContent = ({
               onFileDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
             />
           </>
         )}
@@ -129,7 +150,6 @@ const SearchContent = ({
           </div>
         ) : null}
       </DragOverlay>
-
     </DndContext>
   );
 };

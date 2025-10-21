@@ -81,3 +81,4 @@ Nice to Haves
 - Multiple Layouts (Tablet, Mobile)
 - Accessibility
 - Search Query URL
+- Multiple File/Folder Select
