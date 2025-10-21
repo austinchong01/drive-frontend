@@ -17,7 +17,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
       onClose();
       return;
     }
-    
+
     showMessage(`Renaming ${folder.name}...`);
 
     const result = await api.renameFolder(folder.id, folderName);
@@ -65,6 +65,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
               type="text"
               value={folderName}
               onChange={(e) => setFolderName(e.target.value)}
+              onFocus={(e) => e.target.select()}
               required
               autoFocus
             />

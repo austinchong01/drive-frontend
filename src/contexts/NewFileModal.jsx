@@ -1,4 +1,5 @@
 // src/components/home/NewFileModal.jsx
+import { useState } from "react";
 import { api } from "../services/file";
 import { useMessage } from "../contexts/MessageContext";
 import { useError } from "./ErrorContext";
@@ -7,7 +8,15 @@ import { useParams } from "react-router-dom";
 const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
+  const [selectedFileName, setSelectedFileName] = useState("");
   let { folderId } = useParams();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFileName(file.name);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +29,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
     if (result.success) {
       e.target.reset();
       onSuccess(result.data.file);
-      showMessage(`Created File ${result.data.file.displayName}`)
+      showMessage(`Created File ${result.data.file.displayName}`);
     } else {
       showError(`File Upload Error: ${result.error}`);
       clearMessage();
@@ -56,11 +65,23 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
         <form onSubmit={handleSubmit}>
           <div>
             <label>File Name:</label>
-            <input type="text" name="name" autoFocus required />
+            <input
+              type="text"
+              name="name"
+              autoFocus
+              value={selectedFileName}
+              onChange={(e) => setSelectedFileName(e.target.value)}
+              required
+            />
           </div>
           <div>
             <label>Select File:</label>
-            <input type="file" name="image" required />
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              required
+            />
           </div>
           <button type="submit">Upload</button>
           <button type="button" onClick={onClose}>

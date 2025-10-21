@@ -25,7 +25,9 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
     if (result.success) {
       onSuccess(file.id, result.data.displayName);
       onClose();
-      showMessage(`File ${file.displayName} renamed to ${result.data.displayName}`)
+      showMessage(
+        `File ${file.displayName} renamed to ${result.data.displayName}`
+      );
     } else {
       showError(`File Rename Error: ${result.error}`);
       clearMessage();
@@ -65,6 +67,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
               type="text"
               value={fileName}
               onChange={(e) => setFileName(e.target.value)}
+              onFocus={(e) => e.target.select()}
               required
               autoFocus
             />

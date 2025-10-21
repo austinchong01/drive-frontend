@@ -93,3 +93,4 @@ Nice to Haves
 - Test Cleanup
     - confirm with cloudinary
 - Trash Folder
+- Download Bar
