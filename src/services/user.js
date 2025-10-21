@@ -35,7 +35,6 @@ export const api = {
       });
 
       const data = await response.json();
-      console.log(data)
 
       if (!(response.status === 201))
         throw new Error(

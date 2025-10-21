@@ -15,7 +15,7 @@ const Crumb = ({ folder }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (folder.name == "root") navigate("/home");
+    if (folder.name === "root") navigate("/home");
     else navigate(`/folders/${folder.id}`);
   };
 

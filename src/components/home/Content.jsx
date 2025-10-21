@@ -91,7 +91,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       result = await fileApi.updateFileLoc(draggedItem.id, targetItem.id);
       if (result.success) {
         setInitialFiles((prev) => prev.filter((f) => f.id !== draggedItem.id));
-        showError(`File moved successfully!`);
       }
     } else if (draggedType === "folder") {
       result = await api.updateFolderLoc(draggedItem.id, targetItem.id);
@@ -99,7 +98,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         setInitialFolders((prev) =>
           prev.filter((f) => f.id !== draggedItem.id)
         );
-        showError(`Folder moved successfully!`);
       }
     }
 

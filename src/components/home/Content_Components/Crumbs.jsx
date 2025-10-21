@@ -25,7 +25,7 @@ const Crumbs = ({ folderId }) => {
   return (
     <div>
       {breadcrumbs.map((crumb, index) => {
-        if (index == breadcrumbs.length - 1) // if curr folder
+        if (index === breadcrumbs.length - 1) // if curr folder
           return <span key={crumb.id}>{crumb.name}</span>;
         return (
           <span key={crumb.id}>

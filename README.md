@@ -46,6 +46,8 @@ Functionalities
         - creating files/folders in "root" folder
         - refresh on create/delete, live search results
     - Drag and Drop Files/Folders
+        - check descendant
+        - DND framework
 
 
 Optimization (minimize APIs and re-rendering)
@@ -82,3 +84,5 @@ Nice to Haves
 - Accessibility
 - Search Query URL
 - Multiple File/Folder Select
+- Test Cleanup
+    - confirm with cloudinary
