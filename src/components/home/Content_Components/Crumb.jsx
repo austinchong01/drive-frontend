@@ -10,6 +10,7 @@ const Crumb = ({ folder }) => {
     data: {
       type: "folder",
       item: folder,
+      name: folder.name
     },
   });
 

@@ -2,23 +2,30 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../services/folder";
+import { useMessage } from "../contexts/MessageContext";
 import { useError } from "../contexts/ErrorContext";
 
 const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   const [folderName, setFolderName] = useState(folder.name);
+  const { showMessage } = useMessage();
   const { showError } = useError();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (folder.name === folderName){
+      onClose();
+      return;
+    }
 
     const result = await api.renameFolder(folder.id, folderName);
 
     if (result.success) {
       onSuccess(folder.id, result.data.name);
       onClose();
+      showMessage(`Folder ${folder.name} renamed to ${result.data.name}`)
     } else {
       showError(`Folder Rename Error: ${result.error}`);
-      // onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
 

@@ -1,36 +1,35 @@
-// src/components/ErrorToast.jsx
 import { useEffect, useState } from "react";
-import { useError } from "./ErrorContext";
+import { useMessage } from "./MessageContext";
 
-const ErrorToast = () => {
-  const { error, errorKey, clearError } = useError();
+const MessageToast = () => {
+  const { message, messageKey, clearMessage } = useMessage();
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    if (error) {
+    if (message) {
       setIsExiting(false); // Reset animation
 
       const timer = setTimeout(() => {
         setIsExiting(true); // Start animation
 
         setTimeout(() => {
-          clearError();
+          clearMessage();
         }, 100); // Match animation duration
       }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [errorKey, clearError]);
+  }, [messageKey, clearMessage]);
 
-  if (!error) return null;
+  if (!message) return null;
 
   return (
     <div
       style={{
         position: "fixed",
         bottom: "20px",
-        right: "20px",
-        backgroundColor: "#ff4444",
+        left: "20px",
+        backgroundColor: "#000000",
         color: "white",
         padding: "10px 20px",
         borderRadius: "2px",
@@ -44,16 +43,16 @@ const ErrorToast = () => {
           : "slideUp 0.1s ease-out", // ← Toggle animation
       }}
     >
-      <span style={{ flex: 1, fontSize: "15px" }}>⚠️ {error}</span>
+      <span style={{ flex: 1, fontSize: "15px" }}>{message}</span>
       <button
         onClick={() => {
           setIsExiting(true);
-          setTimeout(() => clearError(), 100);
+          setTimeout(() => clearMessage(), 100);
         }}
         style={{
           background: "none",
           border: "none",
-          color: "white",
+          color: "gray",
           fontSize: "25px",
           cursor: "pointer",
           padding: "0",
@@ -83,4 +82,4 @@ const ErrorToast = () => {
   );
 };
 
-export default ErrorToast;
+export default MessageToast;

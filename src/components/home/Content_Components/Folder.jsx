@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
+import { useMessage } from "../../../contexts/MessageContext";
 import { useError } from "../../../contexts/ErrorContext";
 
 const Folder = ({
@@ -13,6 +14,7 @@ const Folder = ({
   highlightId,
   onToggleHighlight,
 }) => {
+  const { showMessage } = useMessage();
   const { showError } = useError();
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ const Folder = ({
     data: {
       type: "folder",
       item: folder,
+      name: folder.name,
     },
   });
 
@@ -36,6 +39,7 @@ const Folder = ({
     data: {
       type: "folder",
       item: folder,
+      name: folder.name,
     },
   });
 
@@ -49,6 +53,7 @@ const Folder = ({
     const result = await api.deleteFolder(folder.id);
 
     if (result.success) {
+      showMessage(`Delete Folder ${folder.name}`);
       onDelete(folder.id);
     } else {
       showError(`Delete Folder Error: ${result.error}`);

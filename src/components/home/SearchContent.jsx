@@ -10,6 +10,7 @@ import {
 import { api } from "../../services/api";
 import { api as folderApi } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
+import { useMessage } from "../../contexts/MessageContext";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
@@ -21,6 +22,7 @@ const SearchContent = ({
   itemDeleted,
   searchTrigger,
 }) => {
+  const { showMessage } = useMessage();
   const { showError } = useError();
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
@@ -38,7 +40,7 @@ const SearchContent = ({
         setFoundFolders(result.data.folders);
         setFoundFiles(result.data.files);
       } else {
-        showError(`Failed to load search results: ${result.error}`);
+        showError(`Content Load Error: ${result.error}`);
       }
       setLoading(false);
     };
@@ -95,7 +97,13 @@ const SearchContent = ({
       result = await folderApi.updateFolderLoc(draggedItem.id, targetItem.id);
     }
 
-    if (!result.success) showError(`Failed to move: ${result.error}`);
+    if (!result.success) {
+      showError(`Move Error: ${result.error}`);
+    } else {
+      showMessage(
+        `${active.data.current.name} has been moved to ${over.data.current.name}`
+      );
+    }
   };
 
   const handleDragCancel = () => {

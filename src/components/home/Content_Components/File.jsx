@@ -1,6 +1,7 @@
 // src/components/home/Content_Components/File.jsx
 import { useDraggable } from "@dnd-kit/core";
 import { api } from "../../../services/file";
+import { useMessage } from "../../../contexts/MessageContext";
 import { useError } from "../../../contexts/ErrorContext";
 
 const File = ({
@@ -12,6 +13,7 @@ const File = ({
   highlightId,
   onToggleHighlight,
 }) => {
+  const { showMessage } = useMessage();
   const { showError } = useError();
 
   const isHighlighted = highlightId === file.id;
@@ -22,6 +24,7 @@ const File = ({
     data: {
       type: "file",
       item: file,
+      name: file.displayName
     },
   });
 
@@ -31,6 +34,7 @@ const File = ({
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
     );
+    showMessage(`${file.displayName} download started...`)
     window.location.href = downloadUrl;
   };
 
@@ -39,6 +43,7 @@ const File = ({
     const result = await api.deleteFile(file.id);
 
     if (result.success) {
+      showMessage(`Delete File ${file.displayName}`);
       onDelete(file.id);
     } else {
       showError(`Delete File Error: ${result.error}`);

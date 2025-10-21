@@ -1,6 +1,7 @@
 // src/components/home/Sidebar.jsx
 import { useState, useEffect } from "react";
 import { api } from "../../services/user";
+import { useMessage } from "../../contexts/MessageContext";
 import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "../../contexts/NewFolderModal";
 import NewFileModal from "../../contexts/NewFileModal";
@@ -9,6 +10,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
+  const { showMessage } = useMessage();
   const { showError } = useError();
 
   const fetchUserProfile = async () => {
@@ -29,11 +31,13 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
     setIsFileModalOpen(false);
     onFileCreated(newFile);
     fetchUserProfile();
+    showMessage(`Uploaded File ${newFile.displayName}`)
   };
 
   const handleFolderSuccess = (newFolder) => {
     setIsFolderModalOpen(false);
     onFolderCreated(newFolder);
+    showMessage(`Created Folder ${newFolder.name}`)
   };
 
   return (

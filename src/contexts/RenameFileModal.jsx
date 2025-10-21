@@ -2,23 +2,30 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../services/file";
+import { useMessage } from "../contexts/MessageContext";
 import { useError } from "../contexts/ErrorContext";
 
 const RenameFileModal = ({ onClose, onSuccess, file }) => {
   const [fileName, setFileName] = useState(file.displayName);
+  const { showMessage } = useMessage();
   const { showError } = useError();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (file.displayName === fileName) {
+      onClose();
+      return;
+    }
 
     const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
       onSuccess(file.id, result.data.displayName);
       onClose();
+      showMessage(`File ${file.displayName} renamed to ${result.data.displayName}`)
     } else {
       showError(`File Rename Error: ${result.error}`);
-      // onClose(); // Close modal after error (or remove this line to keep it open)
     }
   };
 

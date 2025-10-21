@@ -64,12 +64,17 @@ Optimization (minimize APIs and re-rendering)
 
 
 User Interface
-- Loading messages/screens
 - Error messages
+- Success messages
+- Loading messages/screens
+- Preview URL Fix
+- Picture according to file type
+    - Dragged File/Folder picture
 - Status 500 page
 - Modal Design
     - modal autofill filename on upload
-- Dragged File/Folder picture
+- Register/Login Layout
+- Dashboard Layout
 
 
 Nice to Haves
@@ -86,3 +91,4 @@ Nice to Haves
 - Multiple File/Folder Select
 - Test Cleanup
     - confirm with cloudinary
+- Trash Folder

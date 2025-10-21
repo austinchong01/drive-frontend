@@ -10,12 +10,14 @@ import {
 } from "@dnd-kit/core";
 import { api } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
+import { useMessage } from "../../contexts/MessageContext";
 import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 import Crumbs from "./Content_Components/Crumbs";
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
+  const { showMessage } = useMessage();
   const { showError } = useError();
   let { folderId } = useParams();
   const [initialFiles, setInitialFiles] = useState([]);
@@ -36,7 +38,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         setInitialFolders(result.data.subfolders);
         setInitialFiles(result.data.files);
       } else {
-        showError(`Failed to load contents: ${result.error}`);
+        showError(`Content Load Error: ${result.error}`);
       }
       setLoading(false);
     };
@@ -82,26 +84,29 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
     // Cannot drag into files
     if (targetType === "file") return;
-
     // Don't drop a folder into itself
     if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
 
     let result;
     if (draggedType === "file") {
       result = await fileApi.updateFileLoc(draggedItem.id, targetItem.id);
-      if (result.success) {
+      if (result.success)
         setInitialFiles((prev) => prev.filter((f) => f.id !== draggedItem.id));
-      }
     } else if (draggedType === "folder") {
       result = await api.updateFolderLoc(draggedItem.id, targetItem.id);
-      if (result.success) {
+      if (result.success)
         setInitialFolders((prev) =>
           prev.filter((f) => f.id !== draggedItem.id)
         );
-      }
     }
 
-    if (!result.success) showError(`Failed to move: ${result.error}`);
+    if (!result.success) {
+      showError(`Move Error: ${result.error}`);
+    } else {
+      showMessage(
+        `${active.data.current.name} has been moved to ${over.data.current.name}`
+      );
+    }
   };
 
   const handleDragCancel = () => {

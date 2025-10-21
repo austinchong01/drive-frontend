@@ -1,8 +1,10 @@
 // src/components/Home.jsx
 import { useEffect, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { MessageProvider } from "../contexts/MessageContext";
 import { ErrorProvider } from "../contexts/ErrorContext";
 import { ModalProvider } from "../contexts/ModalContext";
+import MessageToast from "../contexts/MessageToast";
 import ErrorToast from "../contexts/ErrorToast";
 import { api } from "../services/user";
 import Navbar from "./home/Navbar";
@@ -62,48 +64,51 @@ const Home = () => {
   }, []);
 
   return (
-    <ErrorProvider>
-      <ModalProvider>
-        <ErrorToast />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100vh",
-            width: "100vw",
-          }}
-        >
-          <Navbar onSearch={handleSearch} onClearSearch={handleClearSearch} />
+    <MessageProvider>
+      <ErrorProvider>
+        <ModalProvider>
+          <MessageToast />
+          <ErrorToast />
           <div
             style={{
               display: "flex",
-              flex: 1,
+              flexDirection: "column",
+              height: "100vh",
+              width: "100vw",
             }}
           >
-            <Sidebar
-              onFolderCreated={setCreatedFolder}
-              onFileCreated={setCreatedFile}
-              storageTrigger={storageTrigger}
-            />
-            {searchQuery ? (
-              <SearchContent
-                query={searchQuery}
-                createdFile={createdFile}
-                createdFolder={createdFolder}
-                itemDeleted={handleSearchDelete}
-                searchTrigger={searchTrigger}
+            <Navbar onSearch={handleSearch} onClearSearch={handleClearSearch} />
+            <div
+              style={{
+                display: "flex",
+                flex: 1,
+              }}
+            >
+              <Sidebar
+                onFolderCreated={setCreatedFolder}
+                onFileCreated={setCreatedFile}
+                storageTrigger={storageTrigger}
               />
-            ) : (
-              <Content
-                createdFolder={createdFolder}
-                createdFile={createdFile}
-                itemDeleted={handleDelete}
-              />
-            )}
+              {searchQuery ? (
+                <SearchContent
+                  query={searchQuery}
+                  createdFile={createdFile}
+                  createdFolder={createdFolder}
+                  itemDeleted={handleSearchDelete}
+                  searchTrigger={searchTrigger}
+                />
+              ) : (
+                <Content
+                  createdFolder={createdFolder}
+                  createdFile={createdFile}
+                  itemDeleted={handleDelete}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </ModalProvider>
-    </ErrorProvider>
+        </ModalProvider>
+      </ErrorProvider>
+    </MessageProvider>
   );
 };
 export default Home;
