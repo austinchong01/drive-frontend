@@ -13,12 +13,11 @@ const File = ({
   highlightId,
   onToggleHighlight,
 }) => {
-  const { showMessage } = useMessage();
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
 
   const isHighlighted = highlightId === file.id;
 
-  // Make this file draggable
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `file-${file.id}`,
     data: {
@@ -40,6 +39,7 @@ const File = ({
 
   const handleDeleteFile = async (e) => {
     e.stopPropagation();
+    showMessage(`Deleting ${file.displayName}...`)
     const result = await api.deleteFile(file.id);
 
     if (result.success) {
@@ -47,6 +47,7 @@ const File = ({
       onDelete(file.id);
     } else {
       showError(`Delete File Error: ${result.error}`);
+      clearMessage();
     }
   };
 

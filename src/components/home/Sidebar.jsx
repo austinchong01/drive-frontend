@@ -1,7 +1,6 @@
 // src/components/home/Sidebar.jsx
 import { useState, useEffect } from "react";
 import { api } from "../../services/user";
-import { useMessage } from "../../contexts/MessageContext";
 import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "../../contexts/NewFolderModal";
 import NewFileModal from "../../contexts/NewFileModal";
@@ -10,7 +9,6 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   const [storage, setStorage] = useState(null);
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
-  const { showMessage } = useMessage();
   const { showError } = useError();
 
   const fetchUserProfile = async () => {
@@ -31,13 +29,11 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
     setIsFileModalOpen(false);
     onFileCreated(newFile);
     fetchUserProfile();
-    showMessage(`Uploaded File ${newFile.displayName}`)
   };
 
   const handleFolderSuccess = (newFolder) => {
     setIsFolderModalOpen(false);
     onFolderCreated(newFolder);
-    showMessage(`Created Folder ${newFolder.name}`)
   };
 
   return (
@@ -45,7 +41,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <button onClick={() => setIsFileModalOpen(true)}>New File</button>
         <button onClick={() => setIsFolderModalOpen(true)}>New Folder</button>
-        <h1>{storage !== null ? storage : "Loading..."}</h1>
+        <h2>{storage !== null ? storage : "Loading..."}</h2>
       </div>
 
       <NewFileModal

@@ -1,11 +1,13 @@
 // src/components/home/NewFolderModal.jsx
 import { useState } from "react";
 import { api } from "../services/folder";
+import { useMessage } from "../contexts/MessageContext";
 import { useError } from "./ErrorContext";
 import { useParams } from "react-router-dom";
 
 const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
   const [folderName, setFolderName] = useState("");
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
   let { folderId } = useParams();
 
@@ -13,13 +15,16 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
     e.preventDefault();
 
     if (folderId === undefined) folderId = "";
+    showMessage(`Creating Folder ${folderName}...`);
     const result = await api.createFolder(folderName, folderId);
 
     if (result.success) {
       setFolderName("");
       onSuccess(result.data.folder);
+      showMessage(`Created Folder ${result.data.folder.name}`)
     } else {
       showError(`Folder Creation Error: ${result.error}`);
+      clearMessage();
     }
   };
 

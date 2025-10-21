@@ -7,9 +7,11 @@ import Crumb from "./Crumb";
 const Crumbs = ({ folderId }) => {
   const { showError } = useError();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCrumbs = async () => {
+      setLoading(true);
       const result = await api.getCrumbs(folderId);
 
       if (result.success) {
@@ -17,23 +19,31 @@ const Crumbs = ({ folderId }) => {
       } else {
         showError(`Failed to load crumbs: ${result.error}`);
       }
+      setLoading(false);
     };
 
     fetchCrumbs();
   }, [folderId]);
 
   return (
-    <div>
-      {breadcrumbs.map((crumb, index) => {
-        if (index === breadcrumbs.length - 1) // if curr folder
-          return <span key={crumb.id}>{crumb.name}</span>;
-        return (
-          <span key={crumb.id}>
-            <Crumb folder={crumb} /> /
-          </span>
-        );
-      })}
-    </div>
+    <>
+      {loading ? (
+        <p>Loading crumbs...</p>
+      ) : (
+        <div>
+          {breadcrumbs.map((crumb, index) => {
+            if (index === breadcrumbs.length - 1)
+              // if curr folder
+              return <span key={crumb.id}>{crumb.name}</span>;
+            return (
+              <span key={crumb.id}>
+                <Crumb folder={crumb} /> /
+              </span>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

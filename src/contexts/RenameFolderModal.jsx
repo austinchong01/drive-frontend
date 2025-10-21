@@ -7,25 +7,28 @@ import { useError } from "../contexts/ErrorContext";
 
 const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   const [folderName, setFolderName] = useState(folder.name);
-  const { showMessage } = useMessage();
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (folder.name === folderName){
+    if (folder.name === folderName) {
       onClose();
       return;
     }
+    
+    showMessage(`Renaming ${folder.name}...`);
 
     const result = await api.renameFolder(folder.id, folderName);
 
     if (result.success) {
       onSuccess(folder.id, result.data.name);
       onClose();
-      showMessage(`Folder ${folder.name} renamed to ${result.data.name}`)
+      showMessage(`Folder ${folder.name} renamed to ${result.data.name}`);
     } else {
       showError(`Folder Rename Error: ${result.error}`);
+      clearMessage();
     }
   };
 

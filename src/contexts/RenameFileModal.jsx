@@ -7,7 +7,7 @@ import { useError } from "../contexts/ErrorContext";
 
 const RenameFileModal = ({ onClose, onSuccess, file }) => {
   const [fileName, setFileName] = useState(file.displayName);
-  const { showMessage } = useMessage();
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
 
   const handleSubmit = async (e) => {
@@ -18,6 +18,8 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
       return;
     }
 
+    showMessage(`Renaming ${file.displayName}...`);
+
     const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
@@ -26,6 +28,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
       showMessage(`File ${file.displayName} renamed to ${result.data.displayName}`)
     } else {
       showError(`File Rename Error: ${result.error}`);
+      clearMessage();
     }
   };
 

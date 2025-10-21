@@ -74,7 +74,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
         <button type="submit">Search</button>
       </form>
 
-      <h1>{username || "Loading..."}</h1>
+      <h2>{username || "Loading..."}</h2>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

@@ -1,9 +1,11 @@
 // src/components/home/NewFileModal.jsx
 import { api } from "../services/file";
+import { useMessage } from "../contexts/MessageContext";
 import { useError } from "./ErrorContext";
 import { useParams } from "react-router-dom";
 
 const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
   let { folderId } = useParams();
 
@@ -12,13 +14,16 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
 
     const formData = new FormData(e.target);
     if (folderId === undefined) folderId = "";
+    showMessage(`Creating file...`);
     const result = await api.createFile(formData, folderId);
 
     if (result.success) {
       e.target.reset();
-      onSuccess(result.data.file); // Pass the new file data to parent
+      onSuccess(result.data.file);
+      showMessage(`Created File ${result.data.file.displayName}`)
     } else {
       showError(`File Upload Error: ${result.error}`);
+      clearMessage();
     }
   };
 

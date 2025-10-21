@@ -14,7 +14,7 @@ const Folder = ({
   highlightId,
   onToggleHighlight,
 }) => {
-  const { showMessage } = useMessage();
+  const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
   const navigate = useNavigate();
 
@@ -50,6 +50,7 @@ const Folder = ({
 
   const handleDeleteFolder = async (e) => {
     e.stopPropagation();
+    showMessage(`Deleting ${folder.name}...`)
     const result = await api.deleteFolder(folder.id);
 
     if (result.success) {
@@ -57,6 +58,7 @@ const Folder = ({
       onDelete(folder.id);
     } else {
       showError(`Delete Folder Error: ${result.error}`);
+      clearMessage();
     }
   };
 

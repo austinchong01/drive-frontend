@@ -23,15 +23,11 @@ const Home = () => {
 
   // redirect to login if no valid token
   useEffect(() => {
-    let isMounted = true;
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (!result.success && isMounted) navigate("/login");
+      if (!result.success) navigate("/login");
     };
     verifyUser();
-    return () => {
-      isMounted = false;
-    };
   }, [navigate]);
 
   useEffect(() => {

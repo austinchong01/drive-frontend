@@ -7,21 +7,21 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // redirect to home if valid token
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (result.success) {
-        navigate("/home");
-      }
+      if (result.success) navigate("/home");
     };
     verifyUser();
   }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError("");
 
     const result = await api.login(email, password);
@@ -31,6 +31,7 @@ const Login = () => {
     } else {
       setError(result.error);
     }
+    setLoading(false);
   };
 
   return (
@@ -59,6 +60,7 @@ const Login = () => {
         <Link to="/register">Register</Link>
       </form>
       {error && <p>{error}</p>}
+      {loading && <p>{"Logging in..."}</p>}
     </div>
   );
 };
