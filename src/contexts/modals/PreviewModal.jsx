@@ -1,9 +1,22 @@
-// src/components/home/NewFolderModal.jsx
 import { createPortal } from "react-dom";
+import { useState, useEffect } from "react";
 import { useMessage } from "../MessageContext";
 
 const PreviewModal = ({ onClose, file }) => {
   const { showMessage } = useMessage();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      onClose();
+    }, 100);
+  };
+
   const getFileCategory = (mimetype) => {
     if (mimetype.startsWith("image/")) return "image";
     if (mimetype.startsWith("video/")) return "video";
@@ -36,8 +49,10 @@ const PreviewModal = ({ onClose, file }) => {
         alignItems: "center",
         justifyContent: "center",
         zIndex: 1000,
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.1s ease",
       }}
-      onClick={onClose}
+      onClick={handleClose}
     >
       <button
         style={{
@@ -76,8 +91,8 @@ const PreviewModal = ({ onClose, file }) => {
         style={{
           backgroundColor: "#4c494c",
           color: "white",
-          padding: "20px",
-          borderRadius: "12px",
+          padding: "10px",
+          borderRadius: "5px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -111,7 +126,7 @@ const PreviewModal = ({ onClose, file }) => {
             src={file.cloudinaryUrl}
             title="Preview"
             alt="Preview"
-            width="900px" // change to VW/ VH
+            width="900px"
             height="900px"
           />
         )}
