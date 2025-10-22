@@ -41,7 +41,6 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target)
 
     const formData = new FormData(e.target);
     if (folderId === undefined) folderId = "";

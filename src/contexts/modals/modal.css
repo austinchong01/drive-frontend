@@ -55,8 +55,22 @@
   padding: 10px;
 }
 
+.name-button-ok {
+  color: white;
+  background-color: rgba(11, 87, 208, 1);
+  transition: background-color 0.2s ease;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+
 .name-button:hover {
   background-color: rgba(11, 87, 208, 0.1);
+}
+
+.name-button-ok:hover {
+  background-color: rgba(11, 87, 208, 0.6);
 }
 
 .name-input:focus {

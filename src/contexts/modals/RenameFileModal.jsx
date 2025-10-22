@@ -19,7 +19,6 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => {
-      setFolderName("");
       onClose();
     }, 200);
   };
@@ -28,7 +27,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
     e.preventDefault();
 
     if (file.displayName === fileName) {
-      onClose();
+      handleClose();
       return;
     }
 
@@ -37,11 +36,13 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
     const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
-      onSuccess(file.id, result.data.displayName);
-      onClose();
-      showMessage(
+      setIsVisible(false);
+      setTimeout(() => {
+        onSuccess(file.id, result.data.displayName);
+        showMessage(
         `File ${file.displayName} renamed to ${result.data.displayName}`
       );
+      }, 200);
     } else {
       showError(`File Rename Error: ${result.error}`);
       clearMessage();
@@ -50,35 +51,28 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
 
   return createPortal(
     <div
+      className="modal-background"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1000,
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.2s ease",
       }}
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
+        className="name-div"
         style={{
-          backgroundColor: "white",
-          padding: "20px",
-          borderRadius: "8px",
-          minWidth: "300px",
+          transform: isVisible ? "scale(1)" : "scale(0.9)",
+          opacity: isVisible ? 1 : 0,
+          transition: "transform 0.2s ease, opacity 0.2s ease",
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2>Rename File</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="name-header">Rename File</h2>
+        <form onSubmit={handleSubmit} className="name-form">
           <div>
-            <label>File Name:</label>
             <input
               type="text"
+              className="name-input"
               value={fileName}
               onChange={(e) => setFileName(e.target.value)}
               onFocus={(e) => e.target.select()}
@@ -86,10 +80,14 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
               autoFocus
             />
           </div>
-          <button type="submit">Rename</button>
-          <button type="button" onClick={onClose}>
-            Cancel
-          </button>
+          <div className="name-button-div">
+            <button className="name-button" type="button" onClick={handleClose}>
+              Cancel
+            </button>
+            <button className="name-button-ok" type="submit">
+              OK
+            </button>
+          </div>
         </form>
       </div>
     </div>,
