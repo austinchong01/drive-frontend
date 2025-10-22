@@ -68,6 +68,7 @@ User Interface
 - Success messages
 - Loading messages/screens
 - Preview URL Fix
+- transitions
 - Picture according to file type
     - Dragged File/Folder picture
 - Status 500 page?
