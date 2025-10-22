@@ -2,7 +2,6 @@
 import { createPortal } from "react-dom";
 import { useMessage } from "../MessageContext";
 
-
 const PreviewModal = ({ onClose, file }) => {
   const { showMessage } = useMessage();
   const getFileCategory = (mimetype) => {
