@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { api } from "../../services/folder";
 import { useMessage } from "../MessageContext";
 import { useError } from "../ErrorContext";
+import "./modal.css";
 
 const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   const [folderName, setFolderName] = useState(folder.name);

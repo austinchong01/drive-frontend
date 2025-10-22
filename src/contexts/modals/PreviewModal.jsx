@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import { useMessage } from "../MessageContext";
+import "./modal.css";
 
 const PreviewModal = ({ onClose, file }) => {
   const { showMessage } = useMessage();
@@ -38,17 +39,9 @@ const PreviewModal = ({ onClose, file }) => {
   const category = getFileCategory(file.mimetype);
   return createPortal(
     <div
+      className="modal-background"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
         backgroundColor: "rgba(0, 0, 0, 0.8)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1000,
         opacity: isVisible ? 1 : 0,
         transition: "opacity 0.1s ease",
       }}
@@ -70,6 +63,7 @@ const PreviewModal = ({ onClose, file }) => {
           justifyContent: "center",
           outline: "none",
           transition: "background 0.1s ease",
+          zIndex: "1001"
         }}
         onMouseEnter={(e) =>
           (e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)")

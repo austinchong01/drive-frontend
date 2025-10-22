@@ -1,14 +1,28 @@
 // src/components/modals/RenameFileModal.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../../services/file";
 import { useMessage } from "../MessageContext";
 import { useError } from "../ErrorContext";
+import "./modal.css";
 
 const RenameFileModal = ({ onClose, onSuccess, file }) => {
-  const [fileName, setFileName] = useState(file.displayName);
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
+  const [fileName, setFileName] = useState(file.displayName);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setFolderName("");
+      onClose();
+    }, 200);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

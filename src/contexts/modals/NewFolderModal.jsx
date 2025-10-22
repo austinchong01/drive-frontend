@@ -1,15 +1,31 @@
 // src/components/home/NewFolderModal.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "../../services/folder";
 import { useMessage } from "../MessageContext";
 import { useError } from "../ErrorContext";
 import { useParams } from "react-router-dom";
+import "./modal.css";
 
 const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
-  const [folderName, setFolderName] = useState("");
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
+  const [folderName, setFolderName] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
   let { folderId } = useParams();
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+    }
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setFolderName("");
+      onClose();
+    }, 200);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,9 +35,12 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
     const result = await api.createFolder(folderName, folderId);
 
     if (result.success) {
-      setFolderName("");
-      onSuccess(result.data.folder);
-      showMessage(`Created Folder ${result.data.folder.name}`);
+      setIsVisible(false);
+      setTimeout(() => {
+        setFolderName("");
+        onSuccess(result.data.folder);
+        showMessage(`Created Folder ${result.data.folder.name}`);
+      }, 200);
     } else {
       showError(`Folder Creation Error: ${result.error}`);
       clearMessage();
@@ -32,51 +51,43 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
 
   return (
     <div
+      className="modal-background"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1000,
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.2s ease",
       }}
+      onClick={handleClose}
     >
       <div
+        className="name-div"
         style={{
-          backgroundColor: "white",
-          padding: "20px",
-          borderRadius: "8px",
-          minWidth: "300px",
+          transform: isVisible ? "scale(1)" : "scale(0.9)",
+          opacity: isVisible ? 1 : 0,
+          transition: "transform 0.2s ease, opacity 0.2s ease",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
-        <h2>Create New Folder</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="name-header">New Folder</h2>
+        <form onSubmit={handleSubmit} className="name-form">
           <div>
-            <label>
-              Folder Name:
-              <input
-                type="text"
-                value={folderName}
-                onChange={(e) => setFolderName(e.target.value)}
-                required
-                autoFocus
-              />
-            </label>
+            <input
+              type="text"
+              className="name-input"
+              placeholder="Folder Name"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+              required
+              autoFocus
+            />
           </div>
-          <button type="submit">Create</button>
-          <button
-            type="button"
-            onClick={() => {
-              setFolderName("");
-              onClose();
-            }}
-          >
-            Cancel
-          </button>
+          <div className="name-button-div">
+            <button className="name-button" type="button" onClick={handleClose}>
+              Cancel
+            </button>
+            <button className="name-button" type="submit">
+              Create
+            </button>
+          </div>
         </form>
       </div>
     </div>
