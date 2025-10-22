@@ -13,6 +13,7 @@ const PreviewModal = ({ onClose, file }) => {
   };
 
   const handleDownloadFile = (e) => {
+    e.stopPropagation();
     const downloadUrl = file.cloudinaryUrl.replace(
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
@@ -38,6 +39,39 @@ const PreviewModal = ({ onClose, file }) => {
       }}
       onClick={onClose}
     >
+      <button
+        style={{
+          position: "absolute",
+          top: "50px",
+          right: "50px",
+          width: "75px",
+          height: "75px",
+          padding: "0px",
+          borderRadius: "50%",
+          background: "none",
+          border: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          outline: "none",
+          transition: "background 0.1s ease",
+        }}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)")
+        }
+        onMouseLeave={(e) => (e.currentTarget.style.background = "none")}
+        onClick={handleDownloadFile}
+      >
+        <img
+          src="/images/download.svg"
+          alt="Download"
+          style={{
+            width: "70%",
+            filter: "brightness(0) invert(1)",
+          }}
+        />
+      </button>
+
       <div
         style={{
           backgroundColor: "#4c494c",
@@ -50,6 +84,7 @@ const PreviewModal = ({ onClose, file }) => {
           justifyContent: "center",
           boxShadow: "0 10px 12px 5px rgba(0, 0, 0, .2)",
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         {category === "image" && (
           <img
@@ -81,7 +116,6 @@ const PreviewModal = ({ onClose, file }) => {
           />
         )}
         {category === "other" && <p>No preview available</p>}
-        <button onClick={handleDownloadFile}>DOWNLOAD</button>
       </div>
     </div>,
     document.body
