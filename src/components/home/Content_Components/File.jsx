@@ -35,6 +35,7 @@ const File = ({
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
     );
+    console.log(downloadUrl)
     showMessage(`${file.displayName} download started...`);
     window.location.href = downloadUrl;
   };
