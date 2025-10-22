@@ -28,6 +28,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
 
     if (result.success) {
       e.target.reset();
+      setSelectedFileName("")
       onSuccess(result.data.file);
       showMessage(`Created File ${result.data.file.displayName}`);
     } else {

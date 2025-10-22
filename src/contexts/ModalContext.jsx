@@ -8,6 +8,7 @@ import {
 } from "react";
 import RenameFileModal from "./modals/RenameFileModal";
 import RenameFolderModal from "./modals/RenameFolderModal";
+import PreviewModal from "./modals/PreviewModal";
 
 const ModalContext = createContext();
 
@@ -22,6 +23,7 @@ export const useModal = () => {
 export const ModalProvider = ({ children }) => {
   const [fileModalState, setFileModalState] = useState(null);
   const [folderModalState, setFolderModalState] = useState(null);
+  const [previewModalState, setPreviewModalState] = useState(null);
 
   const openFileRenameModal = useCallback((file, onSuccess) => {
     setFileModalState({ file, onSuccess });
@@ -39,18 +41,30 @@ export const ModalProvider = ({ children }) => {
     setFolderModalState(null);
   }, []);
 
+  const openPreviewModal = useCallback((file) => {
+    setPreviewModalState(file);
+  }, []);
+
+  const closePreviewModal = useCallback(() => {
+    setPreviewModalState(null);
+  }, []);
+
   const value = useMemo(
     () => ({
       openFileRenameModal,
       closeFileRenameModal,
       openFolderRenameModal,
       closeFolderRenameModal,
+      openPreviewModal,
+      closePreviewModal,
     }),
     [
       openFileRenameModal,
       closeFileRenameModal,
       openFolderRenameModal,
       closeFolderRenameModal,
+      openPreviewModal,
+      closePreviewModal,
     ]
   );
 
@@ -77,6 +91,13 @@ export const ModalProvider = ({ children }) => {
             closeFolderRenameModal();
           }}
           folder={folderModalState.folder}
+        />
+      )}
+
+      {previewModalState && (
+        <PreviewModal
+          onClose={closePreviewModal}
+          file={previewModalState}
         />
       )}
     </ModalContext.Provider>

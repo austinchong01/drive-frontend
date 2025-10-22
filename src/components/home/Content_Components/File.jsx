@@ -25,7 +25,7 @@ const File = ({
     data: {
       type: "file",
       item: file,
-      name: file.displayName
+      name: file.displayName,
     },
   });
 
@@ -35,13 +35,13 @@ const File = ({
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
     );
-    showMessage(`${file.displayName} download started...`)
+    showMessage(`${file.displayName} download started...`);
     window.location.href = downloadUrl;
   };
 
   const handleDeleteFile = async (e) => {
     e.stopPropagation();
-    showMessage(`Deleting ${file.displayName}...`)
+    showMessage(`Deleting ${file.displayName}...`);
     const result = await api.deleteFile(file.id);
 
     if (result.success) {
@@ -69,8 +69,7 @@ const File = ({
 
   const handleDoubleClick = (e) => {
     e.stopPropagation();
-    openPreviewModal(file.cloudinaryUrl)
-    // window.open(file.cloudinaryUrl, "_blank");
+    openPreviewModal(file);
   };
 
   const isDropdownOpen = openDropdownId === file.id;
