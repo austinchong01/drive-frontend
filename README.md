@@ -69,6 +69,11 @@ User Interface
 - Loading messages/screens
 - Preview URL Fix
 - transitions
+    - modals
+    - pages
+        - buttons
+        - files/folders
+- Font and Font size
 - Picture according to file type
     - Dragged File/Folder picture
 - Status 500 page?
