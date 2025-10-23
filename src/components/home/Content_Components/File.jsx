@@ -90,8 +90,8 @@ const File = ({
     if (file.mimetype === "application/pdf")
       return (
         <img
-          src="/images/document.svg"
-          alt="document"
+          src="/images/pdf.svg"
+          alt="pdf"
           style={{ width: "50px" }}
         />
       );

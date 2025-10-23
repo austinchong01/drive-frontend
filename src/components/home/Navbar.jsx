@@ -35,47 +35,76 @@ const Navbar = ({ onSearch, onClearSearch }) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        padding: "20px",
-        border: "1px solid black",
-        alignItems: "center",
-        gap: "20px",
-      }}
-    >
+    <div className="flex py-2 px-5 border border-black items-center gap-5 bg-[#f2f3fa]">
       <Link
         to="/home"
+        title="Drive"
         onClick={onClearSearch}
-        style={{ display: "flex", alignItems: "center", gap: "10px" }}
+        className="flex items-center gap-2.5 mr-20"
       >
-        <img
-          src="/images/mock_google_drive.svg"
-          alt="Logo"
-          style={{ width: "50px" }}
-        />
-        <h2>DRIVE</h2>
+        <img src="/images/drive.svg" alt="Logo" className="w-[40px]" />
+        <h2 className="text-black hover:text-black font-normal text-xl active:underline">
+          Drive
+        </h2>
       </Link>
-
       <form
         onSubmit={handleSearchSubmit}
-        style={{ flex: 1, display: "flex", gap: "10px" }}
+        className="min-w-[400px] max-w-[700px] flex-1 flex gap-2 bg-[#dadce6] rounded-full p-2 has-[:focus]:bg-white has-[:focus]:shadow-[0_2px_6px_rgba(0,0,0,0.3)] transition-all duration-100"
       >
         <input
+          type="image"
+          src="/images/search.svg"
+          alt="Search"
+          title="Search"
+          className="w-10 h-10 p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10 cursor-pointer"
+        />
+        <input
           type="text"
-          placeholder="Search files and folders..."
+          placeholder="Search in Drive"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          style={{ flex: 1, padding: "8px" }}
+          className="flex-1 px-2 py-2 border-none bg-transparent outline-none placeholder:text-gray-700"
         />
-        <button type="button" onClick={() => setSearchInput("")}>
-          Clear
-        </button>
-        <button type="submit">Search</button>
+        <input
+          type="image"
+          src="/images/cancel.svg"
+          alt="Clear"
+          title="Clear"
+          onClick={(e) => {
+            e.preventDefault();
+            setSearchInput("");
+          }}
+          className="w-10 h-10 p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10 cursor-pointer"
+        />
       </form>
 
-      <h2>{username || "Loading..."}</h2>
-      <button onClick={handleLogout}>Logout</button>
+      <div className="ml-auto flex gap-2 items-center">
+        <img
+          src="/images/help.svg"
+          alt="Help"
+          title="Help (inactive)"
+          className="w-10 h-10 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+        />
+        <img
+          src="/images/settings.svg"
+          alt="Settings"
+          title="Settings (inactive)"
+          className="w-10 h-10 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+        />
+        <img
+          src="/images/logout.svg"
+          alt="Logout"
+          title="Logout"
+          className="w-12 h-10 p-2 cursor-pointer rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          onClick={handleLogout}
+        />
+        <h2
+          title={username}
+          className="w-10 h-10 rounded-full text-white bg-blue-500 flex items-center justify-center text-sm font-semibold"
+        >
+          {username ? username[0].toUpperCase() : "?"}
+        </h2>
+      </div>
     </div>
   );
 };
