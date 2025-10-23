@@ -74,6 +74,30 @@ const File = ({
 
   const isDropdownOpen = openDropdownId === file.id;
 
+  const getFileImage = () => {
+    if (file.mimetype.startsWith("image/"))
+      return (
+        <img src="/images/image.svg" alt="image" style={{ width: "50px" }} />
+      );
+    if (file.mimetype.startsWith("video/"))
+      return (
+        <img src="/images/video.svg" alt="video" style={{ width: "50px" }} />
+      );
+    if (file.mimetype.startsWith("audio/"))
+      return (
+        <img src="/images/audio.svg" alt="audio" style={{ width: "50px" }} />
+      );
+    if (file.mimetype === "application/pdf")
+      return (
+        <img
+          src="/images/document.svg"
+          alt="document"
+          style={{ width: "50px" }}
+        />
+      );
+    return <img src="/images/file.svg" alt="file" style={{ width: "50px" }} />;
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -87,6 +111,7 @@ const File = ({
         opacity: isDragging ? 0.5 : 1, // Visual feedback
       }}
     >
+      <div>{getFileImage()}</div>
       <h3>{file.displayName}</h3>
       <p>Size: {file.size} bytes</p>
       <p>Updated: {new Date(file.updatedAt).toLocaleString()}</p>

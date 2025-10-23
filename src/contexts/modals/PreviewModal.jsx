@@ -15,7 +15,7 @@ const PreviewModal = ({ onClose, file }) => {
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 100);
+    }, 200);
   };
 
   const getFileCategory = (mimetype) => {
@@ -43,7 +43,7 @@ const PreviewModal = ({ onClose, file }) => {
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.8)",
         opacity: isVisible ? 1 : 0,
-        transition: "opacity 0.1s ease",
+        transition: "opacity 0.2s ease",
       }}
       onClick={handleClose}
     >
