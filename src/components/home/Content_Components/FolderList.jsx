@@ -37,16 +37,9 @@ const FolderList = ({
   };
 
   return (
-    <>
+    <div>
       <h2>Folders</h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "15px",
-          marginBottom: "50px",
-        }}
-      >
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
         {folders.map((folder) => (
           <Folder
             key={folder.id}
@@ -62,7 +55,7 @@ const FolderList = ({
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -50,7 +50,7 @@ const Folder = ({
 
   const handleDeleteFolder = async (e) => {
     e.stopPropagation();
-    showMessage(`Deleting ${folder.name}...`)
+    showMessage(`Deleting ${folder.name}...`);
     const result = await api.deleteFolder(folder.id);
 
     if (result.success) {
@@ -91,18 +91,52 @@ const Folder = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       style={{
-        border: isOver ? "2px solid purple" : "1px solid blue",
-        backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
-        opacity: isDragging ? 0.5 : 1, // Visual feedback
+        border: isOver ? "2px solid purple" : "none",
+        opacity: isDragging ? 0.5 : 1,
       }}
+      className={`flex rounded-lg p-3 ${
+        isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"
+      }`}
     >
-      <h3>{folder.name}</h3>
-      <div onPointerDown={(e) => e.stopPropagation()}>
-        <button onClick={toggleDropdown}>...</button>
+      <div className="flex gap-2 items-center">
+        <img src="/images/folder.svg" alt="folder" className="w-[25px]" />
+        <h3>{folder.name}</h3>
+      </div>
+
+      <div
+        onPointerDown={(e) => e.stopPropagation()}
+        className="ml-auto items-center"
+      >
+        <img
+          src="/images/more.svg"
+          alt="more"
+          onClick={toggleDropdown}
+          className="w-[25px] cursor-pointer"
+        />
         {isDropdownOpen && (
-          <div>
-            <button onClick={handleRename}>RENAME</button>
-            <button onClick={handleDeleteFolder}>DELETE</button>
+          <div className="absolute flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+            <button
+              onClick={handleRename}
+              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+            >
+              <img
+                src="/images/rename.svg"
+                alt="rename"
+                className="w-4 shrink-0"
+              />
+              <span>Rename</span>
+            </button>
+            <button
+              onClick={handleDeleteFolder}
+              className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
+            >
+              <img
+                src="/images/trash.svg"
+                alt="delete"
+                className="w-4 shrink-0"
+              />
+              <span>Move to trash</span>
+            </button>
           </div>
         )}
       </div>
