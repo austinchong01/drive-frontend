@@ -77,26 +77,27 @@ const File = ({
   const getFileImage = () => {
     if (file.mimetype.startsWith("image/"))
       return (
-        <img src="/images/image.svg" alt="image" style={{ width: "50px" }} />
+        <img src="/images/image.svg" alt="image" style={{ width: "30px" }} />
       );
     if (file.mimetype.startsWith("video/"))
       return (
-        <img src="/images/video.svg" alt="video" style={{ width: "50px" }} />
+        <img src="/images/video.svg" alt="video" style={{ width: "30px" }} />
       );
     if (file.mimetype.startsWith("audio/"))
       return (
-        <img src="/images/audio.svg" alt="audio" style={{ width: "50px" }} />
+        <img src="/images/audio.svg" alt="audio" style={{ width: "30px" }} />
       );
     if (file.mimetype === "application/pdf")
-      return (
-        <img
-          src="/images/pdf.svg"
-          alt="pdf"
-          style={{ width: "50px" }}
-        />
-      );
-    return <img src="/images/file.svg" alt="file" style={{ width: "50px" }} />;
+      return <img src="/images/pdf.svg" alt="pdf" style={{ width: "30px" }} />;
+    return <img src="/images/file.svg" alt="file" style={{ width: "30px" }} />;
   };
+
+  const newDate = new Date(file.updatedAt);
+  const formattedDate = newDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <div
@@ -106,22 +107,64 @@ const File = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       style={{
-        border: "1px solid green",
-        backgroundColor: isHighlighted ? "#e0e0e0" : "transparent",
         opacity: isDragging ? 0.5 : 1, // Visual feedback
       }}
+      className={`border-b border-gray-400 flex items-center p-3 ${
+        isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
+      }`}
     >
-      <div>{getFileImage()}</div>
-      <h3>{file.displayName}</h3>
-      <p>Size: {file.size} bytes</p>
-      <p>Updated: {new Date(file.updatedAt).toLocaleString()}</p>
-      <div onPointerDown={(e) => e.stopPropagation()}>
-        <button onClick={toggleDropdown}>...</button>
+      <div className="flex-1 flex items-center min-w-100 gap-4 font-medium">
+        <div>{getFileImage()}</div>
+        <h3>{file.displayName}</h3>
+      </div>
+
+      <p className="w-75">{formattedDate}</p>
+      <p className="w-50">{(file.size / 1000000).toFixed(3)} MB</p>
+      <div
+        onPointerDown={(e) => e.stopPropagation()}
+        className="ml-auto items-center"
+      >
+        <img
+          src="/images/more.svg"
+          alt="more"
+          onClick={toggleDropdown}
+          className="w-[25px] cursor-pointer"
+        />
         {isDropdownOpen && (
-          <div>
-            <button onClick={handleDownloadFile}>DOWNLOAD</button>
-            <button onClick={handleRename}>RENAME</button>
-            <button onClick={handleDeleteFile}>DELETE</button>
+          <div className="absolute right-15 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+            <button
+              onClick={handleDownloadFile}
+              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+            >
+              <img
+                src="/images/download.svg"
+                alt="rename"
+                className="w-4 shrink-0"
+              />
+              <span>Download</span>
+            </button>
+            <button
+              onClick={handleRename}
+              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+            >
+              <img
+                src="/images/rename.svg"
+                alt="rename"
+                className="w-4 shrink-0"
+              />
+              <span>Rename</span>
+            </button>
+            <button
+              onClick={handleDeleteFile}
+              className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
+            >
+              <img
+                src="/images/trash.svg"
+                alt="delete"
+                className="w-4 shrink-0"
+              />
+              <span>Move to trash</span>
+            </button>
           </div>
         )}
       </div>

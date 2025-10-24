@@ -83,7 +83,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
           src="/images/help.svg"
           alt="Help"
           title="Help (inactive)"
-          className="w-10 h-10 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          className="w-10 h-10 cursor-pointer p-1.5 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
         />
         <img
           src="/images/settings.svg"

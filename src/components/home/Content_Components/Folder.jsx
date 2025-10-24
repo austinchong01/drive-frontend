@@ -94,12 +94,12 @@ const Folder = ({
         border: isOver ? "2px solid purple" : "none",
         opacity: isDragging ? 0.5 : 1,
       }}
-      className={`flex rounded-lg p-3 ${
+      className={`flex rounded-lg p-3 relative ${
         isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"
       }`}
     >
       <div className="flex gap-2 items-center">
-        <img src="/images/folder.svg" alt="folder" className="w-[25px]" />
+        <img src="/images/folder.svg" alt="folder" className="w-[25px] color-[#444746]" />
         <h3>{folder.name}</h3>
       </div>
 
@@ -114,7 +114,7 @@ const Folder = ({
           className="w-[25px] cursor-pointer"
         />
         {isDropdownOpen && (
-          <div className="absolute flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+          <div className="absolute right-5 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
             <button
               onClick={handleRename}
               className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"

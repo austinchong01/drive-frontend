@@ -39,7 +39,12 @@ const FileList = ({
   return (
     <>
       <h2>Files</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "15px" }}>
+      <div className="flex flex-col">
+        <div className="py-3 flex pr-9 font-medium border-b border-gray-400">
+          <h3 className="flex-1 min-w-109">Name</h3>
+          <h3 className="w-75">Updated</h3>
+          <h3 className="w-50">Size</h3>
+        </div>
         {files.map((file) => (
           <File
             key={file.id}
