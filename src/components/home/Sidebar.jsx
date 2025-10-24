@@ -113,7 +113,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
               />
               <h3>Storage</h3>
             </button>
-            <div className="flex flex-col gap-2 px-5 py-1 my-2">
+            <div className="flex flex-col gap-2 px-5 py-1 items-center mt-1">
               <div className="w-full bg-gray-200 rounded-full h-1">
                 <div
                   className="bg-blue-500 h-1 rounded-full"
@@ -127,7 +127,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
                   ? `${(storage / (1024 * 1024)).toFixed(2)} MB of 10 MB used`
                   : "Loading..."}
               </p>
-              <button className="w-[175px] h-[40px] py-1 px-1 rounded-full border border-black text-blue-800 hover:bg-[#e9eef6] transition-colors duration-50">
+              <button className="w-[175px] h-[40px] py-1 px-1 rounded-full border border-black text-blue-600 font-medium hover:bg-[#e9eef6] transition-colors duration-50">
                 Get more storage
               </button>
             </div>
