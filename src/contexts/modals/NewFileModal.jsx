@@ -31,9 +31,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
     const file = e.target.files[0];
     const lastDotIndex = file.name.lastIndexOf(".");
     const nameWithoutExtension =
-      lastDotIndex > 0
-        ? file.name.substring(0, lastDotIndex)
-        : file.name;
+      lastDotIndex > 0 ? file.name.substring(0, lastDotIndex) : file.name;
     if (file) {
       setSelectedFileName(nameWithoutExtension);
     }
