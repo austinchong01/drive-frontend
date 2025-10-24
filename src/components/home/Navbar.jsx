@@ -35,12 +35,12 @@ const Navbar = ({ onSearch, onClearSearch }) => {
   };
 
   return (
-    <div className="flex py-2 px-5 border border-black items-center gap-5 bg-[#f2f3fa]">
+    <div className="flex py-2 px-6 items-center gap-5 bg-[#f8fafd]">
       <Link
         to="/home"
         title="Drive"
         onClick={onClearSearch}
-        className="flex items-center gap-2.5 mr-20"
+        className="flex flex-none items-center gap-2.5 mr-20 w-[120px]"
       >
         <img src="/images/drive.svg" alt="Logo" className="w-[40px]" />
         <h2 className="text-black hover:text-black font-normal text-xl active:underline">
@@ -49,7 +49,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
       </Link>
       <form
         onSubmit={handleSearchSubmit}
-        className="min-w-[400px] max-w-[700px] flex-1 flex gap-2 bg-[#dadce6] rounded-full p-2 has-[:focus]:bg-white has-[:focus]:shadow-[0_2px_6px_rgba(0,0,0,0.3)] transition-all duration-100"
+        className="min-w-[400px] max-w-[700px] flex-1 flex gap-2 bg-[#e9eef6] rounded-full p-2 has-[:focus]:bg-white has-[:focus]:shadow-[0_2px_6px_rgba(0,0,0,0.3)] transition-all duration-100"
       >
         <input
           type="image"
