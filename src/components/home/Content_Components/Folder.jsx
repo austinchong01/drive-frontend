@@ -99,7 +99,11 @@ const Folder = ({
       }`}
     >
       <div className="flex gap-2 items-center">
-        <img src="/images/folder.svg" alt="folder" className="w-[25px] color-[#444746]" />
+        <img
+          src="/images/folder.svg"
+          alt="folder"
+          className="w-[25px] color-[#444746]"
+        />
         <h3>{folder.name}</h3>
       </div>
 
@@ -111,7 +115,7 @@ const Folder = ({
           src="/images/more.svg"
           alt="more"
           onClick={toggleDropdown}
-          className="w-[25px] cursor-pointer"
+          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors"
         />
         {isDropdownOpen && (
           <div className="absolute right-5 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">

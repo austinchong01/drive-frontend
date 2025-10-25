@@ -128,10 +128,10 @@ const File = ({
           src="/images/more.svg"
           alt="more"
           onClick={toggleDropdown}
-          className="w-[25px] cursor-pointer"
+          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors"
         />
         {isDropdownOpen && (
-          <div className="absolute right-15 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+          <div className="absolute right-30 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
             <button
               onClick={handleDownloadFile}
               className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
