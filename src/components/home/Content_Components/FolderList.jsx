@@ -37,25 +37,29 @@ const FolderList = ({
   };
 
   return (
-    <div>
-      <h2>Folders</h2>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-        {folders.map((folder) => (
-          <Folder
-            key={folder.id}
-            folder={folder}
-            onDelete={handleFolderDelete}
-            onRenameClick={() =>
-              openFolderRenameModal(folder, handleFolderRename)
-            }
-            openDropdownId={openDropdownId}
-            onToggleDropdown={onToggleDropdown}
-            highlightId={highlightId}
-            onToggleHighlight={onToggleHighlight}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {folders.length > 0 && (
+        <div>
+          <h2 className="py-4 text-2xl font-semibold">Folders</h2>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+            {folders.map((folder) => (
+              <Folder
+                key={folder.id}
+                folder={folder}
+                onDelete={handleFolderDelete}
+                onRenameClick={() =>
+                  openFolderRenameModal(folder, handleFolderRename)
+                }
+                openDropdownId={openDropdownId}
+                onToggleDropdown={onToggleDropdown}
+                highlightId={highlightId}
+                onToggleHighlight={onToggleHighlight}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

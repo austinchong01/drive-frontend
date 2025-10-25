@@ -116,7 +116,7 @@ const SearchContent = ({
       onDragCancel={handleDragCancel}
       sensors={sensors}
     >
-      <div style={{ flex: 1, padding: "20px", border: "1px solid black" }}>
+      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7">
         <h2>Search Results for: "{query}"</h2>
         {loading ? (
           <p>Loading search results...</p>

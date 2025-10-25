@@ -119,13 +119,13 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       onDragCancel={handleDragCancel}
       sensors={sensors}
     >
-      <div className="flex flex-1 flex-col rounded-xl bg-white p-5">
+      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7">
 
         {folderId === undefined && (
-          <h1 className="text-3xl text-center">Welcome to Drive</h1>
+          <h1 className="text-3xl text-center mx-auto">Welcome to Drive</h1>
         )}
 
-        <Crumbs folderId={folderId} className="" />
+        {folderId && <Crumbs folderId={folderId} />}
 
         {loading ? (
           <p>Loading contents...</p>
