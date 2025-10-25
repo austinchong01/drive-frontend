@@ -42,7 +42,7 @@ const FileList = ({
         <div>
           <h2 className="py-4 text-2xl font-semibold">Files</h2>
           <div className="flex flex-col">
-            <div className="py-3 flex pr-9 font-medium border-b border-gray-400">
+            <div className="py-3 flex pr-13 font-medium border-b border-gray-400">
               <h3 className="flex-1 min-w-109">Name</h3>
               <h3 className="w-75">Updated</h3>
               <h3 className="w-50">Size</h3>
