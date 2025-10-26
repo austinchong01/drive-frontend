@@ -30,6 +30,13 @@ const Folder = ({
     data: {
       type: "folder",
       item: folder,
+      image: (
+        <img
+          src="/images/folder.svg"
+          alt="folder"
+          className="w-[25px] color-[#444746]"
+        />
+      ),
       name: folder.name,
     },
   });
@@ -50,6 +57,7 @@ const Folder = ({
 
   const handleDeleteFolder = async (e) => {
     e.stopPropagation();
+    onToggleDropdown(null);
     showMessage(`Deleting ${folder.name}...`);
     const result = await api.deleteFolder(folder.id);
 
@@ -64,11 +72,8 @@ const Folder = ({
 
   const handleRename = (e) => {
     e.stopPropagation();
+    onToggleDropdown(null);
     onRenameClick();
-  };
-
-  const toggleDropdown = (e) => {
-    onToggleDropdown(folder.id);
   };
 
   const handleClick = (e) => {
@@ -91,12 +96,13 @@ const Folder = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       style={{
-        border: isOver ? "2px solid purple" : "none",
+        outline: isOver ? "2px solid blue" : "none",
         opacity: isDragging ? 0.5 : 1,
       }}
-      className={`flex rounded-lg p-3 relative ${
+      className={`flex rounded-lg p-3 relative flex items-center p-3 transition-colors duration-75 ${
         isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"
       }`}
+      title={folder.name}
     >
       <div className="flex gap-2 items-center">
         <img
@@ -114,8 +120,10 @@ const Folder = ({
         <img
           src="/images/more.svg"
           alt="more"
-          onClick={toggleDropdown}
-          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors"
+          onClick={() => {
+            onToggleDropdown(folder.id);
+          }}
+          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
         />
         {isDropdownOpen && (
           <div className="absolute right-5 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">

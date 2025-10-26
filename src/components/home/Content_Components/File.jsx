@@ -20,60 +20,6 @@ const File = ({
 
   const isHighlighted = highlightId === file.id;
 
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: `file-${file.id}`,
-    data: {
-      type: "file",
-      item: file,
-      name: file.displayName,
-    },
-  });
-
-  const handleDownloadFile = (e) => {
-    e.stopPropagation();
-    const downloadUrl = file.cloudinaryUrl.replace(
-      "/upload/",
-      `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
-    );
-    showMessage(`${file.displayName} download started...`);
-    window.location.href = downloadUrl;
-  };
-
-  const handleDeleteFile = async (e) => {
-    e.stopPropagation();
-    showMessage(`Deleting ${file.displayName}...`);
-    const result = await api.deleteFile(file.id);
-
-    if (result.success) {
-      showMessage(`Delete File ${file.displayName}`);
-      onDelete(file.id);
-    } else {
-      showError(`Delete File Error: ${result.error}`);
-      clearMessage();
-    }
-  };
-
-  const handleRename = (e) => {
-    e.stopPropagation();
-    onRenameClick();
-  };
-
-  const toggleDropdown = (e) => {
-    onToggleDropdown(file.id);
-  };
-
-  const handleClick = (e) => {
-    e.stopPropagation();
-    onToggleHighlight(file.id);
-  };
-
-  const handleDoubleClick = (e) => {
-    e.stopPropagation();
-    openPreviewModal(file);
-  };
-
-  const isDropdownOpen = openDropdownId === file.id;
-
   const getFileImage = () => {
     if (file.mimetype.startsWith("image/"))
       return (
@@ -92,6 +38,60 @@ const File = ({
     return <img src="/images/file.svg" alt="file" style={{ width: "30px" }} />;
   };
 
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: `file-${file.id}`,
+    data: {
+      type: "file",
+      item: file,
+      image: getFileImage(),
+      name: file.displayName,
+    },
+  });
+
+  const handleDownloadFile = (e) => {
+    e.stopPropagation();
+    onToggleDropdown(null);
+    const downloadUrl = file.cloudinaryUrl.replace(
+      "/upload/",
+      `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
+    );
+    showMessage(`${file.displayName} download started...`);
+    window.location.href = downloadUrl;
+  };
+
+  const handleDeleteFile = async (e) => {
+    e.stopPropagation();
+    onToggleDropdown(null);
+    showMessage(`Deleting ${file.displayName}...`);
+    const result = await api.deleteFile(file.id);
+
+    if (result.success) {
+      showMessage(`Delete File ${file.displayName}`);
+      onDelete(file.id);
+    } else {
+      showError(`Delete File Error: ${result.error}`);
+      clearMessage();
+    }
+  };
+
+  const handleRename = (e) => {
+    e.stopPropagation();
+    onToggleDropdown(null);
+    onRenameClick();
+  };
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onToggleHighlight(file.id);
+  };
+
+  const handleDoubleClick = (e) => {
+    e.stopPropagation();
+    openPreviewModal(file);
+  };
+
+  const isDropdownOpen = openDropdownId === file.id;
+
   const newDate = new Date(file.updatedAt);
   const formattedDate = newDate.toLocaleDateString("en-US", {
     month: "short",
@@ -107,11 +107,12 @@ const File = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       style={{
-        opacity: isDragging ? 0.5 : 1, // Visual feedback
+        opacity: isDragging ? 0.5 : 1,
       }}
-      className={`border-b border-gray-400 flex items-center p-3 ${
+      className={`border-b border-gray-400 flex items-center p-3 transition-colors duration-75 ${
         isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
       }`}
+      title={file.displayName}
     >
       <div className="flex-1 flex items-center min-w-100 gap-4 font-medium">
         <div>{getFileImage()}</div>
@@ -127,11 +128,11 @@ const File = ({
         <img
           src="/images/more.svg"
           alt="more"
-          onClick={toggleDropdown}
-          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors"
+          onClick={() => onToggleDropdown(file.id)}
+          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
         />
         {isDropdownOpen && (
-          <div className="absolute right-30 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+          <div className="absolute right-33 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
             <button
               onClick={handleDownloadFile}
               className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"

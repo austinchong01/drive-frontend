@@ -119,7 +119,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       onDragCancel={handleDragCancel}
       sensors={sensors}
     >
-      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7 mr-20">
+      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7 mr-20 mb-5">
 
         {folderId === undefined && (
           <h1 className="text-3xl text-center mx-auto">Welcome to Drive</h1>
@@ -156,12 +156,9 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       <DragOverlay>
         {activeItem ? (
           <div
-            style={{
-              borderRadius: "4px",
-              cursor: "grabbing",
-            }}
+            className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]"
           >
-            {activeItem.type === "folder" ? "📁" : "📄"}
+            {activeItem.image}
             {activeItem.item.name || activeItem.item.displayName}
           </div>
         ) : null}

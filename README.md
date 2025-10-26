@@ -75,6 +75,9 @@ User Interface
         - files/folders
 - Font and Font size
 - Picture according to file type
+- DND
+    - transition
+    - hover UI
     - Dragged File/Folder picture
 - Status 500 page?
 - Modal Design
@@ -82,6 +85,10 @@ User Interface
     - RENAME, highlight initial name on click
 - Register/Login Layout
 - Dashboard Layout
+    - Scrolling
+        - Title
+        - Folder/File Header
+
 
 
 Nice to Haves
@@ -100,3 +107,4 @@ Nice to Haves
     - confirm with cloudinary
 - Trash Folder
 - Download Bar
+- Right Click functionality
