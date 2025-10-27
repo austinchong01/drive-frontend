@@ -17,28 +17,6 @@ import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 import Crumbs from "./Content_Components/Crumbs";
 
-const cursorOffsetModifier = ({
-  transform,
-  activatorEvent,
-  activeNodeRect,
-}) => {
-  if (!activeNodeRect || !activatorEvent) {
-    return transform;
-  }
-
-  // Calculate offset from element's top-left to where cursor clicked
-  const initialCursorX = activatorEvent.clientX;
-  const initialCursorY = activatorEvent.clientY;
-  const elementLeft = activeNodeRect.left;
-  const elementTop = activeNodeRect.top;
-
-  // The overlay should start at cursor position, then move with transform
-  return {
-    x: initialCursorX - elementLeft + transform.x,
-    y: initialCursorY - elementTop + transform.y,
-  };
-};
-
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showMessage } = useMessage();
   const { showError } = useError();
@@ -50,7 +28,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [highlightId, setHighlightId] = useState(null);
 
-  // load all files and folders in FOLDER
   useEffect(() => {
     if (folderId === undefined) folderId = "";
     const fetchContents = async () => {
@@ -68,7 +45,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     fetchContents();
   }, [folderId]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setOpenDropdownId(null);
@@ -78,14 +54,6 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    })
-  );
 
   const handleDragStart = (event) => {
     setActiveItem(event.active.data.current);
@@ -101,13 +69,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
     const draggedType = active.data.current.type;
     const draggedItem = active.data.current.item;
-    const targetType = over.data.current.type;
-    const targetItem = over.data.current.item;
 
-    // Cannot drag into files
-    if (targetType === "file") return;
-    // Don't drop a folder into itself
-    if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
+    const targetItem = over.data.current.item;
 
     let result;
     if (draggedType === "file") {
@@ -133,6 +96,34 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
   const handleDragCancel = () => {
     setActiveItem(null);
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
+
+  const cursorOffsetModifier = ({
+    transform,
+    activatorEvent,
+    activeNodeRect,
+  }) => {
+    if (!activeNodeRect || !activatorEvent) {
+      return transform;
+    }
+
+    const initialCursorX = activatorEvent.clientX;
+    const initialCursorY = activatorEvent.clientY;
+    const elementLeft = activeNodeRect.left;
+    const elementTop = activeNodeRect.top;
+
+    return {
+      x: initialCursorX - elementLeft + transform.x,
+      y: initialCursorY - elementTop + transform.y,
+    };
   };
 
   return (
@@ -177,7 +168,13 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         )}
       </div>
 
-      <DragOverlay>
+      <DragOverlay
+        dropAnimation={{
+          duration: 100,
+          easing: "ease",
+          keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
+        }}
+      >
         {activeItem ? (
           <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">
             {activeItem.image}

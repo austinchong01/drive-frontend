@@ -6,6 +6,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  pointerWithin,
 } from "@dnd-kit/core";
 import { api } from "../../services/api";
 import { api as folderApi } from "../../services/folder";
@@ -47,7 +48,6 @@ const SearchContent = ({
     fetchSearchContents();
   }, [query, createdFile, createdFolder, searchTrigger, showError]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setOpenDropdownId(null);
@@ -57,14 +57,6 @@ const SearchContent = ({
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    })
-  );
 
   const handleDragStart = (event) => {
     setActiveItem(event.active.data.current);
@@ -80,14 +72,8 @@ const SearchContent = ({
 
     const draggedType = active.data.current.type;
     const draggedItem = active.data.current.item;
-    const targetType = over.data.current.type;
+
     const targetItem = over.data.current.item;
-
-    // Cannot drag into files
-    if (targetType === "file") return;
-
-    // Don't drop a folder into itself
-    if (draggedType === "folder" && draggedItem.id === targetItem.id) return;
 
     let result;
     if (draggedType === "file") {
@@ -109,12 +95,42 @@ const SearchContent = ({
     setActiveItem(null);
   };
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
+
+  const cursorOffsetModifier = ({
+    transform,
+    activatorEvent,
+    activeNodeRect,
+  }) => {
+    if (!activeNodeRect || !activatorEvent) {
+      return transform;
+    }
+
+    const initialCursorX = activatorEvent.clientX;
+    const initialCursorY = activatorEvent.clientY;
+    const elementLeft = activeNodeRect.left;
+    const elementTop = activeNodeRect.top;
+
+    return {
+      x: initialCursorX - elementLeft + transform.x,
+      y: initialCursorY - elementTop + transform.y,
+    };
+  };
+
   return (
     <DndContext
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
       sensors={sensors}
+      modifiers={[cursorOffsetModifier]}
+      collisionDetection={pointerWithin}
     >
       <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7">
         <h2>Search Results for: "{query}"</h2>
@@ -144,15 +160,16 @@ const SearchContent = ({
         )}
       </div>
 
-      <DragOverlay>
+      <DragOverlay
+        dropAnimation={{
+          duration: 100,
+          easing: "ease",
+          keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
+        }}
+      >
         {activeItem ? (
-          <div
-            style={{
-              borderRadius: "4px",
-              cursor: "grabbing",
-            }}
-          >
-            {activeItem.type === "folder" ? "📁" : "📄"}
+          <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">
+            {activeItem.image}
             {activeItem.item.name || activeItem.item.displayName}
           </div>
         ) : null}
