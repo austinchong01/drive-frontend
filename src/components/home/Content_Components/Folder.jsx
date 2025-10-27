@@ -48,6 +48,7 @@ const Folder = ({
       item: folder,
       name: folder.name,
     },
+    disabled: isDragging,
   });
 
   const combinedRef = (node) => {
@@ -95,11 +96,9 @@ const Folder = ({
       {...listeners}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      style={{
-        outline: isOver ? "2px solid blue" : "none",
-        opacity: isDragging ? 0.5 : 1,
-      }}
-      className={`flex rounded-lg p-3 relative flex items-center p-3 transition-colors duration-75 ${
+      className={`flex rounded-lg p-3 relative items-center transition-colors duration-75 ${
+        isOver ? "outline outline-2 outline-blue-500 bg-blue-50" : ""
+      } ${isDragging ? "opacity-50" : "opacity-100"} ${
         isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"
       }`}
       title={folder.name}
