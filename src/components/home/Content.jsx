@@ -7,6 +7,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  pointerWithin,
 } from "@dnd-kit/core";
 import { api } from "../../services/folder";
 import { api as fileApi } from "../../services/file";
@@ -15,6 +16,28 @@ import { useError } from "../../contexts/ErrorContext";
 import FolderList from "./Content_Components/FolderList";
 import FileList from "./Content_Components/FileList";
 import Crumbs from "./Content_Components/Crumbs";
+
+const cursorOffsetModifier = ({
+  transform,
+  activatorEvent,
+  activeNodeRect,
+}) => {
+  if (!activeNodeRect || !activatorEvent) {
+    return transform;
+  }
+
+  // Calculate offset from element's top-left to where cursor clicked
+  const initialCursorX = activatorEvent.clientX;
+  const initialCursorY = activatorEvent.clientY;
+  const elementLeft = activeNodeRect.left;
+  const elementTop = activeNodeRect.top;
+
+  // The overlay should start at cursor position, then move with transform
+  return {
+    x: initialCursorX - elementLeft + transform.x,
+    y: initialCursorY - elementTop + transform.y,
+  };
+};
 
 const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const { showMessage } = useMessage();
@@ -118,9 +141,10 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
       sensors={sensors}
+      modifiers={[cursorOffsetModifier]}
+      collisionDetection={pointerWithin}
     >
       <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7 mr-20 mb-5">
-
         {folderId === undefined && (
           <h1 className="text-3xl text-center mx-auto">Welcome to Drive</h1>
         )}
@@ -155,9 +179,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
       <DragOverlay>
         {activeItem ? (
-          <div
-            className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]"
-          >
+          <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">
             {activeItem.image}
             {activeItem.item.name || activeItem.item.displayName}
           </div>
