@@ -82,12 +82,10 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     let result;
     if (draggedType === "file") {
       result = await fileApi.updateFileLoc(draggedItem.id, targetItem.id);
-      if (result.success)
-        setDraggedFileId(draggedItem.id)
+      if (result.success) setDraggedFileId(draggedItem.id);
     } else if (draggedType === "folder") {
       result = await api.updateFolderLoc(draggedItem.id, targetItem.id);
-      if (result.success)
-        setDraggedFolderId(draggedItem.id)
+      if (result.success) setDraggedFolderId(draggedItem.id);
     }
 
     if (!result.success) {
@@ -140,48 +138,56 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       sensors={sensors}
       collisionDetection={pointerWithin}
     >
-      <div className="flex flex-col rounded-xl bg-white p-5 gap-7 mr-20 overflow-auto h-full min-h-0 w-full min-w-0">
-        {folderId === undefined && (
-          <h1 className="text-3xl text-center mx-auto">Welcome to Drive</h1>
-        )}
+      <div className="rounded-xl bg-white mr-20 min-h-0 w-full min-w-0 overflow-hidden">
+        <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
+          {folderId === undefined && (
+            <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
+              Welcome to Drive
+            </h1>
+          )}
 
-        {folderId && <Crumbs folderId={folderId} />}
+          {folderId && <Crumbs folderId={folderId} />}
 
-        {loading ? (
-          <p>Loading contents...</p>
-        ) : (
-          <>
-            <FolderList
-              initialFolders={initialFolders}
-              createdFolder={createdFolder}
-              onFolderDelete={itemDeleted}
-              openDropdownId={openDropdownId}
-              onToggleDropdown={setOpenDropdownId}
-              highlightId={highlightId}
-              onToggleHighlight={setHighlightId}
-              draggedFolderId={draggedFolderId}
-            />
-            <FileList
-              initialFiles={initialFiles}
-              createdFile={createdFile}
-              onFileDelete={itemDeleted}
-              openDropdownId={openDropdownId}
-              onToggleDropdown={setOpenDropdownId}
-              highlightId={highlightId}
-              onToggleHighlight={setHighlightId}
-              draggedFileId={draggedFileId}
-            />
-          </>
-        )}
+          {loading ? (
+            <p>Loading contents...</p>
+          ) : (
+            <>
+              <FolderList
+                initialFolders={initialFolders}
+                createdFolder={createdFolder}
+                onFolderDelete={itemDeleted}
+                openDropdownId={openDropdownId}
+                onToggleDropdown={setOpenDropdownId}
+                highlightId={highlightId}
+                onToggleHighlight={setHighlightId}
+                draggedFolderId={draggedFolderId}
+              />
+              <FileList
+                initialFiles={initialFiles}
+                createdFile={createdFile}
+                onFileDelete={itemDeleted}
+                openDropdownId={openDropdownId}
+                onToggleDropdown={setOpenDropdownId}
+                highlightId={highlightId}
+                onToggleHighlight={setHighlightId}
+                draggedFileId={draggedFileId}
+              />
+            </>
+          )}
+        </div>
       </div>
 
       <DragOverlay
         modifiers={[cursorOffsetModifier]}
-        dropAnimation={dragSuccess ? {
-          duration: 100,
-          easing: "ease",
-          keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
-        } : undefined}
+        dropAnimation={
+          dragSuccess
+            ? {
+                duration: 100,
+                easing: "ease",
+                keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
+              }
+            : undefined
+        }
       >
         {activeItem ? (
           <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">

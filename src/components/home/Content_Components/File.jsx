@@ -103,7 +103,7 @@ const File = ({
       style={{
         opacity: isDragging ? 0.5 : 1,
       }}
-      className={`border-b border-gray-400 flex items-center p-3 transition-colors duration-75 ${
+      className={`border-b border-gray-400 flex h-15 items-center p-3 transition-colors duration-75 ${
         isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
       }`}
       title={file.displayName}

@@ -29,7 +29,7 @@ const Crumbs = ({ folderId }) => {
       {loading ? (
         <p>Loading crumbs...</p>
       ) : (
-        <div className="text-3xl flex gap-2 items-center">
+        <div className="text-3xl flex gap-2 items-center sticky top-0 w-full py-5 bg-white z-10">
           {breadcrumbs.map((crumb, index) => {
             if (index === breadcrumbs.length - 1)
               // if curr folder
