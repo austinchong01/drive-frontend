@@ -80,6 +80,7 @@ User Interface
     - hover UI
     - Dragged File/Folder picture
 - Status 500 page?
+- No Results page?
 - Modal Design
     - modal autofill filename on upload
     - RENAME, highlight initial name on click
@@ -107,4 +108,4 @@ Nice to Haves
     - confirm with cloudinary
 - Trash Folder
 - Download Bar
-- Right Click functionality
+- Right Click options
