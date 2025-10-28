@@ -25,12 +25,13 @@ const SearchContent = ({
 }) => {
   const { showMessage } = useMessage();
   const { showError } = useError();
+  const [loading, setLoading] = useState(true);
   const [foundFiles, setFoundFiles] = useState([]);
   const [foundFolders, setFoundFolders] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [activeItem, setActiveItem] = useState(null);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [highlightId, setHighlightId] = useState(null);
+  const [dragSuccess, setDragSuccess] = useState(false);
 
   useEffect(() => {
     const fetchSearchContents = async () => {
@@ -70,6 +71,8 @@ const SearchContent = ({
     // If not dropped over anything, do nothing
     if (!over) return;
 
+    setDragSuccess(true);
+
     const draggedType = active.data.current.type;
     const draggedItem = active.data.current.item;
 
@@ -89,6 +92,7 @@ const SearchContent = ({
         `${active.data.current.name} has been moved to ${over.data.current.name}`
       );
     }
+    setDragSuccess(false);
   };
 
   const handleDragCancel = () => {
@@ -132,15 +136,14 @@ const SearchContent = ({
       modifiers={[cursorOffsetModifier]}
       collisionDetection={pointerWithin}
     >
-      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7">
-        <h2>Search Results for: "{query}"</h2>
+      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7 mr-20 mb-5">
+        <h1 className="text-3xl text-center mx-auto">Search Results for: "{query}"</h1>
         {loading ? (
           <p>Loading search results...</p>
         ) : (
           <>
             <FolderList
               initialFolders={foundFolders}
-              createdFolder={undefined}
               onFolderDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
@@ -149,7 +152,6 @@ const SearchContent = ({
             />
             <FileList
               initialFiles={foundFiles}
-              createdFile={undefined}
               onFileDelete={itemDeleted}
               openDropdownId={openDropdownId}
               onToggleDropdown={setOpenDropdownId}
@@ -161,11 +163,11 @@ const SearchContent = ({
       </div>
 
       <DragOverlay
-        dropAnimation={{
+        dropAnimation={dragSuccess ? {
           duration: 100,
           easing: "ease",
           keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
-        }}
+        } : undefined}
       >
         {activeItem ? (
           <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">
