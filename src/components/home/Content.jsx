@@ -27,6 +27,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [activeItem, setActiveItem] = useState(null);
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [highlightId, setHighlightId] = useState(null);
+  const [dragSuccess, setDragSuccess] = useState(false);
 
   useEffect(() => {
     if (folderId === undefined) folderId = "";
@@ -67,6 +68,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     // If not dropped over anything, do nothing
     if (!over) return;
 
+    setDragSuccess(true);
+
     const draggedType = active.data.current.type;
     const draggedItem = active.data.current.item;
 
@@ -92,6 +95,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         `${active.data.current.name} has been moved to ${over.data.current.name}`
       );
     }
+    setDragSuccess(false);
   };
 
   const handleDragCancel = () => {
@@ -169,11 +173,11 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       </div>
 
       <DragOverlay
-        dropAnimation={{
+        dropAnimation={dragSuccess ? {
           duration: 100,
           easing: "ease",
           keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
-        }}
+        } : undefined}
       >
         {activeItem ? (
           <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">

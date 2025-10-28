@@ -92,6 +92,8 @@ const PreviewModal = ({ onClose, file }) => {
           alignItems: "center",
           justifyContent: "center",
           boxShadow: "0 10px 12px 5px rgba(0, 0, 0, .2)",
+          maxWidth: "50vw",
+          maxHeight: "50vw"
         }}
         onClick={(e) => e.stopPropagation()}
       >

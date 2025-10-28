@@ -22,20 +22,14 @@ const File = ({
 
   const getFileImage = () => {
     if (file.mimetype.startsWith("image/"))
-      return (
-        <img src="/images/image.svg" alt="image" style={{ width: "30px" }} />
-      );
+      return <img src="/images/image.svg" alt="image" className="w-[30px]" />;
     if (file.mimetype.startsWith("video/"))
-      return (
-        <img src="/images/video.svg" alt="video" style={{ width: "30px" }} />
-      );
+      return <img src="/images/video.svg" alt="video" className="w-[30px]" />;
     if (file.mimetype.startsWith("audio/"))
-      return (
-        <img src="/images/audio.svg" alt="audio" style={{ width: "30px" }} />
-      );
+      return <img src="/images/audio.svg" alt="audio" className="w-[30px]" />;
     if (file.mimetype === "application/pdf")
-      return <img src="/images/pdf.svg" alt="pdf" style={{ width: "30px" }} />;
-    return <img src="/images/file.svg" alt="file" style={{ width: "30px" }} />;
+      return <img src="/images/pdf.svg" alt="pdf" className="w-[30px]" />;
+    return <img src="/images/file.svg" alt="file" className="w-[30px]" />;
   };
 
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
