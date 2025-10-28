@@ -117,7 +117,7 @@ const File = ({
       <p className="flex-1 min-w-40 max-w-120">{(file.size / 1000000).toFixed(3)} MB</p>
       <div
         onPointerDown={(e) => e.stopPropagation()}
-        className="w-12"
+        className="w-12 items-center relative"
       >
         <img
           src="/images/more.svg"
@@ -126,7 +126,7 @@ const File = ({
           className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
         />
         {isDropdownOpen && (
-          <div className="absolute right-33 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-dropSlideDown">
+          <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
             <button
               onClick={handleDownloadFile}
               className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"

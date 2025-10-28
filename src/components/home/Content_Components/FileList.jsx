@@ -49,7 +49,7 @@ const FileList = ({
     <>
       {files.length > 0 && (
         <div className="pt-4">
-          <h2 className="text-2xl font-semibold">Files</h2>
+          <h2 className="sticky top-19 py-4 text-xl font-medium bg-white z-2">Files</h2>
           <div className="flex flex-col">
             <div className="py-3 flex pr-15 font-semibold border-b border-gray-400 text-lg flex">
               <h3 className="flex-1 min-w-100">Name</h3>

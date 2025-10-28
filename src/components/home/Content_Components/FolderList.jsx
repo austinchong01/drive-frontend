@@ -49,7 +49,7 @@ const FolderList = ({
     <>
       {folders.length > 0 && (
         <div>
-          <h2 className="py-4 text-2xl font-semibold">Folders</h2>
+          <h2 className="sticky top-19 py-4 text-xl font-medium bg-white z-2">Folders</h2>
           <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
             {folders.map((folder) => (
               <Folder
