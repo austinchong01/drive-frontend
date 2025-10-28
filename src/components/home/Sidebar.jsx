@@ -38,7 +38,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
 
   return (
     <>
-      <div className="flex flex-col bg-[#f8fafd] w-[244px] gap-5 px-5">
+      <div className="flex flex-col bg-[#f8fafd] w-[244px] gap-5 px-5 py-2">
         <div className="flex flex-col gap-3">
           <button
             onClick={() => setIsFileModalOpen(true)}
@@ -55,11 +55,11 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
         </div>
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
               <img src="/images/home.svg" className="w-[25px]" alt="Home" />
               <h3>Home</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/myDrive.svg"
                 className="w-[25px]"
@@ -67,7 +67,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
               />
               <h3>My Drive</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/computer.svg"
                 className="w-[25px]"
@@ -78,15 +78,15 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
           </div>
 
           <div className="flex flex-col">
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/shared.svg" className="w-[25px]" alt="Shared" />
               <h3>Shared with me</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/recent.svg" className="w-[25px]" alt="Recent" />
               <h3>Recent</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/starred.svg"
                 className="w-[25px]"
@@ -97,15 +97,15 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
           </div>
 
           <div className="flex flex-col">
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/spam.svg" className="w-[25px]" alt="Spam" />
               <h3>Spam</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/trash.svg" className="w-[25px]" alt="Trash" />
               <h3>Trash</h3>
             </button>
-            <button className="w-[204px] flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/storage.svg"
                 className="w-[25px]"

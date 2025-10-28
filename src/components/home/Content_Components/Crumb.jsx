@@ -10,7 +10,7 @@ const Crumb = ({ folder }) => {
     data: {
       type: "folder",
       item: folder,
-      name: folder.name
+      name: folder.name,
     },
   });
 
@@ -23,13 +23,12 @@ const Crumb = ({ folder }) => {
   return (
     <span
       ref={setNodeRef}
-      style={{
-        color: isOver ? "purple" : "blue",
-        cursor: "pointer",
-      }}
       onClick={handleClick}
+      className={`cursor-pointer px-4 py-2 rounded-full ${
+        isOver ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100" : "hover:bg-gray-200"
+      } `}
     >
-      {folder.name}
+      {folder.name === "root" ? "My Drive" : folder.name}
     </span>
   );
 };

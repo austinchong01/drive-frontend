@@ -29,15 +29,23 @@ const Crumbs = ({ folderId }) => {
       {loading ? (
         <p>Loading crumbs...</p>
       ) : (
-        <div>
+        <div className="text-3xl flex gap-2 items-center">
           {breadcrumbs.map((crumb, index) => {
             if (index === breadcrumbs.length - 1)
               // if curr folder
-              return <span key={crumb.id}>{crumb.name}</span>;
+              return (
+                <div
+                  key={crumb.id}
+                  className="px-4 py-2 rounded-full"
+                >
+                  {crumb.name}
+                </div>
+              );
             return (
-              <span key={crumb.id}>
-                <Crumb folder={crumb} /> /
-              </span>
+              <div className="flex gap-2 items-center text-gray-600" key={crumb.id}>
+                <Crumb folder={crumb} />
+                <div className="text-gray-400">&gt;</div>
+              </div>
             );
           })}
         </div>

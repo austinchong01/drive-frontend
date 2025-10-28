@@ -40,16 +40,16 @@ const Navbar = ({ onSearch, onClearSearch }) => {
         to="/home"
         title="Drive"
         onClick={onClearSearch}
-        className="flex flex-none items-center gap-2.5 mr-20 w-[120px]"
+        className="flex flex-none items-center gap-2.5 w-[100px]"
       >
         <img src="/images/drive.svg" alt="Logo" className="w-[40px]" />
-        <h2 className="text-black hover:text-black font-normal text-xl active:underline">
+        <h2 className="text-black hover:text-black font-normal text-2xl active:underline">
           Drive
         </h2>
       </Link>
       <form
         onSubmit={handleSearchSubmit}
-        className="min-w-[400px] max-w-[700px] flex-1 flex gap-2 bg-[#e9eef6] rounded-full p-2 has-[:focus]:bg-white has-[:focus]:shadow-[0_2px_6px_rgba(0,0,0,0.3)] transition-all duration-100"
+        className="ml-32 min-w-[400px] max-w-[700px] flex-1 flex gap-2 bg-[#e9eef6] rounded-full p-2 has-[:focus]:bg-white has-[:focus]:shadow-[0_2px_6px_rgba(0,0,0,0.3)] transition-all duration-100"
       >
         <input
           type="image"
@@ -63,7 +63,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
           placeholder="Search in Drive"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="flex-1 px-2 py-2 border-none bg-transparent outline-none placeholder:text-gray-700"
+          className="flex-1 px-2 py-2 border-none bg-transparent outline-none placeholder:text-gray-700 placeholder:text-xl"
         />
         <input
           type="image"

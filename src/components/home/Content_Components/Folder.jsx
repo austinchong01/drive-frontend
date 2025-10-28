@@ -96,10 +96,14 @@ const Folder = ({
       {...listeners}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      className={`flex rounded-lg p-3 items-center transition-all duration-100 
-      ${isOver ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100" : ""} 
+      className={`flex rounded-lg p-3 items-center transition-[background-color,opacity] duration-100 
+      ${
+        isOver
+          ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100"
+          : "hover:bg-[#5f636833]"
+      } 
       ${isDragging ? "opacity-50" : ""} 
-      ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"}`}
+      ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6]"}`}
       title={folder.name}
     >
       <div className="flex gap-2 items-center">
