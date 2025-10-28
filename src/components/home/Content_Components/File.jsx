@@ -108,16 +108,16 @@ const File = ({
       }`}
       title={file.displayName}
     >
-      <div className="flex-1 flex items-center min-w-100 gap-4 font-medium">
+      <div className="flex-1 flex items-center min-w-97 gap-4 font-medium text-lg">
         <div>{getFileImage()}</div>
         <h3>{file.displayName}</h3>
       </div>
 
-      <p className="w-75">{formattedDate}</p>
-      <p className="w-50">{(file.size / 1000000).toFixed(3)} MB</p>
+      <p className="flex-1 min-w-40 max-w-120">{formattedDate}</p>
+      <p className="flex-1 min-w-40 max-w-120">{(file.size / 1000000).toFixed(3)} MB</p>
       <div
         onPointerDown={(e) => e.stopPropagation()}
-        className="ml-auto items-center"
+        className="w-12"
       >
         <img
           src="/images/more.svg"

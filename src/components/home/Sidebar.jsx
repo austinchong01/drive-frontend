@@ -39,7 +39,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   return (
     <>
       <div className="flex flex-col bg-[#f8fafd] w-[244px] gap-5 px-5 py-2">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 text-lg font-medium">
           <button
             onClick={() => setIsFileModalOpen(true)}
             className="w-[125px] h-[50px] bg-white shadow-[0_1px_4px_rgba(0,0,0,0.4)] hover:bg-[#e9eef6] hover:shadow-[0_1px_8px_rgba(0,0,0,0.4)] transition-all duration-200 rounded-2xl"
@@ -56,13 +56,13 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
-              <img src="/images/home.svg" className="w-[25px]" alt="Home" />
+              <img src="/images/home.svg" className="w-7" alt="Home" />
               <h3>Home</h3>
             </button>
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/myDrive.svg"
-                className="w-[25px]"
+                className="w-7"
                 alt="My Drive"
               />
               <h3>My Drive</h3>
@@ -70,7 +70,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/computer.svg"
-                className="w-[25px]"
+                className="w-7"
                 alt="Computers"
               />
               <h3>Computers</h3>
@@ -79,17 +79,17 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
 
           <div className="flex flex-col">
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
-              <img src="/images/shared.svg" className="w-[25px]" alt="Shared" />
+              <img src="/images/shared.svg" className="w-7" alt="Shared" />
               <h3>Shared with me</h3>
             </button>
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
-              <img src="/images/recent.svg" className="w-[25px]" alt="Recent" />
+              <img src="/images/recent.svg" className="w-7" alt="Recent" />
               <h3>Recent</h3>
             </button>
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/starred.svg"
-                className="w-[25px]"
+                className="w-7"
                 alt="Starred"
               />
               <h3>Starred</h3>
@@ -98,17 +98,17 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
 
           <div className="flex flex-col">
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
-              <img src="/images/spam.svg" className="w-[25px]" alt="Spam" />
+              <img src="/images/spam.svg" className="w-7" alt="Spam" />
               <h3>Spam</h3>
             </button>
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
-              <img src="/images/trash.svg" className="w-[25px]" alt="Trash" />
+              <img src="/images/trash.svg" className="w-7" alt="Trash" />
               <h3>Trash</h3>
             </button>
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/storage.svg"
-                className="w-[25px]"
+                className="w-7"
                 alt="Storage"
               />
               <h3>Storage</h3>
