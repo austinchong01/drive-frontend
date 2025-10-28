@@ -1,5 +1,6 @@
 // src/components/home/Sidebar.jsx
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../services/user";
 import { useError } from "../../contexts/ErrorContext";
 import NewFolderModal from "../../contexts/modals/NewFolderModal";
@@ -10,6 +11,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [isFileModalOpen, setIsFileModalOpen] = useState(false);
   const { showError } = useError();
+  const navigate = useNavigate();
 
   const fetchUserProfile = async () => {
     const result = await api.getUserProfile();
@@ -24,6 +26,10 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   useEffect(() => {
     fetchUserProfile();
   }, [storageTrigger]);
+
+  const handleHomeClick = () => {
+    navigate("/home");
+  }
 
   const handleFileSuccess = (newFile) => {
     setIsFileModalOpen(false);
@@ -55,7 +61,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
         </div>
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
+            <button onClick={handleHomeClick} className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
               <img src="/images/home.svg" className="w-7" alt="Home" />
               <h3>Home</h3>
             </button>

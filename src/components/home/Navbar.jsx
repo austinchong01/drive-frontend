@@ -78,18 +78,18 @@ const Navbar = ({ onSearch, onClearSearch }) => {
         />
       </form>
 
-      <div className="ml-auto flex gap-2 items-center">
+      <div className="ml-auto flex gap-3 items-center">
         <img
           src="/images/help.svg"
           alt="Help"
           title="Help (inactive)"
-          className="w-10 h-10 cursor-pointer p-1.5 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          className="w-12 cursor-pointer p-1.5 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
         />
         <img
           src="/images/settings.svg"
           alt="Settings"
           title="Settings (inactive)"
-          className="w-10 h-10 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          className="w-12 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
         />
         <img
           src="/images/logout.svg"
