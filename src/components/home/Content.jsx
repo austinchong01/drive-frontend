@@ -141,7 +141,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       modifiers={[cursorOffsetModifier]}
       collisionDetection={pointerWithin}
     >
-      <div className="flex flex-1 flex-col rounded-xl bg-white p-5 gap-7 mr-20 mb-5">
+      <div className="flex flex-col rounded-xl bg-white p-5 gap-7 mr-20 overflow-auto h-full min-h-0 w-full min-w-0">
         {folderId === undefined && (
           <h1 className="text-3xl text-center mx-auto">Welcome to Drive</h1>
         )}

@@ -68,9 +68,11 @@ const Home = () => {
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
               height: "100vh",
               width: "100vw",
+              flexDirection: "column",
+              overflow: "hidden",
+              paddingBottom: "20px",
             }}
           >
             <Navbar onSearch={handleSearch} onClearSearch={handleClearSearch} />
@@ -78,6 +80,7 @@ const Home = () => {
               style={{
                 display: "flex",
                 flex: 1,
+                overflow: "hidden"
               }}
             >
               <Sidebar
