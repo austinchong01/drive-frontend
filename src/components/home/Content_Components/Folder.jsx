@@ -97,8 +97,8 @@ const Folder = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       className={`flex rounded-lg p-3 relative items-center transition-all duration-100 
-      ${isOver ? "outline outline-blue-500 bg-blue-50 hover:bg-blue-50" : ""} 
-      ${isDragging ? "opacity-50" : "opacity-100"} 
+      ${isOver ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100" : ""} 
+      ${isDragging ? "opacity-50" : ""} 
       ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"}`}
       title={folder.name}
     >
