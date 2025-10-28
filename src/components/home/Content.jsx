@@ -28,9 +28,13 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [highlightId, setHighlightId] = useState(null);
   const [dragSuccess, setDragSuccess] = useState(false);
+  const [draggedFolderId, setDraggedFolderId] = useState(null);
+  const [draggedFileId, setDraggedFileId] = useState(null);
 
   useEffect(() => {
     if (folderId === undefined) folderId = "";
+    setDraggedFolderId(null);
+    setDraggedFileId(null);
     const fetchContents = async () => {
       const result = await api.getFolderContents(folderId);
 
@@ -79,13 +83,11 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     if (draggedType === "file") {
       result = await fileApi.updateFileLoc(draggedItem.id, targetItem.id);
       if (result.success)
-        setInitialFiles((prev) => prev.filter((f) => f.id !== draggedItem.id));
+        setDraggedFileId(draggedItem.id)
     } else if (draggedType === "folder") {
       result = await api.updateFolderLoc(draggedItem.id, targetItem.id);
       if (result.success)
-        setInitialFolders((prev) =>
-          prev.filter((f) => f.id !== draggedItem.id)
-        );
+        setDraggedFolderId(draggedItem.id)
     }
 
     if (!result.success) {
@@ -158,6 +160,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
               onToggleDropdown={setOpenDropdownId}
               highlightId={highlightId}
               onToggleHighlight={setHighlightId}
+              draggedFolderId={draggedFolderId}
             />
             <FileList
               initialFiles={initialFiles}
@@ -167,6 +170,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
               onToggleDropdown={setOpenDropdownId}
               highlightId={highlightId}
               onToggleHighlight={setHighlightId}
+              draggedFileId={draggedFileId}
             />
           </>
         )}

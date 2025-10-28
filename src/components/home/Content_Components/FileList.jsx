@@ -11,6 +11,7 @@ const FileList = ({
   onToggleDropdown,
   highlightId,
   onToggleHighlight,
+  draggedFileId,
 }) => {
   const { openFileRenameModal } = useModal();
   const [files, setFiles] = useState(initialFiles);
@@ -22,6 +23,14 @@ const FileList = ({
   useEffect(() => {
     if (createdFile) setFiles((prev) => [createdFile, ...prev]);
   }, [createdFile]);
+
+  useEffect(() => {
+    if (draggedFileId) {
+      setFiles((prev) =>
+        prev.filter((file) => file.id !== draggedFileId)
+      );
+    }
+  }, [draggedFileId]);
 
   const handleFileRename = (fileId, newName) => {
     setFiles((prev) =>

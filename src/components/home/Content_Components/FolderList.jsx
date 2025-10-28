@@ -11,17 +11,26 @@ const FolderList = ({
   onToggleDropdown,
   highlightId,
   onToggleHighlight,
+  draggedFolderId,
 }) => {
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
 
   useEffect(() => {
-    setFolders(initialFolders);
+    setFolders(initialFolders)
   }, [initialFolders]);
 
   useEffect(() => {
     if (createdFolder) setFolders((prev) => [createdFolder, ...prev]);
   }, [createdFolder]);
+
+  useEffect(() => {
+    if (draggedFolderId) {
+      setFolders((prev) =>
+        prev.filter((folder) => folder.id !== draggedFolderId)
+      );
+    }
+  }, [draggedFolderId]);
 
   const handleFolderRename = (folderId, newName) => {
     setFolders((prev) =>
