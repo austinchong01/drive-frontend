@@ -135,39 +135,47 @@ const SearchContent = ({
       sensors={sensors}
       collisionDetection={pointerWithin}
     >
-      <div className="flex flex-col rounded-xl bg-white p-5 gap-7 mr-20 overflow-auto h-full min-h-0 w-full min-w-0">
-        <h1 className="text-3xl text-center mx-auto">Search Results for: "{query}"</h1>
-        {loading ? (
-          <p>Loading search results...</p>
-        ) : (
-          <>
-            <FolderList
-              initialFolders={foundFolders}
-              onFolderDelete={itemDeleted}
-              openDropdownId={openDropdownId}
-              onToggleDropdown={setOpenDropdownId}
-              highlightId={highlightId}
-              onToggleHighlight={setHighlightId}
-            />
-            <FileList
-              initialFiles={foundFiles}
-              onFileDelete={itemDeleted}
-              openDropdownId={openDropdownId}
-              onToggleDropdown={setOpenDropdownId}
-              highlightId={highlightId}
-              onToggleHighlight={setHighlightId}
-            />
-          </>
-        )}
+      <div className="rounded-xl bg-white mr-20 min-h-0 w-full min-w-0 overflow-hidden">
+        <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
+          <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
+            Search Results for: "{query}"
+          </h1>
+          {loading ? (
+            <p>Loading search results...</p>
+          ) : (
+            <>
+              <FolderList
+                initialFolders={foundFolders}
+                onFolderDelete={itemDeleted}
+                openDropdownId={openDropdownId}
+                onToggleDropdown={setOpenDropdownId}
+                highlightId={highlightId}
+                onToggleHighlight={setHighlightId}
+              />
+              <FileList
+                initialFiles={foundFiles}
+                onFileDelete={itemDeleted}
+                openDropdownId={openDropdownId}
+                onToggleDropdown={setOpenDropdownId}
+                highlightId={highlightId}
+                onToggleHighlight={setHighlightId}
+              />
+            </>
+          )}
+        </div>
       </div>
 
       <DragOverlay
         modifiers={[cursorOffsetModifier]}
-        dropAnimation={dragSuccess ? {
-          duration: 100,
-          easing: "ease",
-          keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
-        } : undefined}
+        dropAnimation={
+          dragSuccess
+            ? {
+                duration: 100,
+                easing: "ease",
+                keyframes: (values) => [{ opacity: 1 }, { opacity: 0 }],
+              }
+            : undefined
+        }
       >
         {activeItem ? (
           <div className="flex items-center gap-4 p-2 font-medium w-50 rounded-xl bg-white shadow-[0_1px_5px_2px_rgba(0,0,0,0.3)]">
