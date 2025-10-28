@@ -3,7 +3,7 @@ button {
 }
 
 
-@keyframes slideDown {
+@keyframes dropSlideDown {
   from {
     opacity: 0;
     transform: translateY(-10px);
@@ -14,6 +14,6 @@ button {
   }
 }
 
-.animate-slideDown {
-  animation: slideDown 100ms ease-out;
+.animate-dropSlideDown {
+  animation: dropSlideDown 100ms ease-out;
 }

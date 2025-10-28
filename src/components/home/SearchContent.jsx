@@ -133,7 +133,6 @@ const SearchContent = ({
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
       sensors={sensors}
-      modifiers={[cursorOffsetModifier]}
       collisionDetection={pointerWithin}
     >
       <div className="flex flex-col rounded-xl bg-white p-5 gap-7 mr-20 overflow-auto h-full min-h-0 w-full min-w-0">
@@ -163,6 +162,7 @@ const SearchContent = ({
       </div>
 
       <DragOverlay
+        modifiers={[cursorOffsetModifier]}
         dropAnimation={dragSuccess ? {
           duration: 100,
           easing: "ease",

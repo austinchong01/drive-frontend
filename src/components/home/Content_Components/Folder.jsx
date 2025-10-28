@@ -96,7 +96,7 @@ const Folder = ({
       {...listeners}
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
-      className={`flex rounded-lg p-3 relative items-center transition-all duration-100 
+      className={`flex rounded-lg p-3 items-center transition-all duration-100 
       ${isOver ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100" : ""} 
       ${isDragging ? "opacity-50" : ""} 
       ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6] hover:bg-[#5f636833]"}`}
@@ -113,7 +113,7 @@ const Folder = ({
 
       <div
         onPointerDown={(e) => e.stopPropagation()}
-        className="ml-auto items-center"
+        className="ml-auto items-center relative"
       >
         <img
           src="/images/more.svg"
@@ -124,7 +124,7 @@ const Folder = ({
           className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
         />
         {isDropdownOpen && (
-          <div className="absolute right-5 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 origin-top animate-slideDown">
+          <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
             <button
               onClick={handleRename}
               className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
