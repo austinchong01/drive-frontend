@@ -7,14 +7,14 @@ const MessageToast = () => {
 
   useEffect(() => {
     if (message) {
-      setIsExiting(false); // Reset animation
+      setIsExiting(false);
 
       const timer = setTimeout(() => {
-        setIsExiting(true); // Start animation
+        setIsExiting(true);
 
         setTimeout(() => {
           clearMessage();
-        }, 100); // Match animation duration
+        }, 100);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -40,7 +40,7 @@ const MessageToast = () => {
         display: "flex",
         animation: isExiting
           ? "slideDown 0.1s ease-out"
-          : "slideUp 0.1s ease-out", // ← Toggle animation
+          : "slideUp 0.1s ease-out",
       }}
     >
       <span style={{ flex: 1, fontSize: "15px" }}>{message}</span>

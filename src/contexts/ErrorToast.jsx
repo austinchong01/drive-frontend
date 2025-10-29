@@ -8,14 +8,14 @@ const ErrorToast = () => {
 
   useEffect(() => {
     if (error) {
-      setIsExiting(false); // Reset animation
+      setIsExiting(false);
 
       const timer = setTimeout(() => {
-        setIsExiting(true); // Start animation
+        setIsExiting(true);
 
         setTimeout(() => {
           clearError();
-        }, 100); // Match animation duration
+        }, 100);
       }, 3000);
 
       return () => clearTimeout(timer);
@@ -40,8 +40,8 @@ const ErrorToast = () => {
         gap: "10px",
         display: "flex",
         animation: isExiting
-          ? "slideDown 0.1s ease-out"
-          : "slideUp 0.1s ease-out", // ← Toggle animation
+          ? "errorSlideDown 0.1s ease-out"
+          : "errorSlideUp 0.1s ease-out", // ← Toggle animation
       }}
     >
       <span style={{ flex: 1, fontSize: "15px" }}>⚠️ {error}</span>
@@ -62,7 +62,7 @@ const ErrorToast = () => {
         ×
       </button>
       <style>{`
-        @keyframes slideUp {
+        @keyframes errorSlideUp {
           from {
             transform: translateY(100%);
           }
@@ -70,7 +70,7 @@ const ErrorToast = () => {
             transform: translateY(0);
           }
         }
-        @keyframes slideDown {
+        @keyframes errorSlideDown {
           from {
             transform: translateY(0);
           }

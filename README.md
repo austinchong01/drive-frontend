@@ -67,7 +67,7 @@ User Interface
 - Error messages
 - Success messages
 - Loading messages/screens
-- Preview URL Fix
+- Preview URL
 - transitions
     - modals
     - pages
@@ -78,8 +78,9 @@ User Interface
     - transition
     - hover UI
     - Dragged File/Folder picture
-- Status 500 page?
-- No Results page?
+- No Results page
+    - empty drive
+    - empty search query
 - Modal Design
     - modal autofill filename on upload
     - RENAME, highlight initial name on click
@@ -89,6 +90,7 @@ User Interface
     - Scrolling
         - Title
         - Folder/File Header
+- Guest Account
 
 
 
@@ -99,7 +101,6 @@ Nice to Haves
 - Change username
 - File replace on existing name
 - End to End Testing
-- Guest Account
 - Multiple Layouts (Tablet, Mobile)
 - Accessibility
 - Search Query URL
@@ -109,3 +110,4 @@ Nice to Haves
 - Trash Folder
 - Download Bar
 - Right Click options
+- Status 500 page
