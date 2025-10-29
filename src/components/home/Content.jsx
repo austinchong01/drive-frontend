@@ -30,6 +30,8 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
   const [dragSuccess, setDragSuccess] = useState(false);
   const [draggedFolderId, setDraggedFolderId] = useState(null);
   const [draggedFileId, setDraggedFileId] = useState(null);
+  const [folderCount, setFolderCount] = useState(0);
+  const [fileCount, setFileCount] = useState(0);
 
   useEffect(() => {
     if (folderId === undefined) folderId = "";
@@ -161,6 +163,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
                 highlightId={highlightId}
                 onToggleHighlight={setHighlightId}
                 draggedFolderId={draggedFolderId}
+                onCountChange={setFolderCount}
               />
               <FileList
                 initialFiles={initialFiles}
@@ -171,7 +174,15 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
                 highlightId={highlightId}
                 onToggleHighlight={setHighlightId}
                 draggedFileId={draggedFileId}
+                onCountChange={setFileCount}
               />
+              
+              {folderCount === 0 && fileCount === 0 && (
+              <div className="flex flex-col h-full items-center gap-1 mt-70">
+                <img src="/images/emptyHome.svg" alt="Empty Home" className="w-70"/>
+                <h2 className="text-xl text-gray-600">Use the "New" buttons to view your files and folders</h2>
+              </div>
+              )}
             </>
           )}
         </div>

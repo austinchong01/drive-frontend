@@ -12,12 +12,13 @@ const FolderList = ({
   highlightId,
   onToggleHighlight,
   draggedFolderId,
+  onCountChange,
 }) => {
   const { openFolderRenameModal } = useModal();
   const [folders, setFolders] = useState(initialFolders);
 
   useEffect(() => {
-    setFolders(initialFolders)
+    setFolders(initialFolders);
   }, [initialFolders]);
 
   useEffect(() => {
@@ -31,6 +32,11 @@ const FolderList = ({
       );
     }
   }, [draggedFolderId]);
+
+  // Report folder count to parent
+  useEffect(() => {
+    onCountChange(folders.length);
+  }, [folders.length]);
 
   const handleFolderRename = (folderId, newName) => {
     setFolders((prev) =>
@@ -49,7 +55,9 @@ const FolderList = ({
     <>
       {folders.length > 0 && (
         <div>
-          <h2 className="sticky top-19 py-4 text-xl font-medium bg-white z-2">Folders</h2>
+          <h2 className="sticky top-19 py-4 text-xl font-medium bg-white z-2">
+            Folders
+          </h2>
           <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
             {folders.map((folder) => (
               <Folder

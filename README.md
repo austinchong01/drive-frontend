@@ -74,7 +74,6 @@ User Interface
         - buttons
         - files/folders
 - Font and Font size
-- Picture according to file type
 - DND
     - transition
     - hover UI
@@ -86,6 +85,7 @@ User Interface
     - RENAME, highlight initial name on click
 - Register/Login Layout
 - Dashboard Layout
+    - Picture according to file type
     - Scrolling
         - Title
         - Folder/File Header

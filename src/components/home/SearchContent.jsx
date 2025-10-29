@@ -127,6 +127,9 @@ const SearchContent = ({
     };
   };
 
+  const dummyFunction = () => {};
+  const noResults = foundFiles.length === 0 && foundFolders.length === 0;
+
   return (
     <DndContext
       onDragStart={handleDragStart}
@@ -151,6 +154,7 @@ const SearchContent = ({
                 onToggleDropdown={setOpenDropdownId}
                 highlightId={highlightId}
                 onToggleHighlight={setHighlightId}
+                onCountChange={dummyFunction}
               />
               <FileList
                 initialFiles={foundFiles}
@@ -159,8 +163,15 @@ const SearchContent = ({
                 onToggleDropdown={setOpenDropdownId}
                 highlightId={highlightId}
                 onToggleHighlight={setHighlightId}
+                onCountChange={dummyFunction}
               />
             </>
+          )}
+          {!loading && noResults && (
+            <div className="flex flex-col h-full items-center gap-1 mt-70">
+              <img src="/images/noResults.svg" alt="No Results" className="w-70"/>
+              <h2 className="text-xl text-gray-600">No matching results for "{query}"</h2>
+            </div>
           )}
         </div>
       </div>
