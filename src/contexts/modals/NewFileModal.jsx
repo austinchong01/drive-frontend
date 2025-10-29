@@ -82,6 +82,14 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
         <form onSubmit={handleSubmit} className="name-form">
           <div>
             <input
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              required
+            />
+          </div>
+          <div>
+            <input
               type="text"
               name="name"
               className="name-input"
@@ -90,14 +98,6 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
               onChange={(e) => setSelectedFileName(e.target.value)}
               required
               autoFocus
-            />
-          </div>
-          <div>
-            <input
-              type="file"
-              name="image"
-              onChange={handleFileChange}
-              required
             />
           </div>
           <div className="name-button-div">

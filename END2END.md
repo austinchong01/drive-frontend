@@ -1,0 +1,77 @@
+Register
+- Empty fields
+- Invalid username/password characters
+    - Error Message
+- Invalid email
+    - Error Message
+- Existing email in db
+    - Error Message
+- Successful Registration
+    - Registering message
+    - Remove Error Message
+- Other
+    - token saved
+    - redirect to Home on valid token
+
+Login
+- Empty fields
+- Invalid email
+    - Error Message
+- Incorrect email-password
+    - Error Message
+- 7 Maximum Login Attempts
+- Successful Login (including Guest Account)
+    - Login message
+    - Remove Error Message
+- Other
+    - token saved
+    - redirect to Home on valid token
+
+Home
+- Redirect to Login on invalid token
+- Logout
+    - remove token
+- Appropriate UI Layout
+- No Results page
+    - disappear on creation of file/folder
+    - appear on deletion of all files/folders
+- No Search Results page
+    - disappear on creation of found file/folder
+    - appear on deletion of all found files/folders
+- Exclusive Files/Folders to User
+- File (Respective Success/Error Messages)
+    - New File
+        - Empty filename
+        - Invalid filename
+        - One file
+        - More than 5MB upload
+        - Same filename within same directory
+        - Successful upload
+            - update storage and UI
+    - Preview File
+        - 
+    - Download File
+        - filename is displayName
+    - Rename File
+        - change on UI
+        - download, filename is displayName
+    - Move File
+        - 
+    - Delete File
+        - 
+    - Other
+        - 
+- Folder (Respective Success/Error Messages)
+    - New Folder
+    - Rename Folder
+    - Move Folder
+    - Delete Folder
+    - Other
+- Storage
+- Search (Respective Success/Error Messages)
+- User Interface
+    - Drag and Drop
+        - picture and name attached
+        - disappear on successful drop
+        - snap back on unsuccessful drop
+        - attached to cursor
