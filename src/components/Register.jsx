@@ -37,11 +37,11 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center bg-[#f1f3f4] min-h-screen">
-      <div className="bg-white w-150 h-150 flex flex-col gap-3 rounded-xl shadow-[0_1px_4px_rgba(0,0,0,0.4)] items-center justify-center">
+      <div className="relative bg-white w-150 h-150 flex flex-col gap-3 rounded-xl shadow-[0_1px_4px_rgba(0,0,0,0.4)] items-center justify-center">
         <img src="/images/google.svg" alt="Google" className="w-30" />
         <h1 className="text-3xl">Register</h1>
         <p>Create a "mock" Google Account</p>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
           <div className="relative">
             <input
               type="text"
@@ -55,7 +55,8 @@ const Register = () => {
             <label
               className="absolute left-4 top-1/2 transition-all -translate-y-1/2 text-lg text-gray-500 bg-white px-1 pointer-events-none duration-200
                          peer-focus:top-0 peer-focus:text-sm peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-0 
-                         peer-[:not(:placeholder-shown)]:text-sm">
+                         peer-[:not(:placeholder-shown)]:text-sm"
+            >
               Username
             </label>
           </div>
@@ -72,7 +73,8 @@ const Register = () => {
             <label
               className="absolute left-4 top-1/2 transition-all -translate-y-1/2 text-lg text-gray-500 bg-white px-1 pointer-events-none duration-200
                          peer-focus:top-0 peer-focus:text-sm peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-0 
-                         peer-[:not(:placeholder-shown)]:text-sm">
+                         peer-[:not(:placeholder-shown)]:text-sm"
+            >
               Email
             </label>
           </div>
@@ -89,18 +91,37 @@ const Register = () => {
             <label
               className="absolute left-4 top-1/2 transition-all -translate-y-1/2 text-lg text-gray-500 bg-white px-1 pointer-events-none duration-200
                          peer-focus:top-0 peer-focus:text-sm peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-0 
-                         peer-[:not(:placeholder-shown)]:text-sm">
+                         peer-[:not(:placeholder-shown)]:text-sm"
+            >
               Password
             </label>
           </div>
 
           <div className="flex gap-4 justify-between">
-            <Link to="/login">Back to Login</Link>
-            <button type="submit">Register</button>
+            <Link
+              className="bg-white rounded-xl px-5 py-3 text-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all duration-100"
+              to="/login"
+            >
+              Back to Login
+            </Link>
+            <button
+              className="bg-blue-500 hover:bg-blue-600 hover:shadow-[0_1px_4px_rgba(0,0,0,0.4)] rounded px-5 py-3 text-white transition-all duration-100"
+              type="submit"
+            >
+              Register
+            </button>{" "}
           </div>
         </form>
-        {error && <p>{error}</p>}
-        {loading && <p>{"Registering user..."}</p>}
+        {error && (
+          <div className="absolute top-132 bg-red-700 text-white p-2 text-sm rounded w-100 shadow-[0_1px_4px_rgba(0,0,0,0.4)]">
+            {error}
+          </div>
+        )}
+        {loading && (
+          <div className="absolute top-132 text-blue-500 p-2 text-sm w-100">
+            Registering user...
+          </div>
+        )}
       </div>
     </div>
   );
