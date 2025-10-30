@@ -27,7 +27,7 @@ const Crumbs = ({ folderId }) => {
   return (
     <>
       {loading ? (
-        <p>Loading crumbs...</p>
+        <p className="ml-1 mt-1">Loading crumbs...</p>
       ) : (
         <div className="text-3xl flex gap-2 items-center sticky top-0 w-full py-5 bg-white z-10">
           {breadcrumbs.map((crumb, index) => {
