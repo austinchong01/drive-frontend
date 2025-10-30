@@ -184,7 +184,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
                   className="w-70"
                 />
                 <h2 className="text-xl text-gray-600">
-                  Use the "New" buttons to view your files and folders
+                  Use the "New" buttons to add your files and folders
                 </h2>
               </div>
             )}
