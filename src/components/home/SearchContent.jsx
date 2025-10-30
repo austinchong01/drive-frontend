@@ -35,6 +35,7 @@ const SearchContent = ({
 
   useEffect(() => {
     const fetchSearchContents = async () => {
+      setLoading(true);
       const result = await api.search(query);
 
       if (result.success) {
