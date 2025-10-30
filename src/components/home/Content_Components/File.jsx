@@ -1,4 +1,5 @@
 // src/components/home/Content_Components/File.jsx
+import { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { api } from "../../../services/file";
 import { useMessage } from "../../../contexts/MessageContext";
@@ -17,6 +18,7 @@ const File = ({
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
   const { openPreviewModal } = useModal();
+  const [loading, setLoading] = useState(false);
 
   const isHighlighted = highlightId === file.id;
 
@@ -55,6 +57,7 @@ const File = ({
 
   const handleDeleteFile = async (e) => {
     e.stopPropagation();
+    setLoading(true);
     onToggleDropdown(null);
     showMessage(`Deleting ${file.displayName}...`);
     const result = await api.deleteFile(file.id);
@@ -66,6 +69,7 @@ const File = ({
       showError(`Delete File Error: ${result.error}`);
       clearMessage();
     }
+    setLoading(false);
   };
 
   const handleRename = (e) => {
@@ -94,76 +98,84 @@ const File = ({
   });
 
   return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-      }}
-      className={`border-b border-gray-400 flex h-15 items-center p-3 transition-colors duration-75 ${
-        isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
-      }`}
-      title={file.displayName}
-    >
-      <div className="flex-1 flex items-center min-w-97 gap-4 font-medium text-lg">
-        <div>{getFileImage()}</div>
-        <h3>{file.displayName}</h3>
-      </div>
-
-      <p className="flex-1 min-w-40 max-w-120">{formattedDate}</p>
-      <p className="flex-1 min-w-40 max-w-120">{(file.size / 1000000).toFixed(3)} MB</p>
-      <div
-        onPointerDown={(e) => e.stopPropagation()}
-        className="w-12 items-center relative"
-      >
-        <img
-          src="/images/more.svg"
-          alt="more"
-          onClick={() => onToggleDropdown(file.id)}
-          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
-        />
-        {isDropdownOpen && (
-          <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
-            <button
-              onClick={handleDownloadFile}
-              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
-            >
-              <img
-                src="/images/download.svg"
-                alt="rename"
-                className="w-4 shrink-0"
-              />
-              <span>Download</span>
-            </button>
-            <button
-              onClick={handleRename}
-              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
-            >
-              <img
-                src="/images/rename.svg"
-                alt="rename"
-                className="w-4 shrink-0"
-              />
-              <span>Rename</span>
-            </button>
-            <button
-              onClick={handleDeleteFile}
-              className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
-            >
-              <img
-                src="/images/trash.svg"
-                alt="delete"
-                className="w-4 shrink-0"
-              />
-              <span>Move to trash</span>
-            </button>
+    <>
+      {loading ? (
+        <div className="border-b border-gray-400 flex h-15 items-center p-3 bg-white">
+          <span className="opacity-50">Deleting File...</span>
+        </div>
+      ) : (
+        <div
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
+          onClick={handleClick}
+          onDoubleClick={handleDoubleClick}
+          style={{
+            opacity: isDragging ? 0.5 : 1,
+          }}
+          className={`border-b border-gray-400 flex h-15 items-center p-3 transition-colors duration-75 ${
+            isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
+          }`}
+          title={file.displayName}
+        >
+          <div className="flex-1 flex items-center min-w-97 gap-4 font-medium text-lg">
+            <div>{getFileImage()}</div>
+            <h3>{file.displayName}</h3>
           </div>
-        )}
-      </div>
-    </div>
+
+          <p className="flex-1 min-w-40 max-w-120">{formattedDate}</p>
+          <p className="flex-1 min-w-40 max-w-120">{(file.size / 1000000).toFixed(3)} MB</p>
+          <div
+            onPointerDown={(e) => e.stopPropagation()}
+            className="w-12 items-center relative"
+          >
+            <img
+              src="/images/more.svg"
+              alt="more"
+              onClick={() => onToggleDropdown(file.id)}
+              className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
+            />
+            {isDropdownOpen && (
+              <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
+                <button
+                  onClick={handleDownloadFile}
+                  className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+                >
+                  <img
+                    src="/images/download.svg"
+                    alt="rename"
+                    className="w-4 shrink-0"
+                  />
+                  <span>Download</span>
+                </button>
+                <button
+                  onClick={handleRename}
+                  className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+                >
+                  <img
+                    src="/images/rename.svg"
+                    alt="rename"
+                    className="w-4 shrink-0"
+                  />
+                  <span>Rename</span>
+                </button>
+                <button
+                  onClick={handleDeleteFile}
+                  className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
+                >
+                  <img
+                    src="/images/trash.svg"
+                    alt="delete"
+                    className="w-4 shrink-0"
+                  />
+                  <span>Move to trash</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

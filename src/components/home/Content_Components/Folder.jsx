@@ -1,4 +1,5 @@
 // src/components/home/Content_Components/Folder.jsx
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { api } from "../../../services/folder";
@@ -16,6 +17,7 @@ const Folder = ({
 }) => {
   const { showMessage, clearMessage } = useMessage();
   const { showError } = useError();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const isHighlighted = highlightId === folder.id;
@@ -58,6 +60,7 @@ const Folder = ({
 
   const handleDeleteFolder = async (e) => {
     e.stopPropagation();
+    setLoading(true);
     onToggleDropdown(null);
     showMessage(`Deleting ${folder.name}...`);
     const result = await api.deleteFolder(folder.id);
@@ -69,6 +72,7 @@ const Folder = ({
       showError(`Delete Folder Error: ${result.error}`);
       clearMessage();
     }
+    setLoading(false);
   };
 
   const handleRename = (e) => {
@@ -90,13 +94,23 @@ const Folder = ({
   const isDropdownOpen = openDropdownId === folder.id;
 
   return (
-    <div
-      ref={combinedRef}
-      {...attributes}
-      {...listeners}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-      className={`flex rounded-lg p-3 items-center transition-[background-color,opacity] duration-100 
+    <>
+      {loading ? (
+        <div
+          className={
+            "flex rounded-lg p-3 items-center opacity-50 bg-[#e9eef6]"
+          }
+        >
+          Deleting Folder...
+        </div>
+      ) : (
+        <div
+          ref={combinedRef}
+          {...attributes}
+          {...listeners}
+          onClick={handleClick}
+          onDoubleClick={handleDoubleClick}
+          className={`flex rounded-lg p-3 items-center transition-[background-color,opacity] duration-100 
       ${
         isOver
           ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100"
@@ -104,57 +118,59 @@ const Folder = ({
       } 
       ${isDragging ? "opacity-50 hover:bg-[#e9eef6]" : ""} 
       ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6]"}`}
-      title={folder.name}
-    >
-      <div className="flex gap-2 items-center">
-        <img
-          src="/images/folder.svg"
-          alt="folder"
-          className="w-[25px] color-[#444746]"
-        />
-        <h3>{folder.name}</h3>
-      </div>
-
-      <div
-        onPointerDown={(e) => e.stopPropagation()}
-        className="ml-auto items-center relative"
-      >
-        <img
-          src="/images/more.svg"
-          alt="more"
-          onClick={() => {
-            onToggleDropdown(folder.id);
-          }}
-          className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
-        />
-        {isDropdownOpen && (
-          <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
-            <button
-              onClick={handleRename}
-              className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
-            >
-              <img
-                src="/images/rename.svg"
-                alt="rename"
-                className="w-4 shrink-0"
-              />
-              <span>Rename</span>
-            </button>
-            <button
-              onClick={handleDeleteFolder}
-              className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
-            >
-              <img
-                src="/images/trash.svg"
-                alt="delete"
-                className="w-4 shrink-0"
-              />
-              <span>Move to trash</span>
-            </button>
+          title={folder.name}
+        >
+          <div className="flex gap-2 items-center">
+            <img
+              src="/images/folder.svg"
+              alt="folder"
+              className="w-[25px] color-[#444746]"
+            />
+            <h3>{folder.name}</h3>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div
+            onPointerDown={(e) => e.stopPropagation()}
+            className="ml-auto items-center relative"
+          >
+            <img
+              src="/images/more.svg"
+              alt="more"
+              onClick={() => {
+                onToggleDropdown(folder.id);
+              }}
+              className="w-[40px] cursor-pointer rounded-full p-2 hover:bg-gray-400 transition-colors duration-75"
+            />
+            {isDropdownOpen && (
+              <div className="absolute right-0 top-full w-40 mt-1 flex flex-col bg-white border border-gray-300 rounded shadow-md z-10 animate-dropSlideDown">
+                <button
+                  onClick={handleRename}
+                  className="flex items-center gap-2 text-left hover:bg-gray-300 px-4 py-2"
+                >
+                  <img
+                    src="/images/rename.svg"
+                    alt="rename"
+                    className="w-4 shrink-0"
+                  />
+                  <span>Rename</span>
+                </button>
+                <button
+                  onClick={handleDeleteFolder}
+                  className="flex items-center gap-2 text-left hover:bg-red-200 px-4 py-2"
+                >
+                  <img
+                    src="/images/trash.svg"
+                    alt="delete"
+                    className="w-4 shrink-0"
+                  />
+                  <span>Move to trash</span>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
