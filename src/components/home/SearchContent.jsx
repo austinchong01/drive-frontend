@@ -139,41 +139,47 @@ const SearchContent = ({
       collisionDetection={pointerWithin}
     >
       <div className="rounded-xl bg-white mr-20 min-h-0 w-full min-w-0 overflow-hidden">
-        <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
-          <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
-            Search Results for: "{query}"
-          </h1>
-          {loading ? (
-            <p>Loading search results...</p>
-          ) : (
-            <>
-              <FolderList
-                initialFolders={foundFolders}
-                onFolderDelete={itemDeleted}
-                openDropdownId={openDropdownId}
-                onToggleDropdown={setOpenDropdownId}
-                highlightId={highlightId}
-                onToggleHighlight={setHighlightId}
-                onCountChange={dummyFunction}
-              />
-              <FileList
-                initialFiles={foundFiles}
-                onFileDelete={itemDeleted}
-                openDropdownId={openDropdownId}
-                onToggleDropdown={setOpenDropdownId}
-                highlightId={highlightId}
-                onToggleHighlight={setHighlightId}
-                onCountChange={dummyFunction}
-              />
-            </>
-          )}
-          {!loading && noResults && (
-            <div className="flex flex-col h-full items-center gap-1 mt-70">
-              <img src="/images/noResults.svg" alt="No Results" className="w-70"/>
-              <h2 className="text-xl text-gray-600">No matching results for "{query}"</h2>
-            </div>
-          )}
-        </div>
+        {loading ? (
+          <p className="text-center mt-50">Loading search results...</p>
+        ) : (
+          <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
+            <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
+              Search Results for: "{query}"
+            </h1>
+
+            <FolderList
+              initialFolders={foundFolders}
+              onFolderDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
+              onCountChange={dummyFunction}
+            />
+            <FileList
+              initialFiles={foundFiles}
+              onFileDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
+              onCountChange={dummyFunction}
+            />
+
+            {!loading && noResults && (
+              <div className="flex flex-col h-full items-center gap-1 mt-70">
+                <img
+                  src="/images/noResults.svg"
+                  alt="No Results"
+                  className="w-70"
+                />
+                <h2 className="text-xl text-gray-600">
+                  No matching results for "{query}"
+                </h2>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <DragOverlay

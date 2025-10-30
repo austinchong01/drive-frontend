@@ -35,6 +35,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
   useEffect(() => {
     if (folderId === undefined) folderId = "";
+    setLoading(true);
     setDraggedFolderId(null);
     setDraggedFileId(null);
     const fetchContents = async () => {
@@ -141,51 +142,54 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
       collisionDetection={pointerWithin}
     >
       <div className="rounded-xl bg-white mr-20 min-h-0 w-full min-w-0 overflow-hidden">
-        <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
-          {folderId === undefined && (
-            <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
-              Welcome to Drive
-            </h1>
-          )}
+        {loading ? (
+          <p className="text-center mt-50">Loading contents...</p>
+        ) : (
+          <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
+            {folderId === undefined && (
+              <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
+                Welcome to Drive
+              </h1>
+            )}
 
-          {folderId && <Crumbs folderId={folderId} />}
+            {folderId && <Crumbs folderId={folderId} />}
+            <FolderList
+              initialFolders={initialFolders}
+              createdFolder={createdFolder}
+              onFolderDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
+              draggedFolderId={draggedFolderId}
+              onCountChange={setFolderCount}
+            />
+            <FileList
+              initialFiles={initialFiles}
+              createdFile={createdFile}
+              onFileDelete={itemDeleted}
+              openDropdownId={openDropdownId}
+              onToggleDropdown={setOpenDropdownId}
+              highlightId={highlightId}
+              onToggleHighlight={setHighlightId}
+              draggedFileId={draggedFileId}
+              onCountChange={setFileCount}
+            />
 
-          {loading ? (
-            <p>Loading contents...</p>
-          ) : (
-            <>
-              <FolderList
-                initialFolders={initialFolders}
-                createdFolder={createdFolder}
-                onFolderDelete={itemDeleted}
-                openDropdownId={openDropdownId}
-                onToggleDropdown={setOpenDropdownId}
-                highlightId={highlightId}
-                onToggleHighlight={setHighlightId}
-                draggedFolderId={draggedFolderId}
-                onCountChange={setFolderCount}
-              />
-              <FileList
-                initialFiles={initialFiles}
-                createdFile={createdFile}
-                onFileDelete={itemDeleted}
-                openDropdownId={openDropdownId}
-                onToggleDropdown={setOpenDropdownId}
-                highlightId={highlightId}
-                onToggleHighlight={setHighlightId}
-                draggedFileId={draggedFileId}
-                onCountChange={setFileCount}
-              />
-              
-              {folderCount === 0 && fileCount === 0 && (
+            {folderCount === 0 && fileCount === 0 && (
               <div className="flex flex-col h-full items-center gap-1 mt-70">
-                <img src="/images/emptyHome.svg" alt="Empty Home" className="w-70"/>
-                <h2 className="text-xl text-gray-600">Use the "New" buttons to view your files and folders</h2>
+                <img
+                  src="/images/emptyHome.svg"
+                  alt="Empty Home"
+                  className="w-70"
+                />
+                <h2 className="text-xl text-gray-600">
+                  Use the "New" buttons to view your files and folders
+                </h2>
               </div>
-              )}
-            </>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
 
       <DragOverlay

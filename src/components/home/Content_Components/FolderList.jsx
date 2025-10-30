@@ -58,7 +58,7 @@ const FolderList = ({
           <h2 className="sticky top-19 py-4 text-xl font-medium bg-white z-2">
             Folders
           </h2>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 pt-1">
             {folders.map((folder) => (
               <Folder
                 key={folder.id}

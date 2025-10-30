@@ -102,7 +102,7 @@ const Folder = ({
           ? "outline outline-blue-700 bg-blue-100 hover:bg-blue-100"
           : "hover:bg-[#5f636833]"
       } 
-      ${isDragging ? "opacity-50" : ""} 
+      ${isDragging ? "opacity-50 hover:bg-[#e9eef6]" : ""} 
       ${isHighlighted ? "bg-[#c2e7ff]" : "bg-[#e9eef6]"}`}
       title={folder.name}
     >

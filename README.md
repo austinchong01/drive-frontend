@@ -111,3 +111,5 @@ Nice to Haves
 - Download Bar
 - Right Click options
 - Status 500 page
+- Light/Dark Theme
+- Loading Screen
