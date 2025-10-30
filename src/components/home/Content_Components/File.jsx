@@ -110,12 +110,9 @@ const File = ({
           {...listeners}
           onClick={handleClick}
           onDoubleClick={handleDoubleClick}
-          style={{
-            opacity: isDragging ? 0.5 : 1,
-          }}
           className={`border-b border-gray-400 flex h-15 items-center p-3 transition-colors duration-75 ${
             isHighlighted ? "bg-[#c2e7ff]" : "bg-white hover:bg-[#5f636833]"
-          }`}
+          } ${isDragging ? "opacity-50 hover:bg-white" : "opacity-100"}`}
           title={file.displayName}
         >
           <div className="flex-1 flex items-center min-w-97 gap-4 font-medium text-lg">
