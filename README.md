@@ -6,6 +6,18 @@ organize, and manage files and folders with secure authentication.
 
 #### Backend Repository: https://github.com/austinchong01/drive-backend
 
+## Purpose
+
+This project demonstrates full-stack development skills including:
+- RESTful API design with Express.js
+- Database modeling and relationships with Prisma ORM
+- Secure authentication and authorization with JWT
+- Third-party API integration (Cloudinary)
+- React state management and drag-and-drop interactions
+- Comprehensive error handling and input validation
+
+***Built to showcase proficiency in modern web development practices and the PERN stack.***
+
 Features
 --------
 ### Authentication
