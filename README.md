@@ -48,21 +48,22 @@ Features
 - Rename and delete folders
 - Drag-and-drop folders organization
 
+### User Interface
+- Animations and transitions (hover, drag, drop, etc... )
+- Empty home page
+- No search results page
+
 ### Additional Features
 - Search functionality across files and folders
 - Storage quota tracking (10 MB limit)
 - Real-time status messages and error handling
+  - Custom Error Handling
+  - Query Transactions
 - API Rate Limiter (200 Requests / 5 minutes)
 - Integrated Testing (backend)
 - Health test check endpoint "/health"
 - Guest Account Login
 - Re-render(React) and API Optimization
-- Database Indexes
-
-### User Interface
-- Animations and transitions (hover, drag, drop, etc... )
-- Empty home page
-- No search results page
 
 
 Technology Stack
