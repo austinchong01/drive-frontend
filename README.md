@@ -72,11 +72,12 @@ Features
 
 Technology Stack
 --------
-### Frontend
-- React 19 with Vite
-- Tailwind CSS
-- React Router DOM
-- @dnd-kit (drag-and-drop)
+| Frontend | Backend | Deployment |
+|----------|-------------|
+| React 19 with Vite |
+| Tailwind CSS |
+| React Router DOM |
+| @dnd-kit (drag-and-drop) |
 
 ### Backend
 - Node.js & Express.js
