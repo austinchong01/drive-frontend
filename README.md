@@ -90,7 +90,7 @@ Installation
 ------------
 ```bash
 # Clone the repository
-git clone [your-repo-url]
+git clone git@github.com:austinchong01/drive_frontend.git
 
 # Install dependencies
 npm install
