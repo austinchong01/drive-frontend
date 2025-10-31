@@ -46,9 +46,6 @@ Technology Stack
 Features
 --------
 
-Features
---------
-
 <table>
 <tr>
 <td width="50%" valign="top">
