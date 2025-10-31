@@ -6,25 +6,25 @@ organize, and manage files and folders with secure authentication.
 
 #### Backend Repository: https://github.com/austinchong01/drive-backend
 
+```javascript
   async createFile(formData, folderId) {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${API_BASE_URL}/files/${folderId}/upload`, {
+      const response = await fetch`${API_BASE_URL}/files/${folderId}/upload`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
-
       const data = await response.json();
       if (response.status !== 201) throw new Error(data.message);
-
       return { success: true, data };
     } catch (error) {
       return { success: false, error: error.message };
     }
   }
+```
 
 Features
 --------
