@@ -1,4 +1,4 @@
-$project
+Mock Google Drive
 ========
 
 $project solves the problem of where to start with documentation
@@ -21,19 +21,13 @@ Install $project by running:
 
     install project
 
-Contribute
-----------
-
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
-
 Support
 -------
 
 Let us know if you have issues.
-See our mailing list at: project@google-groups.com
+Contact me at: austin.inhyuk.chong@gmail.com
 
 License
 -------
 
-The project is licensed under the BSD license.
+N/A
