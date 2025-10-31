@@ -58,12 +58,12 @@ Technology Stack
 
 Installation
 ------------
-# Prerequisites
+### Prerequisites
 - Node.js (v18 or higher)
 - PostgreSQL
 - Cloudinary
 
-## Frontend Setup
+#### Frontend Setup
 ```bash
 # Clone the repository
 git clone [your-frontend-repo-url]
@@ -81,8 +81,8 @@ VITE_APP_ENV=development
 npm run dev
 ```
 
-## Backend Setup
-#### Backend Repository: https://github.com/austinchong01/drive-backend
+#### Backend Setup
+##### Backend Repository: https://github.com/austinchong01/drive-backend
 ```bash
 # Clone the backend repository
 git clone https://github.com/austinchong01/drive-backend
