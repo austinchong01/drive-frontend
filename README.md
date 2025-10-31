@@ -32,6 +32,7 @@ Features
 - Protected routes and secure sessions
 - Automatic token management
 - Login Rate Limiter (7 Attempts / 2 Minutes)
+- Sanitation/Validation credentials
 
 ### File Management
 - Upload multiple file types (5 MB limit per upload)
@@ -52,6 +53,8 @@ Features
 - Real-time status messages and error handling
 - API Rate Limiter (200 Requests / 5 minutes)
 - Integrated Testing (backend)
+- Health test check endpoint "/health"
+- Guest Account Login
 
 ### User Interface
 - Animations and transitions
