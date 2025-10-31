@@ -1,8 +1,8 @@
 Mock Google Drive
 ========
 
-$project solves the problem of where to start with documentation
-by providing a basic explanation of how to do it easily:
+A full-stack Mock Google Drive (file management) application that allows users to upload,
+organize, and manage files and folders with secure authentication.
 
     import project
     # Get your stuff done
