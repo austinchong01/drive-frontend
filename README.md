@@ -144,6 +144,27 @@ VITE_APP_ENV=development
 # Run development server
 npm run dev
 ```
+Future Add-ons
+-------
+- Filtering
+- Sharing Files/Folders
+- Pagination (Limiting Files/Folders per page)
+- Change username
+- File replace on existing name
+- End to End Testing
+- Multiple Layouts (Tablet, Mobile)
+- Search Query URL
+- Multiple File/Folder Select
+- Test Cleanup
+    - confirm with cloudinary
+- Trash Folder
+- Download Bar
+- Right Click options
+- Status 500 page
+- Light/Dark Theme
+- Loading Screen
+- More Storage
+- Upload Folders
 
 Contact
 -------
