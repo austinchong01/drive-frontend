@@ -9,9 +9,8 @@ allowing users to upload, organize, and manage files and folders with secure aut
 
 Demo
 --------
-<img width="1144" height="934" alt="main" src="https://github.com/user-attachments/assets/f5af7a6e-c1c3-41a2-ae6f-e5aa79018207" />
-<img width="1149" height="925" alt="file" src="https://github.com/user-attachments/assets/93059cab-cc0e-4529-a0f7-e9593d2a77e4" />
-<img width="1149" height="935" alt="large-file-upload" src="https://github.com/user-attachments/assets/2c427d4c-f925-4ba5-ae47-c0e3dd85bdb1" />
+<img width="1084" height="794" alt="login" src="https://github.com/user-attachments/assets/a5243e15-8b1b-4a0d-9a02-5994795eaef1" />
+<img width="1084" height="794" alt="home" src="https://github.com/user-attachments/assets/f357ee5f-a5fa-408b-b9c8-e5845b64d88d" />
 
 
 
