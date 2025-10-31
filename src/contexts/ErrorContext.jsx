@@ -14,7 +14,7 @@ export const ErrorProvider = ({ children }) => {
   const [errorKey, setErrorKey] = useState(0);
 
   const showError = useCallback((message) => {
-    setError(message);z
+    setError(message);
     setErrorKey(prev => prev + 1);
   }, []);
 

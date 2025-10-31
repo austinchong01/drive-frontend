@@ -41,7 +41,7 @@ const ErrorToast = () => {
         display: "flex",
         animation: isExiting
           ? "errorSlideDown 0.1s ease-out"
-          : "errorSlideUp 0.1s ease-out", // ← Toggle animation
+          : "errorSlideUp 0.1s ease-out",
       }}
     >
       <span style={{ flex: 1, fontSize: "15px" }}>⚠️ {error}</span>

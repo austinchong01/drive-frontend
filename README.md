@@ -52,6 +52,7 @@ Features
 - Animations and transitions (hover, drag, drop, etc... )
 - Empty home page
 - No search results page
+- Scroll functionality
 
 ### Additional Features
 - Search functionality across files and folders
