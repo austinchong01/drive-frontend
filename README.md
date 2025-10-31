@@ -11,8 +11,31 @@ organize, and manage files and folders with secure authentication.
 Features
 --------
 
-- Be awesome
-- Make things faster
+### User Authentication
+- User registration and login
+- JWT-based authentication
+- Protected routes and secure sessions
+- Automatic token management
+
+### File Management
+- Upload multiple file types (images, videos, PDFs)
+- File preview functionality
+- Download files
+- Rename files with custom display names
+- Delete files with confirmation
+
+### Folder Organization
+- Create folders for file organization
+- Rename folders
+- Delete empty folders
+- Navigate through folder contents
+- Upload files directly to specific folders
+
+### User Interface
+- Clean, responsive design with Tailwind CSS
+- Real-time feedback and status messages
+- Mobile-friendly interface
+- Intuitive file and folder management
 
 Installation
 ------------
@@ -24,7 +47,7 @@ Install $project by running:
 Support
 -------
 
-Let us know if you have issues.
+Let me know if you have issues.
 Contact me at: austin.inhyuk.chong@gmail.com
 
 License
