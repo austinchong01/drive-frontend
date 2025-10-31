@@ -1,4 +1,15 @@
-// src/components/home/NewFileModal.jsx
+// src/contexts/modals/NewFileModal.jsx
+
+/**
+ * New File Upload Modal
+ * Modal dialog for uploading files to the current folder with automatic filename extraction.
+ * Validates that the name is unique.
+ * 
+ * @param {boolean} isOpen - Controls modal visibility
+ * @param {Function} onClose - Callback to close the modal
+ * @param {Function} onSuccess - Callback with (newFile) on successful upload
+ */
+
 import { useState, useEffect } from "react";
 import { api } from "../../services/file";
 import { useMessage } from "../MessageContext";
@@ -20,6 +31,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
   }, [isOpen]);
 
   const handleClose = () => {
+    // Fade-out animation
     setIsVisible(false);
     setTimeout(() => {
       setSelectedFileName("");
@@ -46,6 +58,7 @@ const NewFileModal = ({ isOpen, onClose, onSuccess }) => {
     const result = await api.createFile(formData, folderId);
 
     if (result.success) {
+      // Fade-out animation
       setIsVisible(false);
       setTimeout(() => {
         setSelectedFileName("");

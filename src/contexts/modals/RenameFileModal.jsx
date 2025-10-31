@@ -1,4 +1,15 @@
-// src/components/modals/RenameFileModal.jsx
+// src/contexts/modals/RenameFileModal.jsx
+
+/**
+ * Rename File Modal
+ * Modal dialog for renaming files.
+ * Validates that the new name is unique.
+ * 
+ * @param {Function} onClose - Callback to close the modal
+ * @param {Function} onSuccess - Callback with (fileId, newName) on successful rename
+ * @param {Object} file - File object containing id and displayName
+ */
+
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../../services/file";
@@ -17,6 +28,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
   }, []);
 
   const handleClose = () => {
+    // Fade-out animation
     setIsVisible(false);
     setTimeout(() => {
       onClose();
@@ -26,6 +38,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Skip API if name unchanged
     if (file.displayName === fileName) {
       handleClose();
       return;
@@ -36,6 +49,7 @@ const RenameFileModal = ({ onClose, onSuccess, file }) => {
     const result = await api.renameFile(file.id, fileName);
 
     if (result.success) {
+      // Fade-out animation
       setIsVisible(false);
       setTimeout(() => {
         onSuccess(file.id, result.data.displayName);

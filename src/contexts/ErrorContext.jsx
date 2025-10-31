@@ -1,3 +1,15 @@
+// src/contexts/ErrorContext.jsx
+
+/**
+ * Error Context
+ * Provides global error notification system with auto-dismiss toast functionality.
+ * Errors are displayed for 3 seconds before auto-clearing.
+ * 
+ * @example
+ * const { showError } = useError();
+ * showError('Failed to upload file');
+ */
+
 import { createContext, useContext, useState, useCallback } from 'react';
 
 const ErrorContext = createContext();
@@ -11,7 +23,7 @@ export const useError = () => {
 
 export const ErrorProvider = ({ children }) => {
   const [error, setError] = useState(null);
-  const [errorKey, setErrorKey] = useState(0);
+  const [errorKey, setErrorKey] = useState(0); // Key increments to re-render
 
   const showError = useCallback((message) => {
     setError(message);

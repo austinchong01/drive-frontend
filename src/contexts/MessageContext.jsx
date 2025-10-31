@@ -1,3 +1,15 @@
+// src/contexts/MessageContext.jsx
+
+/**
+ * Message Context
+ * Provides global success/info notification system with auto-dismiss toast functionality.
+ * Messages are displayed for 3 seconds before auto-clearing.
+ * 
+ * @example
+ * const { showMessage } = useMessage();
+ * showMessage('File uploaded successfully');
+ */
+
 import { createContext, useContext, useState, useCallback } from 'react';
 
 const MessageContext = createContext();
@@ -11,7 +23,7 @@ export const useMessage = () => {
 
 export const MessageProvider = ({ children }) => {
   const [message, setMessage] = useState(null);
-  const [messageKey, setMessageKey] = useState(0);
+  const [messageKey, setMessageKey] = useState(0); // Key increments to re-render
 
   const showMessage = useCallback((message) => {
     setMessage(message);

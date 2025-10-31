@@ -1,4 +1,15 @@
-// src/components/modals/RenameFolderModal.jsx
+// src/contexts/modals/RenameFolderModal.jsx
+
+/**
+ * Rename Folder Modal
+ * Modal dialog for renaming folders.
+ * Validates that the new name is unique.
+ * 
+ * @param {Function} onClose - Callback to close the modal
+ * @param {Function} onSuccess - Callback with (folderId, newName) on successful rename
+ * @param {Object} folder - Folder object containing id and name
+ */
+
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { api } from "../../services/folder";
@@ -17,6 +28,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   }, []);
 
   const handleClose = () => {
+    // Fade-out animation
     setIsVisible(false);
     setTimeout(() => {
       onClose();
@@ -26,6 +38,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Skip API if name unchanged
     if (folder.name === folderName) {
       handleClose();
       return;
@@ -36,6 +49,7 @@ const RenameFolderModal = ({ onClose, onSuccess, folder }) => {
     const result = await api.renameFolder(folder.id, folderName);
 
     if (result.success) {
+      // Fade-out animation
       setIsVisible(false);
       setTimeout(() => {
         onSuccess(folder.id, result.data.name);

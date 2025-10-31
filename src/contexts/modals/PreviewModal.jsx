@@ -1,3 +1,14 @@
+// src/contexts/modals/PreviewModal.jsx
+
+/**
+ * File Preview Modal
+ * Full-screen modal for previewing files (images, videos, audio, PDFs).
+ * Includes download functionality and renders appropriate preview based on file type.
+ * 
+ * @param {Function} onClose - Callback to close the modal
+ * @param {Object} file - File object containing cloudinaryUrl, mimetype, and displayName
+ */
+
 import { createPortal } from "react-dom";
 import { useState, useEffect } from "react";
 import { useMessage } from "../MessageContext";
@@ -12,12 +23,18 @@ const PreviewModal = ({ onClose, file }) => {
   }, []);
 
   const handleClose = () => {
+    // fade-out animation
     setIsVisible(false);
     setTimeout(() => {
       onClose();
     }, 200);
   };
 
+  /**
+   * Categorizes file by mimetype for rendering appropriate preview component
+   * @param {string} mimetype - File MIME type
+   * @returns {string} Category: 'image', 'video', 'audio', 'document', or 'other'
+   */
   const getFileCategory = (mimetype) => {
     if (mimetype.startsWith("image/")) return "image";
     if (mimetype.startsWith("video/")) return "video";
@@ -28,6 +45,7 @@ const PreviewModal = ({ onClose, file }) => {
 
   const handleDownloadFile = (e) => {
     e.stopPropagation();
+    // Inject Cloudinary attachment flag to force download
     const downloadUrl = file.cloudinaryUrl.replace(
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`

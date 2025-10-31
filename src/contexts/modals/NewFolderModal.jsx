@@ -1,4 +1,15 @@
-// src/components/home/NewFolderModal.jsx
+// src/contexts/modals/NewFolderModal.jsx
+
+/**
+ * New Folder Creation Modal
+ * Modal dialog for creating a new folder within the current directory.
+ * Validates that the name is unique.
+ * 
+ * @param {boolean} isOpen - Controls modal visibility
+ * @param {Function} onClose - Callback to close the modal
+ * @param {Function} onSuccess - Callback with (newFolder) on successful creation
+ */
+
 import { useState, useEffect } from "react";
 import { api } from "../../services/folder";
 import { useMessage } from "../MessageContext";
@@ -20,6 +31,7 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
   }, [isOpen]);
 
   const handleClose = () => {
+    // Fade-out animation
     setIsVisible(false);
     setTimeout(() => {
       setFolderName("");
@@ -35,6 +47,7 @@ const NewFolderModal = ({ isOpen, onClose, onSuccess }) => {
     const result = await api.createFolder(folderName, folderId);
 
     if (result.success) {
+      // Fade-out animation
       setIsVisible(false);
       setTimeout(() => {
         setFolderName("");

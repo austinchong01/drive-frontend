@@ -1,4 +1,17 @@
 // src/contexts/ModalContext.jsx
+
+/**
+ * Modal Context
+ * Centralized modal management system for file/folder rename and preview modals.
+ * Provides hooks to open/close modals from anywhere in the component tree.
+ * 
+ * @example
+ * const { openFileRenameModal } = useModal();
+ * openFileRenameModal(file, (fileId, newName) => {
+ *   // handle successful rename
+ * });
+ */
+
 import {
   createContext,
   useContext,
@@ -21,6 +34,7 @@ export const useModal = () => {
 };
 
 export const ModalProvider = ({ children }) => {
+  // Modal state: stores { file, onSuccess } when open, null when closed
   const [fileModalState, setFileModalState] = useState(null);
   const [folderModalState, setFolderModalState] = useState(null);
   const [previewModalState, setPreviewModalState] = useState(null);
@@ -49,6 +63,7 @@ export const ModalProvider = ({ children }) => {
     setPreviewModalState(null);
   }, []);
 
+  // Memoize context value to prevent unnecessary re-renders
   const value = useMemo(
     () => ({
       openFileRenameModal,
