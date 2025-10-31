@@ -37,7 +37,6 @@ export const api = {
 
       return { success: true, data };
     } catch (error) {
-      console.error("Registration failed:", error);
       return { success: false, error: error.message };
     }
   },
@@ -70,7 +69,6 @@ export const api = {
 
       return { success: true, data };
     } catch (error) {
-      console.error("Login failed:", error);
       return { success: false, error: error.message };
     }
   },
@@ -96,7 +94,6 @@ export const api = {
 
       return { success: true };
     } catch (error) {
-      console.error(error.message);
       return { success: false, error: error.message };
     }
   },
@@ -122,7 +119,6 @@ export const api = {
 
       return { success: true, data };
     } catch (error) {
-      console.error("Failed to get user profile:", error.message);
       return { success: false, error: error.message };
     }
   },

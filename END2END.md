@@ -49,7 +49,6 @@ Home
         - Successful upload
             - update storage and UI
     - Preview File
-        - 
     - Download File
         - filename is displayName
     - Rename File

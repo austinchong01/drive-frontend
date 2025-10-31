@@ -52,7 +52,6 @@ export const api = {
       const data = await response.json();
       return { success: true, data };
     } catch (error) {
-      console.error("API connection test failed:", error);
       return { success: false, error: error.message };
     }
   },
