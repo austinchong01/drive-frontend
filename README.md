@@ -180,7 +180,7 @@ Future Add-ons
 | Upload Folders | Status 500 page |
 | File replace on existing name | Download Bar |
 | End to End Testing | Right Click options |
-| Search Query URL | Empty states improvements |
+| Search Query URL | |
 | Multiple File/Folder Select | |
 | Trash Folder | |
 
