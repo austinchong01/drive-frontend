@@ -56,6 +56,8 @@ Features
 - Integrated Testing (backend)
 - Health test check endpoint "/health"
 - Guest Account Login
+- Re-render(React) and API Optimization
+- Database Indexes
 
 ### User Interface
 - Animations and transitions (hover, drag, drop, etc... )
