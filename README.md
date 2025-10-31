@@ -106,10 +106,10 @@ Features
 <td width="50%" valign="top">
 
 ### Other
+**- Integrated Testing (backend)**
 - Search functionality across files and folders
 - Storage quota tracking (10 MB limit)
 - Real-time status messages and error handling
-- Integrated Testing (backend)
 - Guest Account Login
 - Re-render(React) and API Optimization
 
@@ -177,15 +177,12 @@ Future Add-ons
 | Filtering | Multiple Layouts (Tablet, Mobile) |
 | Sharing Files/Folders | Light/Dark Theme |
 | Pagination (Limiting Files/Folders per page) | Loading Screen |
-| Change username | Status 500 page |
+| Upload Folders | Status 500 page |
 | File replace on existing name | Download Bar |
 | End to End Testing | Right Click options |
 | Search Query URL | Empty states improvements |
 | Multiple File/Folder Select | |
-| Test Cleanup (confirm with cloudinary) | |
 | Trash Folder | |
-| More Storage | |
-| Upload Folders | |
 
 Contact
 -------
