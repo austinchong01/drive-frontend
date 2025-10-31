@@ -51,6 +51,7 @@ Features
 - Storage quota tracking (10 MB limit)
 - Real-time status messages and error handling
 - API Rate Limiter (200 Requests / 5 minutes)
+- Integrated Testing (backend)
 
 ### User Interface
 - Animations and transitions
