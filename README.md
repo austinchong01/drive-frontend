@@ -29,6 +29,11 @@ This project demonstrates full-stack development skills including:
 
 Features
 --------
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
 ### Authentication
 - User registration and login
 - JWT-based authentication
@@ -51,6 +56,9 @@ Features
 - Rename and delete folders
 - Drag-and-drop folders organization
 
+</td>
+<td width="50%" valign="top">
+
 ### User Interface
 - Animations and transitions (hover, drag, drop, etc... )
 - Empty home page
@@ -68,6 +76,10 @@ Features
 - Health test check endpoint "/health"
 - Guest Account Login
 - Re-render(React) and API Optimization
+
+</td>
+</tr>
+</table>
 
 
 Technology Stack
