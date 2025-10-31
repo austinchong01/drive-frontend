@@ -31,6 +31,7 @@ Features
 - JWT-based authentication
 - Protected routes and secure sessions
 - Automatic token management
+- Login Rate Limiter (7 Attempts / 2 Minutes)
 
 ### File Management
 - Upload multiple file types (5 MB limit per upload)
@@ -49,7 +50,12 @@ Features
 - Search functionality across files and folders
 - Storage quota tracking (10 MB limit)
 - Real-time status messages and error handling
-- Smooth animations and transitions
+- API Rate Limiter (200 Requests / 5 minutes)
+
+### User Interface
+- Animations and transitions
+- Empty home page
+- No search results page
 
 
 Technology Stack
