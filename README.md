@@ -60,12 +60,16 @@ Installation
 ------------
 ```bash
 # Clone the repository
-git clone git@github.com:austinchong01/drive_frontend.git
+git clone [your-frontend-repo-url]
+cd [project-name]
 
 # Install dependencies
 npm install
 
-# Set up environment variables (see .env.example)
+# Create .env file in root directory
+# Add the following variables:
+VITE_BACKEND_URL=http://localhost:3000
+VITE_APP_ENV=development
 
 # Run development server
 npm run dev
