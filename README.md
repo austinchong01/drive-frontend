@@ -9,7 +9,7 @@ allowing users to upload, organize, and manage files and folders with secure aut
 
 Demo
 --------
-<img width="1147" height="935" alt="fileUpload" src="https://github.com/user-attachments/assets/599797c5-8be6-435f-b4d0-1912c82fbaf2" />
+<img width="1149" height="925" alt="file" src="https://github.com/user-attachments/assets/bf492247-9e47-41de-9dd1-586f47af2ade" />
 
 
 Purpose
