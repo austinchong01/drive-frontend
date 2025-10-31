@@ -9,10 +9,10 @@ allowing users to upload, organize, and manage files and folders with secure aut
 
 Demo
 --------
-<img width="575" height="463" alt="main" src="https://github.com/user-attachments/assets/b066c759-7faf-450a-988b-4ab1de2c9903" />
-<img width="575" height="463" alt="file" src="https://github.com/user-attachments/assets/bf492247-9e47-41de-9dd1-586f47af2ade" />
-<img width="575" height="463" alt="large-file-upload" src="https://github.com/user-attachments/assets/83fe0ad5-b89f-4b40-8752-be0351994cf2" />
-<img width="575" height="463" alt="Screenshot from 2025-10-30 22-29-29" src="https://github.com/user-attachments/assets/fff29f1b-5475-48b7-88ae-81f64688dff1" />
+<img width="1144" height="934" alt="main" src="https://github.com/user-attachments/assets/f5af7a6e-c1c3-41a2-ae6f-e5aa79018207" />
+<img width="1149" height="925" alt="file" src="https://github.com/user-attachments/assets/93059cab-cc0e-4529-a0f7-e9593d2a77e4" />
+<img width="1149" height="935" alt="large-file-upload" src="https://github.com/user-attachments/assets/2c427d4c-f925-4ba5-ae47-c0e3dd85bdb1" />
+
 
 
 Purpose
