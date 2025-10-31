@@ -81,10 +81,10 @@ Technology Stack
 | ![bcrypt](https://img.shields.io/badge/bcrypt-338033?style=flat&logo=letsencrypt&logoColor=white) bcryptjs (password hashing) | |
 | ![Multer](https://img.shields.io/badge/Multer-FF6C37?style=flat&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJMMiAyMmgyMEwxMiAyeiIvPjwvc3ZnPg==) Multer (file upload middleware) | |
 
-**Deployment**
-- Frontend & Backend: Render
-- Database: Aiven PostgreSQL
-- File Storage: Cloudinary
+Deployment
+* ![Render](https://img.shields.io/badge/Render-46E3B7?style=flat&logo=render&logoColor=white) Frontend & Backend: Render
+* ![Aiven](https://img.shields.io/badge/Aiven-FF3E00?style=flat&logo=aiven&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white) Database: Aiven PostgreSQL
+* ![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=flat&logo=cloudinary&logoColor=white) File Storage: Cloudinary
 
 Installation
 ------------
