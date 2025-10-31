@@ -1,29 +1,20 @@
-// src/services/api.js
+// src/services/user.js
+
+/**
+ * User Service
+ * Handles all user-related API calls including authentication and profile management
+ */
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const api = {
-  async testConnection() {
-    try {
-      const response = await fetch(`${API_BASE_URL}/health`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return { success: true, data };
-    } catch (error) {
-      console.error("API connection test failed:", error);
-      return { success: false, error: error.message };
-    }
-  },
-
+  /**
+   * Registers a new user account
+   * @param {string} username - User's username
+   * @param {string} email - User's email address
+   * @param {string} password - User's password
+   * @returns {Promise<{success: boolean, data?: Object, error?: string}>} Registration result w/ JWT token
+   */
   async register(username, email, password) {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
@@ -41,6 +32,7 @@ export const api = {
           data.message || `HTTP error! status: ${response.status}`
         );
 
+      // Store JWT token in localStorage
       localStorage.setItem("token", data.token);
 
       return { success: true, data };
@@ -50,6 +42,12 @@ export const api = {
     }
   },
 
+  /**
+   * Authenticates a user with email and password
+   * @param {string} email - User's email address
+   * @param {string} password - User's password
+   * @returns {Promise<{success: boolean, data?: Object, error?: string}>} Login result w/ JWT token
+   */
   async login(email, password) {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -67,6 +65,7 @@ export const api = {
           data.message || `HTTP error! status: ${response.status}`
         );
 
+      // Store JWT token in localStorage
       localStorage.setItem("token", data.token);
 
       return { success: true, data };
@@ -76,6 +75,10 @@ export const api = {
     }
   },
 
+  /**
+   * Verifies JWT token
+   * @returns {Promise<{success: boolean, error?: string}>} Verification result
+   */
   async verifyJWT() {
     try {
       const token = localStorage.getItem("token");
@@ -98,6 +101,10 @@ export const api = {
     }
   },
 
+  /**
+   * Fetches the current user's profile information
+   * @returns {Promise<{success: boolean, data?: Object, error?: string}>} User's profile data
+   */
   async getUserProfile() {
     try {
       const token = localStorage.getItem("token");

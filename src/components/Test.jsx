@@ -1,6 +1,6 @@
 // src/components/Test.jsx
 import { useState, useEffect } from "react";
-import { api } from "../services/user";
+import { api } from "../services/api";
 
 const Test = () => {
   const [message, setMessage] = useState("Testing connection...");

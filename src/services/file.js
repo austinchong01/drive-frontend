@@ -1,6 +1,19 @@
+// src/services/file.js
+
+/**
+ * File Service
+ * Handles all file-related API operations: create, rename, move, and delete
+ */
+
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const api = {
+  /**
+   * Upload a file to a folder
+   * @param {FormData} formData - Form data containing the file and metadata
+   * @param {string} folderId - ID of parent folder (empty string for root)
+   * @returns {Promise<{success: boolean, data?: {file: Object}, error?: string}>} Upload result with created file data
+   */
   async createFile(formData, folderId) {
     try {
       const token = localStorage.getItem("token");
@@ -21,6 +34,12 @@ export const api = {
     }
   },
 
+  /**
+   * Rename a file
+   * @param {string} fileId - ID of file to rename
+   * @param {string} name - New file name
+   * @returns {Promise<{success: boolean, data?: {displayName: string}, error?: string}>} Rename result with updated file name
+   */
   async renameFile(fileId, name) {
     try {
       const endpoint = `${API_BASE_URL}/files/${fileId}/updateFileName`;
@@ -44,6 +63,12 @@ export const api = {
     }
   },
 
+  /**
+   * Move a file to a different folder
+   * @param {string} fileId - ID of file to move
+   * @param {string} newParentId - ID of destination folder
+   * @returns {Promise<{success: boolean, data?: Object, error?: string}>} Move result
+   */
   async updateFileLoc(fileId, newParentId) {
     try {
       const endpoint = `${API_BASE_URL}/files/${fileId}/updateFileLocation`;
@@ -67,6 +92,11 @@ export const api = {
     }
   },
 
+  /**
+   * Delete a file
+   * @param {string} fileId - ID of file to delete
+   * @returns {Promise<{success: boolean, error?: string}>} Delete result
+   */
   async deleteFile(fileId) {
     try {
       const endpoint = `${API_BASE_URL}/files/${fileId}`;
