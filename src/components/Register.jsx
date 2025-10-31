@@ -1,4 +1,12 @@
 // src/components/Register.jsx
+
+/**
+ * Register
+ * Handles new user account creation with username, email, and password.
+ * Automatically redirects authenticated users to home page.
+ * On successful registration, creates JWT token and navigates to home.
+ */
+
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { api } from "../services/user";
@@ -11,7 +19,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // redirect to home if valid token
+  // Redirect to home if user is already authenticated
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
@@ -109,7 +117,7 @@ const Register = () => {
               type="submit"
             >
               Register
-            </button>{" "}
+            </button>
           </div>
         </form>
         {error && (

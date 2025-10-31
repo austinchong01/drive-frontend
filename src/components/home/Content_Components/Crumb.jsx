@@ -1,4 +1,13 @@
-// src/components/home/Content_Components/Folder.jsx
+// src/components/home/Content_Components/Crumb.jsx
+
+/**
+ * Breadcrumb Component
+ * Clickable breadcrumb item that acts as both navigation link and drop target.
+ * Highlights when items are dragged over it for visual feedback.
+ * 
+ * @param {Object} folder - Folder object containing id and name
+ */
+
 import { useNavigate } from "react-router-dom";
 import { useDroppable } from "@dnd-kit/core";
 

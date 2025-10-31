@@ -1,4 +1,11 @@
 // src/components/Test.jsx
+
+/**
+ * Backend Connection Test Component
+ * Diagnostic page for verifying backend API connectivity and health status.
+ * Displays connection status, timestamp, and environment information.
+ */
+
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 

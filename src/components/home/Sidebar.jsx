@@ -1,4 +1,16 @@
 // src/components/home/Sidebar.jsx
+
+/**
+ * Sidebar Navigation Component
+ * Left sidebar containing navigation links, file/folder creation buttons, and storage meter.
+ * Shows current storage usage with visual progress bar (10 MB limit).
+ * Only "Home" button is functional; other navigation items are placeholders.
+ * 
+ * @param {Function} onFileCreated - Callback with (newFile) when file is uploaded
+ * @param {Function} onFolderCreated - Callback with (newFolder) when folder is created
+ * @param {number} storageTrigger - Counter that triggers storage refresh when incremented
+ */
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/user";
@@ -23,18 +35,19 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
     }
   };
 
+  // Refresh storage display when files/folders are created or deleted
   useEffect(() => {
     fetchUserProfile();
   }, [storageTrigger]);
 
   const handleHomeClick = () => {
     navigate("/home");
-  }
+  };
 
   const handleFileSuccess = (newFile) => {
     setIsFileModalOpen(false);
     onFileCreated(newFile);
-    fetchUserProfile();
+    fetchUserProfile(); // Update storage after upload
   };
 
   const handleFolderSuccess = (newFolder) => {
@@ -60,6 +73,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
           </button>
         </div>
         <div className="flex flex-col gap-5">
+          {/* Primary navigation - only Home is functional */}
           <div className="flex flex-col">
             <button onClick={handleHomeClick} className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
               <img src="/images/home.svg" className="w-7" alt="Home" />
@@ -83,6 +97,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
             </button>
           </div>
 
+          {/* Secondary navigation - placeholder items */}
           <div className="flex flex-col">
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/shared.svg" className="w-7" alt="Shared" />
@@ -102,6 +117,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
             </button>
           </div>
 
+          {/* Storage section with progress bar */}
           <div className="flex flex-col">
             <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/spam.svg" className="w-7" alt="Spam" />

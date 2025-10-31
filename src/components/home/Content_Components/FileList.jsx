@@ -1,4 +1,22 @@
 // src/components/home/Content_Components/FileList.jsx
+
+/**
+ * File List Component
+ * Manages and displays list of files.
+ * Handles file state updates from creation, renaming, drag operations, and deletion.
+ * Reports file count to parent for empty state detection.
+ * 
+ * @param {Array} initialFiles - Initial list of files from API
+ * @param {Object} createdFile - Newly created file to add to list
+ * @param {Function} onFileDelete - Callback with (fileId) when file is deleted
+ * @param {string} openDropdownId - ID of file with open dropdown menu
+ * @param {Function} onToggleDropdown - Callback to toggle dropdown visibility
+ * @param {string} highlightId - ID of currently selected/highlighted file
+ * @param {Function} onToggleHighlight - Callback to toggle file selection
+ * @param {string} draggedFileId - ID of file being dragged (to remove from display)
+ * @param {Function} onCountChange - Callback with current file count
+ */
+
 import { useState, useEffect } from "react";
 import { useModal } from "../../../contexts/ModalContext";
 import File from "./File";
@@ -21,10 +39,12 @@ const FileList = ({
     setFiles(initialFiles);
   }, [initialFiles]);
 
+  // Add newly created file to top of list (sorted by latest)
   useEffect(() => {
     if (createdFile) setFiles((prev) => [createdFile, ...prev]);
   }, [createdFile]);
 
+  // Remove file from display after successful drag operation
   useEffect(() => {
     if (draggedFileId) {
       setFiles((prev) =>
@@ -33,9 +53,10 @@ const FileList = ({
     }
   }, [draggedFileId]);
 
+  // Report file count to parent
   useEffect(() => {
     onCountChange(files.length);
-  }, [files.length]);
+  }, [files.length, onCountChange]);
 
   const handleFileRename = (fileId, newName) => {
     setFiles((prev) =>

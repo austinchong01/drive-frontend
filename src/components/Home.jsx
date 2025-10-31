@@ -1,4 +1,12 @@
 // src/components/Home.jsx
+
+/**
+ * Home Component - Main Application Container
+ * Manages layout, context providers, and coordinates between Navbar, Sidebar, and Content areas.
+ * Handles switching between folder browsing and search results.
+ * Redirects unauthenticated users to login page.
+ */
+
 import { useEffect, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MessageProvider } from "../contexts/MessageContext";
@@ -21,7 +29,7 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTrigger, setSearchTrigger] = useState(0);
 
-  // redirect to login if no valid token
+  // Redirect to login if user is not authenticated
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
@@ -30,6 +38,7 @@ const Home = () => {
     verifyUser();
   }, [navigate]);
 
+  // Clear created items and search when navigating to different folder
   useEffect(() => {
     setCreatedFolder(null);
     setCreatedFile(null);
@@ -46,7 +55,7 @@ const Home = () => {
       setSearchQuery(trimmedQuery);
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
 
   const handleSearchDelete = useCallback(() => {
     setStorageTrigger((prev) => prev + 1);

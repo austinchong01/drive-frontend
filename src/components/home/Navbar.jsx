@@ -1,4 +1,13 @@
 // src/components/home/Navbar.jsx
+
+/**
+ * Navigation Bar Component
+ * Top navigation bar containing logo, search functionality, and user controls.
+ * 
+ * @param {Function} onSearch - Callback with (query) when search is submitted
+ * @param {Function} onClearSearch - Callback when returning to home/clearing search
+ */
+
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { api } from "../../services/user";

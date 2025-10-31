@@ -1,4 +1,20 @@
 // src/components/home/Content_Components/File.jsx
+
+/**
+ * File Component
+ * Displays a single file with drag, download, rename, preview, and delete capabilities.
+ * Shows file type icon, name, last updated date, and size.
+ * Double-click to open preview modal.
+ * 
+ * @param {Object} file - File object with id, displayName, mimetype, size, cloudinaryUrl, updatedAt
+ * @param {Function} onDelete - Callback with (fileId) when file is deleted
+ * @param {Function} onRenameClick - Callback to open rename modal
+ * @param {string} openDropdownId - ID of file with open dropdown menu
+ * @param {Function} onToggleDropdown - Callback to toggle dropdown visibility
+ * @param {string} highlightId - ID of currently selected file
+ * @param {Function} onToggleHighlight - Callback to toggle selection
+ */
+
 import { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { api } from "../../../services/file";
@@ -22,6 +38,9 @@ const File = ({
 
   const isHighlighted = highlightId === file.id;
 
+  /**
+   * Returns appropriate icon based on file MIME type
+   */
   const getFileImage = () => {
     if (file.mimetype.startsWith("image/"))
       return <img src="/images/image.svg" alt="image" className="w-[30px]" />;
@@ -47,6 +66,7 @@ const File = ({
   const handleDownloadFile = (e) => {
     e.stopPropagation();
     onToggleDropdown(null);
+    // Modify Cloudinary URL to force download with original filename
     const downloadUrl = file.cloudinaryUrl.replace(
       "/upload/",
       `/upload/fl_attachment:${encodeURIComponent(file.displayName)}/`
@@ -140,7 +160,7 @@ const File = ({
                 >
                   <img
                     src="/images/download.svg"
-                    alt="rename"
+                    alt="download"
                     className="w-4 shrink-0"
                   />
                   <span>Download</span>

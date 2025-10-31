@@ -1,4 +1,20 @@
 // src/components/home/Content_Components/Folder.jsx
+
+/**
+ * Folder Component
+ * Displays a single folder with drag-and-drop, rename, and delete capabilities.
+ * Acts as both draggable item and drop target for nested organization.
+ * Double-click to navigate into folder.
+ * 
+ * @param {Object} folder - Folder object with id and name
+ * @param {Function} onDelete - Callback with (folderId) when folder is deleted
+ * @param {Function} onRenameClick - Callback to open rename modal
+ * @param {string} openDropdownId - ID of folder with open dropdown menu
+ * @param {Function} onToggleDropdown - Callback to toggle dropdown visibility
+ * @param {string} highlightId - ID of currently selected folder
+ * @param {Function} onToggleHighlight - Callback to toggle selection
+ */
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDraggable, useDroppable } from "@dnd-kit/core";

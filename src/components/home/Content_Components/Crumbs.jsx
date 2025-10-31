@@ -1,4 +1,13 @@
 // src/components/home/Content_Components/Crumbs.jsx
+
+/**
+ * Breadcrumb Navigation Component
+ * Displays hierarchical path from root to current folder with clickable navigation.
+ * Each breadcrumb is a droppable target for drag-and-drop operations.
+ * 
+ * @param {string} folderId - ID of the current folder
+ */
+
 import { useState, useEffect } from "react";
 import { api } from "../../../services/folder";
 import { useError } from "../../../contexts/ErrorContext";
@@ -31,8 +40,8 @@ const Crumbs = ({ folderId }) => {
       ) : (
         <div className="text-3xl flex gap-2 items-center sticky top-0 w-full py-5 bg-white z-10">
           {breadcrumbs.map((crumb, index) => {
+            // Current folder is not clickable
             if (index === breadcrumbs.length - 1)
-              // if curr folder
               return (
                 <div
                   key={crumb.id}

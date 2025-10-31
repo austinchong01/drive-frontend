@@ -1,4 +1,16 @@
 // src/components/home/Content.jsx
+
+/**
+ * Main Content Area Component
+ * Displays folder contents with drag-and-drop functionality for organizing files and folders.
+ * Shows breadcrumb navigation for current location and empty state when no content exists.
+ * Handles item selection, dropdown menus, and drag-and-drop operations between folders.
+ * 
+ * @param {Object} createdFolder - Newly created folder to display immediately
+ * @param {Object} createdFile - Newly created file to display immediately
+ * @param {Function} itemDeleted - Callback when item is deleted (triggers storage update)
+ */
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -53,6 +65,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     fetchContents();
   }, [folderId]);
 
+  // Close dropdowns and clear selection when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
       setOpenDropdownId(null);
@@ -72,14 +85,12 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
 
     const { active, over } = event;
 
-    // If not dropped over anything, do nothing
     if (!over) return;
 
     setDragSuccess(true);
 
     const draggedType = active.data.current.type;
     const draggedItem = active.data.current.item;
-
     const targetItem = over.data.current.item;
 
     let result;
@@ -105,6 +116,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     setActiveItem(null);
   };
 
+  // Minimum 10px drag distance
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -113,6 +125,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
     })
   );
 
+  // Custom modifier to follow cursor
   const cursorOffsetModifier = ({
     transform,
     activatorEvent,
@@ -145,7 +158,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         {loading ? (
           <p className="text-center mt-50">Loading contents...</p>
         ) : (
-          <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-205">
+          <div className="flex flex-col px-5 pb-5 overflow-y-auto overflow-x-hidden h-full min-w-205">
             {folderId === undefined && (
               <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
                 Welcome to Drive

@@ -1,4 +1,13 @@
 // src/components/Login.jsx
+
+/**
+ * Login
+ * Handles user authentication with email and password.
+ * Includes guest account option for quick demo access.
+ * Automatically redirects authenticated users to home page.
+ * On successful login, creates JWT token and navigates to home.
+ */
+
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { api } from "../services/user";
@@ -10,7 +19,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // redirect to home if valid token
+  // Redirect to home if user is already authenticated
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
@@ -34,6 +43,7 @@ const Login = () => {
     setLoading(false);
   };
 
+  // Guest account login
   const handleGuest = async (e) => {
     e.preventDefault();
     setLoading(true);
