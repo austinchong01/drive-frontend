@@ -1,8 +1,9 @@
 Mock Google Drive
 ========
 
-A full-stack Mock Google Drive (file management) application that allows users to upload,
-organize, and manage files and folders with secure authentication.
+A full-stack file management application that replicates Google Drive's core functionality, 
+allowing users to upload, organize, and manage files and folders with secure authentication.
+
 
 #### Backend Repository: https://github.com/austinchong01/drive-backend
 
