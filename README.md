@@ -37,53 +37,49 @@ Features
 - Automatic token management
 
 ### Files
-- Upload multiple file types (images, videos, PDFs, etc.)
-- Preview
-- Download with "filename"
-- Unique filename within a folder
-- Rename
-- Delete
+- Upload multiple file types (5 MB limit per upload)
+- Preview files directly in browser
+- Download with preserved filenames
+- Rename and delete files
+- Drag-and-drop file organization
 
 ### Folders
-- Create folders for file organization
-- Rename folders
-- Delete empty folders
-- Navigate through folder contents
-- Upload files directly to specific folders
+- Create nested folder structures
+- Navigate through folder hierarchy with breadcrumb navigation
+- Rename and delete folders
+- Drag-and-drop folders organization
 
 ## Other
 - Search
 - Storage
 
-### User Interface
-- Status/Error messages
-- Drag and Drop
-- Animated Transitions
-- Loading transitions
+### Additional Features
+- Search functionality across files and folders
+- Storage quota tracking (10 MB limit)
+- Real-time status messages and error handling
+- Smooth animations and transitions
 
 
 Technology Stack
 --------
-### Frontend
-- **React 19** - UI library
-- **Vite** - Build tool and development server
-- **Tailwind CSS** - Utility-first CSS framework
+**Frontend**
+- React 19 with Vite
+- Tailwind CSS
+- React Router DOM
+- @dnd-kit (drag-and-drop)
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web application framework
-- **Prisma** - Database ORM
-- **PostgreSQL** - Database
-- **Cloudinary** - Media storage
-- **JWT** - Authentication tokens
-- **bcryptjs** - Password hashing
-- **Multer** - File upload middleware
+**Backend**
+- Node.js & Express.js
+- Prisma ORM with PostgreSQL
+- Cloudinary (media storage)
+- JWT authentication
+- bcryptjs (password hashing)
+- Multer (file upload middleware)
 
-### Deployment
-- **Frontend**: Render
-- **Backend**: Render
-- **Database**: Aiven PostgreSQL
-- **File Storage**: Cloudinary
+**Deployment**
+- Frontend & Backend: Render
+- Database: Aiven PostgreSQL
+- File Storage: Cloudinary
 
 
 Installation
