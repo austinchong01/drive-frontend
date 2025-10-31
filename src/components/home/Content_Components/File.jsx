@@ -124,7 +124,7 @@ const File = ({
           <p className="flex-1 min-w-40 max-w-120">{(file.size / 1000000).toFixed(3)} MB</p>
           <div
             onPointerDown={(e) => e.stopPropagation()}
-            className="w-12 items-center relative"
+            className="w-12 flex-shrink-0 items-center relative"
           >
             <img
               src="/images/more.svg"

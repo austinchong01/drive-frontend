@@ -145,7 +145,7 @@ const Content = ({ createdFolder, createdFile, itemDeleted }) => {
         {loading ? (
           <p className="text-center mt-50">Loading contents...</p>
         ) : (
-          <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-175">
+          <div className="flex flex-col px-5 pb-5 overflow-auto h-full min-w-205">
             {folderId === undefined && (
               <h1 className="sticky top-0 w-full py-5 text-3xl bg-white z-10">
                 Welcome to Drive
