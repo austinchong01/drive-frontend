@@ -88,17 +88,25 @@ Technology Stack
 
 Installation
 ------------
-Install $project by running:
+```bash
+# Clone the repository
+git clone [your-repo-url]
 
-    install project
+# Install dependencies
+npm install
 
-Support
+# Set up environment variables (see .env.example)
+
+# Run development server
+npm run dev
+```
+
+Contact
 -------
 
-Let me know if you have issues.
-Contact me at: austin.inhyuk.chong@gmail.com
+For questions or feedback, reach out at: austin.inhyuk.chong@gmail.com
 
 License
 -------
 
-N/A
+© 2025 Austin Chong. All Rights Reserved.
