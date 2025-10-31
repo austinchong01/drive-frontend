@@ -53,18 +53,6 @@ Features
 <tr>
 <td width="50%" valign="top">
 
-### Authentication
-- User registration and login
-- JWT-based authentication
-- Protected routes and secure sessions
-- Logout (delete JWT token)
-- Automatic token management
-- Login Rate Limiter (7 Attempts / 2 Minutes)
-- Sanitation/Validation of credentials
-
-</td>
-<td width="50%" valign="top">
-
 ### File Management
 - Upload multiple file types (5 MB limit per upload)
 - Preview files directly in browser
@@ -73,9 +61,6 @@ Features
 - Drag-and-drop file organization
 
 </td>
-</tr>
-
-<tr>
 <td width="50%" valign="top">
 
 ### Folder Management
@@ -83,6 +68,21 @@ Features
 - Navigate through folder hierarchy with breadcrumb navigation
 - Rename and delete folders
 - Drag-and-drop folders organization
+
+</td>
+</tr>
+
+<tr>
+<td width="50%" valign="top">
+
+### Authentication
+- User registration and login
+- JWT-based authentication
+- Protected routes and secure sessions
+- Logout (delete JWT token)
+- Automatic token management
+- Login Rate Limiter (7 Attempts / 2 Minutes)
+- Sanitation/Validation of credentials
 
 </td>
 <td width="50%" valign="top">
@@ -99,20 +99,22 @@ Features
 <tr>
 <td width="50%" valign="top">
 
-### Additional Features
-- Search functionality across files and folders
-- Storage quota tracking (10 MB limit)
-- Real-time status messages and error handling
-  - Custom Error Handling
-  - Query Transactions
+### API
 - API Rate Limiter (200 Requests / 5 minutes)
-- Integrated Testing (backend)
 - Health test check endpoint "/health"
-- Guest Account Login
-- Re-render(React) and API Optimization
+- Custom Error Handling
+- Query Transactions
 
 </td>
 <td width="50%" valign="top">
+
+### Other
+- Search functionality across files and folders
+- Storage quota tracking (10 MB limit)
+- Real-time status messages and error handling
+- Integrated Testing (backend)
+- Guest Account Login
+- Re-render(React) and API Optimization
 
 </td>
 </tr>
