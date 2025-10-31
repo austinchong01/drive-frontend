@@ -73,24 +73,13 @@ Features
 Technology Stack
 --------
 | Frontend | Backend | Deployment |
-|----------|-------------|
-| React 19 with Vite |
-| Tailwind CSS |
-| React Router DOM |
-| @dnd-kit (drag-and-drop) |
-
-### Backend
-- Node.js & Express.js
-- Prisma ORM with PostgreSQL
-- Cloudinary (media storage)
-- JWT authentication
-- bcryptjs (password hashing)
-- Multer (file upload middleware)
-
-**Deployment**
-- Frontend & Backend: Render
-- Database: Aiven PostgreSQL
-- File Storage: Cloudinary
+|----------|---------|------------|
+| React 19 with Vite | Node.js & Express.js | Frontend & Backend: Render |
+| Tailwind CSS | Prisma ORM with PostgreSQL | Database: Aiven PostgreSQL |
+| React Router DOM | Cloudinary (media storage) | File Storage: Cloudinary |
+| @dnd-kit (drag-and-drop) | JWT authentication | |
+| | bcryptjs (password hashing) | |
+| | Multer (file upload middleware) | |
 
 
 Installation
