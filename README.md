@@ -30,6 +30,7 @@ Features
 - User registration and login
 - JWT-based authentication
 - Protected routes and secure sessions
+- Logout (delete JWT token)
 - Automatic token management
 - Login Rate Limiter (7 Attempts / 2 Minutes)
 - Sanitation/Validation of credentials
@@ -57,7 +58,7 @@ Features
 - Guest Account Login
 
 ### User Interface
-- Animations and transitions
+- Animations and transitions (hover, drag, drop, etc... )
 - Empty home page
 - No search results page
 
