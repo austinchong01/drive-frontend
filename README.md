@@ -32,7 +32,7 @@ Features
 - Protected routes and secure sessions
 - Automatic token management
 - Login Rate Limiter (7 Attempts / 2 Minutes)
-- Sanitation/Validation credentials
+- Sanitation/Validation of credentials
 
 ### File Management
 - Upload multiple file types (5 MB limit per upload)
