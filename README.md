@@ -187,16 +187,16 @@ Future Add-ons
 
 | Functionality | User Interface |
 |---------------|----------------|
-| Filtering | Multiple Layouts (Tablet, Mobile) |
-| Sharing Files/Folders | Light/Dark Theme |
-| Pagination (Limiting Files/Folders per page) | Loading Screen |
-| Upload Folders | Status 500 page |
-| File replace on existing name | Download Bar |
-| End to End Testing | Right Click options |
-| Search Query URL | More Animations/Transitions |
-| Multiple File/Folder Select | |
-| Folder Categories | |
-| Optimize Storage/Search API calls| |
+| Filtering | Multiple layouts (tablet, mobile) |
+| Sharing files/folders | Light/Dark theme |
+| Pagination (Limiting files/folders per page) | Loading screen |
+| Upload folders | Status 500 page |
+| File replace on existing name | Download bar |
+| End to end testing | Right click options |
+| Search query URL | More animations/transitions |
+| Multiple file/folder select | |
+| Folder categories | |
+| Optimize storage/search API calls| |
 
 Contact
 -------
