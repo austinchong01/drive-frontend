@@ -19,9 +19,9 @@ Purpose
 
 This project demonstrates full-stack development skills including:
 - RESTful API design
-- Database modeling and relationships (Prisma ORM/PostgreSQL)
+- Database modeling and relationships (Prisma/PostgreSQL)
 - Sanitation/Validation
-- JWT authentication and authorization
+- Authentication and authorization (JWT)
 - Third-party API integration (Cloudinary)
 - Error and status handling
 - Testing (Unit/Integrated)
