@@ -5,10 +5,12 @@ A full-stack file management application that replicates Google Drive's core fun
 allowing users to upload, organize, and manage files and folders with secure authentication.
 
 
-#### Backend Repository: https://github.com/austinchong01/drive-backend
+**Backend Repository: https://github.com/austinchong01/drive-backend**
 
 Demo
 --------
+### Live Demo: https://drive-frontend-llln.onrender.com
+
 <img width="1084" height="794" alt="login" src="https://github.com/user-attachments/assets/a5243e15-8b1b-4a0d-9a02-5994795eaef1" />
 <img width="1084" height="794" alt="home" src="https://github.com/user-attachments/assets/f357ee5f-a5fa-408b-b9c8-e5845b64d88d" />
 
@@ -199,6 +201,7 @@ Future Add-ons
 | Folder categories | |
 | Optimize storage/search API calls| |
 | Forgot Email/Password | |
+| Back Button Fix | |
 
 Contact
 -------
