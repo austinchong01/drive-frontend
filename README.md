@@ -19,11 +19,12 @@ Purpose
 
 This project demonstrates full-stack development skills including:
 - RESTful API design with Express.js
-- Database modeling and relationships with Prisma ORM
+- Database modeling and relationships with Prisma ORM (PostgreSQL)
 - Secure authentication and authorization with JWT
 - Third-party API integration (Cloudinary)
 - React state management and drag-and-drop interactions
-- Comprehensive error handling and input validation
+- Comprehensive error handling
+- Input sanitation/validation
 
 ***Built to showcase proficiency in modern web development practices and the PERN stack.***
 
@@ -99,17 +100,16 @@ Features
 ### API
 - API Rate Limiter (200 Requests / 5 minutes)
 - Health test check endpoint "/health"
-- Custom Error Handling
+- Storage quota tracking (10 MB limit)
+- Search functionality across files and folders
+- Real-time status messages and error handling
 - Query Transactions
 
 </td>
 <td width="50%" valign="top">
 
 ### Other
-**- Integrated Testing (backend)**
-- Search functionality across files and folders
-- Storage quota tracking (10 MB limit)
-- Real-time status messages and error handling
+- **Integrated Testing (backend)**
 - Guest Account Login
 - Re-render(React) and API Optimization
 
