@@ -75,59 +75,59 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
         <div className="flex flex-col gap-5">
           {/* Primary navigation - only Home is functional */}
           <div className="flex flex-col">
-            <button onClick={handleHomeClick} className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
+            <button onClick={handleHomeClick} title="Home" className="w-full flex items-center gap-4 px-5 py-1 rounded-full bg-[#c2e7ff]">
               <img src="/images/home.svg" className="w-7" alt="Home" />
               <h3>Home</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50 flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/myDrive.svg"
                 className="w-7"
                 alt="My Drive"
               />
-              <h3>My Drive</h3>
+              <h3>My Drive (N/A)</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/computer.svg"
                 className="w-7"
                 alt="Computers"
               />
-              <h3>Computers</h3>
+              <h3>Computers (N/A)</h3>
             </button>
           </div>
 
           {/* Secondary navigation - placeholder items */}
           <div className="flex flex-col">
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/shared.svg" className="w-7" alt="Shared" />
-              <h3>Shared with me</h3>
+              <h3>Shared (N/A)</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/recent.svg" className="w-7" alt="Recent" />
-              <h3>Recent</h3>
+              <h3>Recent (N/A)</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img
                 src="/images/starred.svg"
                 className="w-7"
                 alt="Starred"
               />
-              <h3>Starred</h3>
+              <h3>Starred (N/A)</h3>
             </button>
           </div>
 
           {/* Storage section with progress bar */}
           <div className="flex flex-col">
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/spam.svg" className="w-7" alt="Spam" />
-              <h3>Spam</h3>
+              <h3>Spam (N/A)</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button className="w-full opacity-50  flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
               <img src="/images/trash.svg" className="w-7" alt="Trash" />
-              <h3>Trash</h3>
+              <h3>Trash (N/A)</h3>
             </button>
-            <button className="w-full flex items-center gap-4 px-5 py-1 rounded-full hover:bg-[#5f636833] transition-colors duration-5">
+            <button title={`${storage}/10000000 Bytes`} className="w-full flex items-center gap-4 px-5 py-1 rounded-full">
               <img
                 src="/images/storage.svg"
                 className="w-7"
@@ -149,8 +149,8 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
                   ? `${(storage / (1024 * 1024)).toFixed(2)} MB of 10 MB used`
                   : "Loading..."}
               </p>
-              <button className="w-[175px] h-[40px] py-1 px-1 rounded-full border border-black text-blue-600 font-medium hover:bg-[#e9eef6] transition-colors duration-50">
-                Get more storage
+              <button className="opacity-50  w-[175px] h-[40px] py-1 px-1 rounded-full border border-black text-blue-600 font-medium hover:bg-[#e9eef6] transition-colors duration-50">
+                Get more storage (N/A)
               </button>
             </div>
           </div>

@@ -91,14 +91,14 @@ const Navbar = ({ onSearch, onClearSearch }) => {
         <img
           src="/images/help.svg"
           alt="Help"
-          title="Help (inactive)"
-          className="w-12 cursor-pointer p-1.5 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          title="Help (N/A)"
+          className="opacity-30  w-12 cursor-pointer p-1.5 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
         />
         <img
           src="/images/settings.svg"
           alt="Settings"
-          title="Settings (inactive)"
-          className="w-12 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
+          title="Settings (N/A)"
+          className="opacity-30  w-12 cursor-pointer p-2 rounded-full bg-transparent transition-colors duration-100 ease-in-out hover:bg-black/10"
         />
         <img
           src="/images/logout.svg"
@@ -108,7 +108,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
           onClick={handleLogout}
         />
         <h2
-          title={username}
+          title={`User: ${username}`}
           className="w-10 h-10 rounded-full text-white bg-blue-500 flex items-center justify-center text-sm font-semibold"
         >
           {username ? username[0].toUpperCase() : "?"}
