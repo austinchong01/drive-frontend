@@ -3,7 +3,7 @@
 /**
  * Navigation Bar Component
  * Top navigation bar containing logo, search functionality, and user controls.
- * 
+ *
  * @param {Function} onSearch - Callback with (query) when search is submitted
  * @param {Function} onClearSearch - Callback when returning to home/clearing search
  */
@@ -34,7 +34,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   const handleSearchSubmit = (e) => {

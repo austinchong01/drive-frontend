@@ -41,7 +41,7 @@ const Sidebar = ({ onFileCreated, onFolderCreated, storageTrigger }) => {
   }, [storageTrigger]);
 
   const handleHomeClick = () => {
-    navigate("/home");
+    navigate("/home", { replace: true });
   };
 
   const handleFileSuccess = (newFile) => {
