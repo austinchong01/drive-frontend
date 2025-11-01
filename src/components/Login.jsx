@@ -21,11 +21,20 @@ const Login = () => {
 
   // Redirect to home if user is already authenticated
   useEffect(() => {
+    let mounted = true;
+
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (result.success) navigate("/home", { replace: true });
+      if (result.success && mounted) {
+        navigate("/home", { replace: true });
+      }
     };
+
     verifyUser();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const handleSubmit = async (e) => {
