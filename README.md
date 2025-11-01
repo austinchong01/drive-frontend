@@ -26,7 +26,7 @@ This project demonstrates full-stack development skills including:
 - Comprehensive error handling
 - Input sanitation/validation
 
-***Built to showcase proficiency in modern web development practices and the PERN stack.***
+***Built to showcase proficiency in modern web development practices and the PERN (PostgreSQL, Express.js, React.js, Node.js) stack.***
 
 Technology Stack
 --------
