@@ -182,7 +182,7 @@ Future Add-ons
 | End to End Testing | Right Click options |
 | Search Query URL | |
 | Multiple File/Folder Select | |
-| Trash Folder | |
+| Folder Categories | |
 
 Contact
 -------
