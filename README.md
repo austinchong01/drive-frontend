@@ -1,4 +1,4 @@
-Mock Google Drive    ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=plastic&logo=googledrive&logoColor=white)
+Mock Google Drive (Frontend)    ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=plastic&logo=googledrive&logoColor=white)
 ========
 
 A full-stack file management application that replicates Google Drive's core functionality, 
