@@ -79,6 +79,7 @@ Features
 
 ### Authentication
 - User registration and login
+- One account per email
 - Sanitation/Validation of credentials
 - JWT-based authentication
 - Protected routes and secure sessions
@@ -197,6 +198,7 @@ Future Add-ons
 | Multiple file/folder select | |
 | Folder categories | |
 | Optimize storage/search API calls| |
+| Forgot Email/Password | |
 
 Contact
 -------
