@@ -18,10 +18,10 @@ Purpose
 --------
 
 This project demonstrates full-stack development skills including:
-- RESTful API design with Express.js
-- Database modeling and relationships with Prisma ORM (PostgreSQL)
-- Input sanitation/validation
-- Secure authentication and authorization with JWT
+- RESTful API design
+- Database modeling and relationships (Prisma ORM/PostgreSQL)
+- Sanitation/Validation
+- JWT authentication and authorization
 - Third-party API integration (Cloudinary)
 - Error and status handling
 - Testing (Unit/Integrated)
