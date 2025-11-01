@@ -98,8 +98,8 @@ Features
 - Storage bar
 - Home layout (Sorted by latest updated)
     - Highlight item (file/folder)
-    - File - name, icon, date, size, dropdown option menu
-    - Folder - name, icon, dropdown option menu
+    - File - name, icon, date, size, dropdown menu
+    - Folder - name, icon, dropdown menu
 
 </td>
 </tr>
