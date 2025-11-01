@@ -82,7 +82,6 @@ Features
 - Sanitation/Validation of credentials
 - JWT-based authentication
 - Protected routes and secure sessions
-- Automatic url redirection
 - Logout (delete JWT token)
 - Login Rate Limiter (7 Attempts / 2 Minutes)
 
