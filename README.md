@@ -18,7 +18,7 @@ Purpose
 --------
 
 This project demonstrates full-stack development skills including:
-- RESTful API design
+- RESTful API design (Node/Express)
 - Database modeling and relationships (Prisma/PostgreSQL)
 - Sanitation/Validation
 - Authentication and authorization (JWT)
