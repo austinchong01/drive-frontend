@@ -34,7 +34,7 @@ const Navbar = ({ onSearch, onClearSearch }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login", { replace: true });
+    navigate("/login");
   };
 
   const handleSearchSubmit = (e) => {
