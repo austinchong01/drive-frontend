@@ -29,14 +29,13 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchTrigger, setSearchTrigger] = useState(0);
 
-  // Redirect to login if user is not authenticated
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (!result.success) navigate("/login");
+      if (!result.success) navigate("/login", { replace: true });
     };
     verifyUser();
-  }, [navigate]);
+  }, []);
 
   // Clear created items and search when navigating to different folder
   useEffect(() => {
@@ -49,13 +48,16 @@ const Home = () => {
     setStorageTrigger((prev) => prev + 1);
   }, []);
 
-  const handleSearch = useCallback((query) => {
-    const trimmedQuery = query.trim();
-    if (trimmedQuery) {
-      setSearchQuery(trimmedQuery);
-      navigate("/home");
-    }
-  }, [navigate]);
+  const handleSearch = useCallback(
+    (query) => {
+      const trimmedQuery = query.trim();
+      if (trimmedQuery) {
+        setSearchQuery(trimmedQuery);
+        navigate("/home");
+      }
+    },
+    [navigate]
+  );
 
   const handleSearchDelete = useCallback(() => {
     setStorageTrigger((prev) => prev + 1);
@@ -89,7 +91,7 @@ const Home = () => {
               style={{
                 display: "flex",
                 flex: 1,
-                overflow: "hidden"
+                overflow: "hidden",
               }}
             >
               <Sidebar

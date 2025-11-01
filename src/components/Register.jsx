@@ -23,10 +23,10 @@ const Register = () => {
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (result.success) navigate("/home");
+      if (result.success) navigate("/home", { replace: true });
     };
     verifyUser();
-  }, [navigate]);
+  }, []); // Remove navigate from dependencies
 
   const handleSubmit = async (e) => {
     e.preventDefault();

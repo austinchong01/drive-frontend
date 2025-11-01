@@ -23,10 +23,10 @@ const Login = () => {
   useEffect(() => {
     const verifyUser = async () => {
       const result = await api.verifyJWT();
-      if (result.success) navigate("/home");
+      if (result.success) navigate("/home", { replace: true });
     };
     verifyUser();
-  }, [navigate]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,7 +103,10 @@ const Login = () => {
             </label>
           </div>
 
-          <button onClick={handleGuest} className="text-sm bg-white rounded-xl px-5 py-3 text-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all duration-100">
+          <button
+            onClick={handleGuest}
+            className="text-sm bg-white rounded-xl px-5 py-3 text-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all duration-100"
+          >
             Sign into Guest Account
           </button>
 
