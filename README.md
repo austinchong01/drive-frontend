@@ -20,11 +20,12 @@ Purpose
 This project demonstrates full-stack development skills including:
 - RESTful API design with Express.js
 - Database modeling and relationships with Prisma ORM (PostgreSQL)
+- Input sanitation/validation
 - Secure authentication and authorization with JWT
 - Third-party API integration (Cloudinary)
+- Error and status handling
+- Testing (Unit/Integrated)
 - React state management and drag-and-drop interactions
-- Comprehensive error handling
-- Input sanitation/validation
 
 ***Built to showcase proficiency in modern web development practices and the PERN (PostgreSQL, Express.js, React.js, Node.js) stack.***
 
@@ -52,20 +53,23 @@ Features
 <td width="50%" valign="top">
 
 ### File Management
-- Upload multiple file types (5 MB limit per upload)
+- Upload file types (5 MB limit per upload)
+- Unique name within parent folder
 - Preview files directly in browser
 - Download with preserved filenames
 - Rename and delete files
-- Drag-and-drop file organization
+- Drag-and-drop files
 
 </td>
 <td width="50%" valign="top">
 
 ### Folder Management
 - Create nested folder structures
-- Navigate through folder hierarchy with breadcrumb navigation
+- Unique name within parent folder
+- Navigate through folder hierarchy
+- Breadcrumb navigation
 - Rename and delete folders
-- Drag-and-drop folders organization
+- Drag-and-drop folders
 
 </td>
 </tr>
@@ -75,12 +79,12 @@ Features
 
 ### Authentication
 - User registration and login
+- Sanitation/Validation of credentials
 - JWT-based authentication
 - Protected routes and secure sessions
+- Automatic url redirection
 - Logout (delete JWT token)
-- Automatic token management
 - Login Rate Limiter (7 Attempts / 2 Minutes)
-- Sanitation/Validation of credentials
 
 </td>
 <td width="50%" valign="top">
@@ -90,6 +94,13 @@ Features
 - Empty home page
 - No search results page
 - Scroll functionality
+    - Folder/File sticky header
+- Register/Login layout
+- Storage bar
+- Home layout (Sorted by latest updated)
+    - Highlight item (file/folder)
+    - File - name, icon, date, size, dropdown option menu
+    - Folder - name, icon, dropdown option menu
 
 </td>
 </tr>
@@ -112,6 +123,9 @@ Features
 - **Integrated Testing (backend)**
 - Guest Account Login
 - Re-render(React) and API Optimization
+    - Callback approach (creation/deletion of file/folder)
+    - Memoization (Status/Error Messages)
+    - ModalContext (two rename modals for all files and folders)
 
 </td>
 </tr>
@@ -180,9 +194,10 @@ Future Add-ons
 | Upload Folders | Status 500 page |
 | File replace on existing name | Download Bar |
 | End to End Testing | Right Click options |
-| Search Query URL | |
+| Search Query URL | More Animations/Transitions |
 | Multiple File/Folder Select | |
 | Folder Categories | |
+| Optimize Storage/Search API calls| |
 
 Contact
 -------
