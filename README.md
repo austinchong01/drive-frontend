@@ -103,7 +103,7 @@ Features
 - Storage quota tracking (10 MB limit)
 - Search functionality across files and folders
 - Real-time status messages and error handling
-- Query Transactions
+- Query Transactions for data integrity
 
 </td>
 <td width="50%" valign="top">
