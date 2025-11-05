@@ -198,10 +198,8 @@ Future Add-ons
 | End to end testing | Right click options |
 | Search query URL | More animations/transitions |
 | Multiple file/folder select | WCAG |
-| Folder categories | |
-| Optimize storage/search API calls| |
-| Forgot Email/Password | |
-| Next.js | |
+| Folder categories | Next.js |
+| Forgot Email/Password | Optimize storage/search API calls |
 
 Contact
 -------
