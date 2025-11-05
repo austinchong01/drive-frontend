@@ -201,7 +201,7 @@ Future Add-ons
 | Folder categories | |
 | Optimize storage/search API calls| |
 | Forgot Email/Password | |
-| Back Button Fix | |
+| Next.js | |
 
 Contact
 -------
