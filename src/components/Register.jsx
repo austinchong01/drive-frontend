@@ -127,7 +127,7 @@ const Register = () => {
         )}
         {loading && (
           <div className="absolute top-132 text-blue-500 p-2 text-sm w-100">
-            Registering user... (Please wait ~2 minutes for database boot-up)
+            Registering user... (Please wait ~2 minutes for initialization)
           </div>
         )}
       </div>
