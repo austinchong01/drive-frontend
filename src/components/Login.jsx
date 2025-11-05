@@ -132,7 +132,7 @@ const Login = () => {
         )}
         {loading && (
           <div className="absolute top-128 text-blue-500 p-2 text-sm w-100">
-            Logging in...
+            Logging in... (Please wait ~2 minutes for database boot-up)
           </div>
         )}
       </div>
