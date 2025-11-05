@@ -202,6 +202,7 @@ Future Add-ons
 | Optimize storage/search API calls| |
 | Forgot Email/Password | |
 | Next.js | |
+| WCAG | |
 
 Contact
 -------
