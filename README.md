@@ -197,12 +197,11 @@ Future Add-ons
 | File replace on existing name | Download bar |
 | End to end testing | Right click options |
 | Search query URL | More animations/transitions |
-| Multiple file/folder select | |
+| Multiple file/folder select | WCAG |
 | Folder categories | |
 | Optimize storage/search API calls| |
 | Forgot Email/Password | |
 | Next.js | |
-| WCAG | |
 
 Contact
 -------
